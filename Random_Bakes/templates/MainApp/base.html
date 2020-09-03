@@ -1,0 +1,65 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Random Bakes</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "/assets/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "/css/cover.css" %}" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      /* @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap'); */
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
+  <body class="text-center" >
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <img src="{% static "/media/Random_Bakes_white.png" %}" class = "masthead-brand" alt="Logo">
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" href="{% url 'index' %}">Home</a>
+        <a class="nav-link active" href="{% url 'Baking:projects' %}">Projects</a>
+        <!-- <a class="nav-link active" href="{% url 'Baking:batch' %}">Batch Info</a> -->
+        <a class="nav-link active" href="{% url 'Baking:about' %}">About Us</a>
+        <a class="nav-link" href="{% url 'Baking:registration' %}">Contact</a>
+
+      </nav>
+    </div>
+  </header>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+{% block body_block %}
+{% endblock %}
+</div>
+  <footer class="container">
+      <div class="cite">
+                   <!-- <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> -->
+          &copy; 2020 Random Bakes  &middot; <a  href="{% url 'Baking:license' %}">Licenses</a> &middot; <a  href="{% url 'Baking:sanitation' %}">Sanitation Protocols</a>
+      </div>
+  </footer>
+</div>
+
+</body>
+</html>
