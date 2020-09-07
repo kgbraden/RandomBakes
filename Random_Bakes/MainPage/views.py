@@ -14,7 +14,7 @@ def index(request):
     #        }
     cover_content ={'CoverTitle': cover_content2.title,
            'CoverText': cover_content2.story,
-           'CoverPhoto': cover_content2.photo,
+           'CoverPhoto': cover_content2,
            'CoverAltText': cover_content2.photo_alt,
            'CoverButton': cover_content2.button,
            'CoverButtonLink': cover_content2.button_link

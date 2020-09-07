@@ -4,6 +4,7 @@
 {% block body_block %}
 <!-- _______________________________________________________________________ -->
 {% load static %}
+
 {% load py_functions %}
 <script src ="https://form.jotform.com/static/feedback2.js" type="text/javascript"></script><script type="text/javascript">
     var JFL_202426957335055 = new JotformFeedback({
@@ -20,7 +21,7 @@
 </script>
 <div class="cover-container">
   <main role="main" class="inner cover">
-    <img src=  "{% static "/media/Bagels-two.jpg" %}"   class = "img-fluid" alt="{{ CoverAltText}}">
+    <img src=  "{{CoverPhoto.photo2.url}}"  class = "img-fluid" alt="{{ CoverAltText}}">
     <h1 class="cover-heading">{{ CoverTitle }}</h1>
     <p class="lead">{{ CoverText }}</p>
     <p class = "lead">There are {{ CoverTitle|chk_invt}} bagels left for sale this week!
