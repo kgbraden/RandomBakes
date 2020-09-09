@@ -60,7 +60,11 @@
   <footer class="container">
       <div class="cite">
                    <!-- <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> -->
-          &copy; 2020 Random Bakes  &middot; <a  href="{% url 'Baking:license' %}">Licenses</a> &middot; <a  href="{% url 'Baking:sanitation' %}">Sanitation Protocols</a>
+          &copy; 2020 Random Bakes <br>
+          <a  href="{% url 'Baking:license' %}">Licenses</a> &middot; <a  href="{% url 'Baking:sanitation' %}">Sanitation Protocols</a>
+          {% if user.is_authenticated %}
+          &middot; <a  href="{% url 'admin:index'  %}">Admin</a>
+          {% endif %}
       </div>
   </footer>
 </div>
