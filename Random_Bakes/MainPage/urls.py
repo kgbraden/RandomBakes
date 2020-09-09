@@ -20,6 +20,7 @@ urlpatterns = [
     path('sanitation/', views.sanitation, name = 'sanitation'),
     path('order/', views.order, name = 'order'),
     path('registration/', views.registration, name = 'registration'),
+    url(r'^user_login/$', views.user_login, name = 'user_login' ),
     ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

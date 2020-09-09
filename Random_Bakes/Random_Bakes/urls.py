@@ -28,7 +28,11 @@ urlpatterns = [
     path('index/', views.index, name = 'index'),
     path('projects/', views.projects, name = 'projects'),
     path('admin/', admin.site.urls),
-    url(r'^Baking/', include('MainPage.urls'))
+    url(r'^logout/$', views.user_logout, name = 'logout'),
+    url(r'^user_login/$', views.user_login, name = 'user_login' ),
+    url(r'^Baking/', include('MainPage.urls')),
+
+
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from MainPage.models import highlight
 from MainPage.forms import UserForm, UserProfileInfoForm
+
+from django.contrib.auth import authenticate, login,logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
@@ -20,6 +25,8 @@ def index(request):
            'CoverButtonLink': cover_content2.button_link
            }
     return render(request,'MainApp/index.html', context = cover_content)
+
+
 
 def projects(request):
     return render(request,'MainApp/projects.html')
@@ -70,3 +77,26 @@ def registration(request):
                     {'user_form': user_form,
                     'profile_form': profile_form,
                     'registered':  registered})
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
+def user_login(request):
+    if request.method =='POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                HttpResponse("Your account is not active.")
+        else:
+            print("Someone tried to login")
+            return HttpResponse("Invalid login.")
+    else:
+        return render(request,'MainApp/user_login.html', {})
