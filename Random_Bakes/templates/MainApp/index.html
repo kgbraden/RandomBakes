@@ -22,11 +22,11 @@
 <div class="cover-container">
   <main role="main" class="inner cover">
     <img src=  "{{CoverPhoto.photo2.url}}"  class = "img-fluid" alt="{{ CoverAltText }}">
-    <h1 class="cover-heading">{{ CoverTitle }}</h1>
+    <h1 class="cover-heading ">{{ CoverTitle }}</h1>
     <p class="lead">{{ CoverText }}</p>
     <p class = "lead">There are {{ CoverTitle|chk_invt}} bagels left for sale this week!
     <p class="lead">
-      <a class="btn btn-lg btn-primary lightbox-202426957335055" style="margin-top: 16px" >{{CoverButton}}</a>
+      <a class="btn btn-lg btn-primary lightbox-202426957335055 cover-heading" style="margin-top: 16px" >{{CoverButton}}</a>
     </p>
   </main>
 </div>
