@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from MainPage.models import highlight
-from MainPage.forms import UserForm, UserProfileInfoForm
+from MainPage.forms import UserForm, UserProfileInfoForm, baking_batch_form
 
 from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -77,6 +77,23 @@ def registration(request):
                     {'user_form': user_form,
                     'profile_form': profile_form,
                     'registered':  registered})
+
+def enterbatch(request):
+    formfilled = False
+
+    if request.method =='POST':
+        batch_form = baking_batch_form(data=request.POST)
+        if batch_form.is_valid():
+            batch = batch_form.save()
+            formfilled = True
+        else:
+            print(batch_form.errors )
+    else:
+        batch_form = baking_batch_form()
+    return render(request, 'MainApp/enter_batch.html',
+                  {'batch_form': batch_form,
+                  'formfilled': formfilled})
+
 @login_required
 def user_logout(request):
     logout(request)

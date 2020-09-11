@@ -21,6 +21,7 @@ urlpatterns = [
     path('order/', views.order, name = 'order'),
     path('registration/', views.registration, name = 'registration'),
     url(r'^user_login/$', views.user_login, name = 'user_login' ),
+    url(r'^enter_batch/$', views.enterbatch, name = 'enter_batch' ),
     ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
