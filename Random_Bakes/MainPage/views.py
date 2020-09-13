@@ -78,6 +78,18 @@ def registration(request):
                     'profile_form': profile_form,
                     'registered':  registered})
 
+def thankyou(request):
+    if request.method=='POST':
+        BATCH_ID = request.POST.get('batchid76')
+        Customer = request.POST.get('name')
+    else:
+        BATCH_ID = "Didn't"
+        Customer = "Work"
+        return render(request, 'MainApp/ThankYou.html',
+                     {'BATCH_ID': BATCH_ID,
+                      'Customer': Customer
+                     })
+
 def enterbatch(request):
     formfilled = False
 
