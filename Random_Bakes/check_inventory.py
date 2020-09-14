@@ -15,6 +15,7 @@
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 """
 import pygsheets, ast
+
 import pandas as pd
 
 def importSales():
@@ -26,17 +27,44 @@ def importSales():
 
     df.dropna(axis=0, how='any', thresh=None, subset=None, inplace=True)
     df=df[df['Submission Date'] !=""]
-    print(len(df))
+
     # df.set_index(['Invoice ID'])
 
     df.to_csv('orders.csv', index=False)
-
+    return(df)
 
 def ReturnTicket(invoice, df2):
 
     order = df2.loc[(df2['Invoice ID']==invoice), 'My Products: Products'].values[0]
-    deliveree = df2.loc[(df2['Invoice ID']==invoice), 'My Products: Payer Address'].values[0]
-    deliveree = deliveree.replace('\r', "")
+    fname =  df2.loc[(df2['Invoice ID']==invoice), 'First Name'].values[0]
+    lname = df2.loc[(df2['Invoice ID']==invoice), 'Last Name'].values[0]
+    straddress = df2.loc[(df2['Invoice ID']==invoice), 'Street Address'].values[0]
+    straddress2 =  df2.loc[(df2['Invoice ID']==invoice), 'Street Address Line 2'].values[0]
+    if not type(straddress2) is str: straddress2 = ' '
+    city = df2.loc[(df2['Invoice ID']==invoice), 'City'].values[0]
+    state = df2.loc[(df2['Invoice ID']==invoice), 'State / Province'].values[0]
+    zip = df2.loc[(df2['Invoice ID']==invoice), 'Postal / Zip Code'].values[0]
+    if type(zip) is float: zip = int(zip)
+    email = df2.loc[(df2['Invoice ID']==invoice), 'Email'].values[0]
+    phone = df2.loc[(df2['Invoice ID']==invoice), 'Phone Number'].values[0]
+    notes = df2.loc[(df2['Invoice ID']==invoice), 'Delivery notes:'].values[0]
+    if not type(notes) is str: notes = 'None.'
+    customer = {
+                'First Name': fname,
+                'Last Name': lname,
+                'Street Address': straddress,
+                'Street Address 2': straddress2,
+                'City': city,
+                'State': state,
+                'Zip': zip,
+                'Email': email,
+                'Phone Number': phone,
+                'Delivery Notes': notes,
+                }
+    customer_clean = {k: customer[k] for k in customer if type(k) is str}
+
+    # deliveree = [df2.loc[(df2['Invoice ID']==invoice), 'My Products: Payer Address'].values[0]]
+    # deliveree = deliveree.replace('\r', "")
     order = order.replace('  ', ' ')
     order = order.replace('\r', '')
     order = order.split('\n')
@@ -54,9 +82,10 @@ def ReturnTicket(invoice, df2):
             toDel.append(order[part])
         else:
             order[part] = ast.literal_eval(order[part])
+    ticket = ""
     for z in toDel:
         order.remove(z)
-    ticket = 'Invoice: %s\n%s\n' %(invoice,deliveree)
+    # ticket = 'Invoice: %s\n%s\n' %(invoice,customer)
     for b in range(1,5):
         b_info = order[0]['Bagel Four Pack']['Bagel '+str(b)]
         ticket += 'Bagel %s: %s\n' %(str(b), b_info)
@@ -64,6 +93,7 @@ def ReturnTicket(invoice, df2):
     noRandom = True
     amt = 0
     RndAmt = 0
+
     for item in range(1, len(order)):
 
         if "Cream Cheese" in order[item]:
@@ -88,9 +118,7 @@ def ReturnTicket(invoice, df2):
         ticket += "No Cream Cheese"
     if noRandom:
         ticket += "No Random Bake"
-    ticket = ticket.replace("Country: United States\n", "")
-    ticket = ticket.replace("/Postal", "")
-    ticket = ticket.replace("/Region", "")
+
     inventory = {'plain': ticket.count("Plain"),
                  'sesame': ticket.count("Sesame"),
                  'salt': ticket.count("Salt"),
@@ -99,6 +127,7 @@ def ReturnTicket(invoice, df2):
                  'everything': ticket.count("Everything"),
                  'creamcheese': amt,
                  'randombake': RndAmt}
+    ticket = {'Customer Info':customer_clean, 'Order': ticket.split('\n')}
     return ticket, inventory
 
 def WeeksSales(batch, df):
@@ -112,11 +141,11 @@ def WeeksSales(batch, df):
                  'creamcheese': 0,
                  'randombake': 0,
                  'totBagels': 0}
-    tickets = []
+    tickets = {}
     for orders in subdf:
-        print('#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#')
         rtrn = ReturnTicket(orders,df)
-        tickets.append(rtrn[0].split('\n'))
+
+        tickets[orders] =rtrn[0]
         invt = rtrn[1]
         for cat in inventory:
             if cat != 'totBagels':
@@ -124,12 +153,12 @@ def WeeksSales(batch, df):
                 inventory['totBagels'] +=invt[cat]
     return tickets, inventory
 
-df2 = pd.read_csv('orders.csv')
+# df2 = pd.read_csv('orders.csv')
 
-invoice = '# INV-X0NY64'
-invoice = '# INV-N34Z2Q'
-batch = "BATCH_21"
+# invoice = '# INV-X0NY64'
+# invoice = '# INV-N34Z2Q'
+# batch = "BATCH_21"
 # print (ReturnTicket(invoice,df2)[1])
 # importSales()
 
-print(WeeksSales(batch, df2)[1])
+# print(WeeksSales(batch, df2)[1])

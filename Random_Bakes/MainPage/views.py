@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from MainPage.models import highlight
+from MainPage.models import highlight, ActiveSales
 from MainPage.forms import UserForm, UserProfileInfoForm, baking_batch_form
-
+from check_inventory import importSales, WeeksSales
 from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from datetime import date, datetime
+
 # Create your views here.
 def index(request):
     cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
@@ -17,12 +19,16 @@ def index(request):
     #        'CoverButton': 'Order Now',
     #        'CoverButtonLink': 'order_bagels'
     #        }
+
     cover_content ={'CoverTitle': cover_content2.title,
            'CoverText': cover_content2.story,
-           'CoverPhoto': cover_content2,
+           'CoverPhoto': cover_content2.photo2.url,
            'CoverAltText': cover_content2.photo_alt,
            'CoverButton': cover_content2.button,
-           'CoverButtonLink': cover_content2.button_link
+           'CoverButtonLink': cover_content2.button_link,
+           'CoverButtonClass': cover_content2.button_class,
+           'CoverScript': cover_content2.script
+
            }
     return render(request,'MainApp/index.html', context = cover_content)
 
@@ -45,9 +51,61 @@ def license(request):
 
 def sanitation(request):
     return render(request,'MainApp/sanitation.html')
+def next_batch(batch):
+    b = batch.split("_")
+    b[1] = str(int(b[1])+1)
+    sep = "_"
+    return sep.join(b)
 
 def order(request):
-    return render(request,'MainApp/order.html')
+    acv_sales = ActiveSales.objects.filter(active ="True")[0]
+    today = date.today()
+    deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
+    storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
+    deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
+    activeBatch = acv_sales.batch
+    nextbatch = next_batch(activeBatch)
+    if ActiveSales.objects.filter(batch =nextbatch).count()==1:
+        #Checks to see if the next batch has been scheduled
+        nBatch = ActiveSales.objects.filter(batch =nextbatch)
+        NxtSched = True
+        nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
+        nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
+    else:
+        NxtSched = False
+    if (acv_sales.start_sales < today) & (today < acv_sales.end_sales):
+        # In sales period
+        sales = importSales()
+        sold = WeeksSales(acv_sales.batch, sales)[1]
+        sold = sold['totBagels']
+
+        DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when they have cooled enough for packaging. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
+        available = acv_sales.units
+        if sold >= available:
+            cover_content2 = highlight.objects.filter(title = "Sold Out!")[0]
+        else:
+            cover_content2 = highlight.objects.filter(title = "Buy Now")[0]
+    else:
+        sold = 'N/A'
+        available = 'N/A'
+        cover_content2 = highlight.objects.filter(title = "Sales Closed")[0]
+        if NxtSched:
+            DeliveryInfo = "Our next scheduled production run, %s, will be on %s. Sales open for this batch will open on %s." %(nextbatch, nxtdatedelivery, nxtdateopen)
+        else:
+            DeliveryInfo = "We have not scheduled our next scheduled production run. Please check back soon!"
+    ##{'plain': 7, 'sesame': 10, 'salt': 4, 'garlic': 5, 'onion': 4, 'everything': 6, 'creamcheese': 6, 'randombake': 0, 'totBagels': 42}
+
+    cover_content ={'CoverTitle': cover_content2.title,
+           'CoverText': cover_content2.story,
+           'CoverPhoto': cover_content2.photo2.url,
+           'CoverAltText': cover_content2.photo_alt,
+           'CoverButton': cover_content2.button,
+           'CoverButtonClass': cover_content2.button_class,
+           'CoverButtonLink': cover_content2.button_link,
+           'DeliveryInfo': DeliveryInfo,
+           'BagelsSold': str(sold),
+           'BagelsAvailable':  str(available)}
+    return render(request,'MainApp/order.html', context = cover_content)
 
 def registration(request):
     registered = False

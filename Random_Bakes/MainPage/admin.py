@@ -5,7 +5,8 @@ from MainPage.models import (highlight,
                              Ingredients,
                              PreFerment,
                              Dough,
-                             ShapingFinishing)
+                             ShapingFinishing,
+                              ActiveSales)
 # Register your models here.
 admin.site.register(highlight)
 admin.site.register(UserProfileInfo)
@@ -14,3 +15,4 @@ admin.site.register(Ingredients)
 admin.site.register(PreFerment)
 admin.site.register(Dough)
 admin.site.register(ShapingFinishing)
+admin.site.register(ActiveSales)

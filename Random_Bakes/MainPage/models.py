@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import datetime
 # Create your models here.
 class highlight(models.Model):
     title = models.CharField(max_length = 35, unique = True)
     story = models.CharField(max_length = 300)
-    photo = models.CharField(max_length = 264)
+    script = models.TextField(default="None")
     photo2 = models.ImageField(upload_to='highlight_images', default = '/media/photo-placeholder-icon.jpg')
     photo_alt = models.CharField(max_length = 25)
     button = models.CharField(max_length = 18)
     button_link = models.CharField(max_length = 264)
+    button_class =models.CharField(max_length = 264, default = "index")
     def __str__(self):
         return self.title
 
@@ -20,6 +21,19 @@ class UserProfileInfo(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class ActiveSales(models.Model):
+    batch = models.CharField(max_length =10, primary_key= True, unique = True)
+    active = models.CharField(max_length =5)
+    start_sales = models.DateField()
+    end_sales = models.DateField()
+    units = models.PositiveIntegerField()
+    soldout = models.CharField(max_length =5)
+    bakingdate = models.DateField(default=datetime.now, blank=True)
+    deliverydate = models.DateField(default=datetime.now, blank=True)
+    bakingtime = models.TimeField(default=datetime.now, blank=True)
+    def __str__(self):
+        return self.batch
 
 class Ingredients(models.Model):
     ingredient = models.CharField(max_length = 264)

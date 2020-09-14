@@ -1,18 +1,18 @@
-Submission Date,Check delivery distance,First Name,Last Name,Street Address,Street Address Line 2,City,State / Province,Postal / Zip Code,Country,Delivery notes:,Email,Phone Number,Batch ID,Invoice ID,My Products: Products,My Products: Payer Info,My Products: Payer Address,Submission ID,,,,,,,,,
-2020-08-30 16:29:37,,,,,,,,,,,,,BATCH_17,# INV-N34Z2R,,,,4746393773614332208,,,,,,,,,
-2020-08-30 17:26:54,,,,,,,,,,,,,BATCH_18,# INV-N34Z2S,,,,4746428143611410086,,,,,,,,,
+Submission Date,Check delivery distance,Street Address,Street Address Line 2,City,State / Province,Postal / Zip Code,Country,Delivery notes:,Batch ID,Invoice ID,First Name,Last Name,Email,Phone Number,Is your delivery address within 10 miles of Tahoe Park?,Is Delivery Address different than billing address,My Products: Products,My Products: Payer Info,My Products: Payer Address,Payment Methods,Submission ID,,,,,,,,,
+2020-08-30 16:29:37,,4095 somewhere,,Sacramento,Ca,95820,,,BATCH_17,# INV-N34Z2R,,,,,,,,,,,4746393773614332208,,,,,,,,,
+2020-08-30 17:26:54,,4096 somewhere,,Sacramento,Ca,95820,,,BATCH_18,# INV-N34Z2S,,,,,,,,,,,4746428143611410086,,,,,,,,,
 2020-09-01 14:28:57,"From: Sacramento, CA 95820, USA
 To: 3516 56th St, Sacramento, CA 95820, USA
 Distance: 1.3 mi
-Duration: 5 mins",,,,,,,,,,,,BATCH_19,# INV-N34Z2T,,,,4748049373617284039,,,,,,,,,
+Duration: 5 mins",4097 somewhere,,Sacramento,Ca,95820,,,BATCH_19,# INV-N34Z2T,,,,,,,,,,,4748049373617284039,,,,,,,,,
 2020-09-11 14:10:40,"From: Sacramento, CA 95820, USA
 To: 3516 56th St, Sacramento, CA 95820, USA
 Distance: 1.3 mi
-Duration: 5 mins",,,,,,,,,,,,BATCH_20,# INV-N34Z2U,,,,4756678403611314462,,,,,,,,,
+Duration: 5 mins",4098 somewhere,,Sacramento,Ca,95820,,,BATCH_20,# INV-N34Z2U,,,,,,,,,,,4756678403611314462,,,,,,,,,
 2020-09-11 17:19:11,"From: 3516 56th St, Sacramento, CA 95820, USA
 To: 4220 Florin Rd, Sacramento, CA 95823, USA
 Distance: 4.9 mi
-Duration: 15 mins",Bob,The Dog,4099 somewhere,,Sacramento,Ca,95820,,,test@testireno.com,(808) 2614795,BATCH_21,# INV-N34Z2Q,"Bagel Four Pack  (Amount: 12.00 USD, Bagel 1: Plain, Bagel 2: Sesame, Bagel 3: Onion, Bagel 4: Everything)
+Duration: 15 mins",4099 somewhere,,Sacramento,Ca,95820,,,BATCH_21,# INV-N34Z2Q,Bob,The Dog,test@testireno.com,(808) 2614795,,,"Bagel Four Pack  (Amount: 12.00 USD, Bagel 1: Plain, Bagel 2: Sesame, Bagel 3: Onion, Bagel 4: Everything)
 Bagel Four Pack 2  (Amount: 12.00 USD, Bagel 5: Plain, Bagel 6: Sesame, Bagel 7: Onion, Bagel 8: Everything)
 Subtotal: 15.00
 Tax: 
@@ -22,11 +22,11 @@ Street: 3516 56th St
 City: Sacramento
 State/Region: CA
 Zip/Postal: 95820
-Country: United States",4756791493614510524,,,,,,,,,
+Country: United States",,4756791493614510524,,,,,,,,,
 2020-09-12 12:30:31,"From: 3516 56th St, Sacramento, CA 95820, USA
 To: 3516 19th Ave, Sacramento, CA 95820, USA
 Distance: 2.0 mi
-Duration: 7 mins",John,Dogger,4700 College Oak Drive,Library 311,Sacramento,Ca,95820,United States,,bradenk@arc.losrios.edu,(916) 4848408,BATCH_21,# INV-WRD93Y,"Bagel Four Pack  (Amount: 12.00 USD, Bagel 1: Plain, Bagel 2: Salt, Bagel 3: Onion, Bagel 4: Everything)
+Duration: 7 mins",4700 College Oak Drive,Library 311,Sacramento,Ca,95820,United States,,BATCH_21,# INV-WRD93Y,John,Dogger,bradenk@arc.losrios.edu,(916) 4848408,,,"Bagel Four Pack  (Amount: 12.00 USD, Bagel 1: Plain, Bagel 2: Salt, Bagel 3: Onion, Bagel 4: Everything)
 Cream Cheese (Amount: 3.00 USD, Quantity: 2)
 Subtotal: 15.00
 Tax: 
@@ -36,11 +36,11 @@ Street: 3516 56th St
 City: Sacramento
 State/Region: CA
 Zip/Postal: 95820
-Country: United States",4757482313614043986,,,,,,,,,
+Country: United States",,4757482313614043986,,,,,,,,,
 2020-09-12 12:46:34,"From: 3516 56th St, Sacramento, CA 95820, USA
 To: 4424 37th Ave, Sacramento, CA 95824, USA
 Distance: 2.5 mi
-Duration: 8 mins",Test,Aroony,"4424 37th Ave,",56th,Sacramento,Ca,95824,United States,,kale@ebraden.com,(916) 7300854,BATCH_21,# INV-X0NY64,"Bagel Four Pack  (Amount: 12.00 USD, Bagel 1: Plain, Bagel 2: Garlic, Bagel 3: Onion, Bagel 4: Everything)
+Duration: 8 mins","4424 37th Ave,",56th,Sacramento,Ca,95824,United States,,BATCH_21,# INV-X0NY64,Test,Aroony,kale@ebraden.com,(916) 7300854,,,"Bagel Four Pack  (Amount: 12.00 USD, Bagel 1: Plain, Bagel 2: Garlic, Bagel 3: Onion, Bagel 4: Everything)
 Cream Cheese (Amount: 3.00 USD, Quantity: 1)
 Subtotal: 15.00
 Tax: 
@@ -53,4 +53,36 @@ Street: 3516 56th St
 City: Sacramento
 State/Region: CA
 Zip/Postal: 95820
-Country: United States",4757491243611240625,,,,,,,,,
+Country: United States",,4757491243611240625,,,,,,,,,
+2020-09-13 10:27:34,,3516 56th St,,Sacramento,CA,95820,United States,Bring the dog.,BATCH_21,# INV-I1LKF9,Charles,Braden,bradenk@arc.losrios.edu,(916) 4848408,Yes,Yes,"Bagel Four Pack (Amount: 12.00 USD, Bagel 1: Garlic, Bagel 2: Salt, Bagel 3: Garlic, Bagel 4: Salt)
+Cream Cheese (Amount: 3.00 USD, Quantity: 1)
+Bagel Four Pack  2 (Amount: 12.00 USD, Bagel 5: Plain, Bagel 6: Sesame, Bagel 7: Sesame, Bagel 8: Everything)
+Subtotal: 27.00
+Tax: 
+
+Total: 27.00","First Name: Big 
+Last Name: Bootay
+Transaction ID: 2UY97127AU8483603",,Payed by Card Fields,4758272503616039693,,,,,,,,,
+2020-09-13 11:14:52,,4700 College Oak Drive,Library 311,Sacramento,California,95841,United States,Bring Two Dogs!,BATCH_21,# INV-9AAJJZ,Kale,Braden,bradenk@arc.losrios.edu,(916) 7300854,Yes,Yes,"Bagel Four Pack (Amount: 12.00 USD, Bagel 1: Sesame, Bagel 2: Sesame, Bagel 3: Garlic, Bagel 4: Everything)
+Cream Cheese (Amount: 3.00 USD, Quantity: 1)
+Subtotal: 15.00
+Tax: 
+
+Total: 15.00","First Name: Big
+Last Name: Baller
+Transaction ID: 9NC46153B57944919",,Payed by Card Fields,4758300883615456476,,,,,,,,,
+2020-09-13 11:17:36,,3516,56th,Sacramento,CA,95820,United States,,BATCH_21,# INV-M87T1K,JOhn,Bagel-eater,test@test.com,(916) 666-5588,Yes,Yes,"Bagel Four Pack (Amount: 12.00 USD, Bagel 1: Plain, Bagel 2: Sesame, Bagel 3: Salt, Bagel 4: Sesame)
+Cream Cheese (Amount: 3.00 USD, Quantity: 1)
+Subtotal: 15.00
+Tax: 
+
+Total: 15.00","First Name: John
+Last Name: Bagel Eater
+Transaction ID: 015871674J3536011",,Payed by Card Fields,4758302523612545592,,,,,,,,,
+2020-09-13 11:20:09,,3516,56th,Sacramento,CA,95820,United States,,BATCH_21,# INV-ZA5K0C,Jerimiah,Bullfrog,test@test.com,(991) 2222222,Yes,No,"Bagel Four Pack (Amount: 12.00 USD, Bagel 1: Garlic, Bagel 2: Sesame, Bagel 3: Sesame, Bagel 4: Plain)
+Subtotal: 12.00
+Tax: 
+
+Total: 12.00","First Name: Jeramiah
+Last Name: Bullfrog
+Transaction ID: 9EM27529SH474222H",,Payed by Card Fields,4758304053615025775,,,,,,,,,
