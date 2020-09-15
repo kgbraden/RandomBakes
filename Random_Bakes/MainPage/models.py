@@ -13,6 +13,15 @@ class highlight(models.Model):
     button_class =models.CharField(max_length = 264, default = "index")
     def __str__(self):
         return self.title
+class Featurette(models.Model):
+    title = models.CharField(max_length = 35, unique = True)
+    subtitle = models.CharField(max_length = 40, default ="")
+    description = models.TextField(max_length = 430, default="Description goes here.")
+    Story = models.TextField(default="None")
+    photo = models.ImageField(upload_to='highlight_images', default = '/media/photo-placeholder-icon.jpg')
+    button = models.CharField(max_length = 18)
+    button_link = models.CharField(max_length = 264, default = "#")
+    button_class =models.CharField(max_length = 264, default = "btn btn-lg btn-primary cover-heading")
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)

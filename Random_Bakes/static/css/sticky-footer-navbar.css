@@ -39,8 +39,9 @@ body {
   color: #fff;
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 1);
-  /* height: 100%; */
   background-color: #333;
+  /* height: 100%; */
+
 }
 }
 .logo {
@@ -48,6 +49,7 @@ body {
 }
 .cover-container {
   max-width: 60em;
+
 }
 .cover-heading {
   font-family: 'Homemade Apple', cursive;
@@ -55,6 +57,29 @@ body {
 .RandBakes{
   width:100%;
       max-width:150px;
+}
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 1rem 0;
+  border-bottom: .5px solid rgba(0, 0, 0, .5);
+      /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.05rem;
+}
+.featurette1-container {
+  max-width: 60em;
+  background-color: rgba(0, 0, 0, .3);
+}
+.featurette2-container {
+  max-width: 60em;
+  background-color: rgba(0, 0, 0, .1);
 }
 @media (min-width: 48em) {
   .masthead-brand {
@@ -64,6 +89,7 @@ body {
   }
   .masthead {
     margin-bottom: 2rem;
+
   }
 
   .masthead-brand {
@@ -73,3 +99,4 @@ body {
     min-width: 30%;
     height: auto;
   }
+}

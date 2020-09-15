@@ -1,16 +1,19 @@
 from django.shortcuts import render
-from MainPage.models import highlight, ActiveSales
+from MainPage.models import highlight, ActiveSales, Featurette
 from MainPage.forms import UserForm, UserProfileInfoForm, baking_batch_form
 from check_inventory import importSales, WeeksSales
 from django.contrib.auth import authenticate, login,logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.generic import View,TemplateView
 from datetime import date, datetime
 
 # Create your views here.
 def index(request):
     cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
+    feat = Featurette.objects.order_by("id")
+    print(type(feat))
 
     # cover_content ={'CoverTitle': "Order Bagels",
     #        'CoverText': "We produce 48 kettle-boiled, hand-rolled bagels every other week and deliver them to the Sacramento region on Sunday mornings. Sold in batches of four with the option of adding Sonoma Clover cream cheese to your order. You choose the toppings. Once we're sold out, that's it for the week!",
@@ -27,8 +30,8 @@ def index(request):
            'CoverButton': cover_content2.button,
            'CoverButtonLink': cover_content2.button_link,
            'CoverButtonClass': cover_content2.button_class,
-           'CoverScript': cover_content2.script
-
+           'CoverScript': cover_content2.script,
+           'Featurette': feat
            }
     return render(request,'MainApp/index.html', context = cover_content)
 
@@ -49,8 +52,15 @@ def contact(request):
 def license(request):
     return render(request,'MainApp/license.html')
 
-def sanitation(request):
-    return render(request,'MainApp/sanitation.html')
+class SanitationView(TemplateView):
+    template_name = 'MainApp/sanitation.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['test_injection']= 'This is only a test'
+        return context
+# def sanitation(request):
+#     return render(request,'MainApp/sanitation.html')
+
 def next_batch(batch):
     b = batch.split("_")
     b[1] = str(int(b[1])+1)
