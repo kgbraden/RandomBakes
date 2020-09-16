@@ -8,7 +8,7 @@
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v4.1.1">
   <title>Random Bakes</title>
-
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
   <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
 
   <!-- Bootstrap core CSS -->
@@ -68,7 +68,7 @@
         <a class="nav-link" href="\">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'Baking:projects' %}">Projects<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'Baking:about' %}">About Us</a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -78,7 +78,8 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More...</a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
-          <a class="dropdown-item" href="{% url 'Baking:about' %}">About Us</a>
+
+          <a class="dropdown-item" href="{% url 'Baking:projects' %}">Projects<span class="sr-only">(current)</span></a>
           <a class="dropdown-item" href="{% url 'Baking:license' %}">Licenses</a>
           <a class="dropdown-item" href="#">Contact Us</a>
           <a class="dropdown-item" href="{% url 'Baking:sanitation' %}">Sanitation Protocols</a>
@@ -89,12 +90,14 @@
       </li>
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'logout' %}"><img src="{% static "/media/unlocked.png" %}" class = "" alt="Logout"></a>
+        <!-- <a class="nav-link" href="{% url 'logout' %}">Logout</a> -->
         <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
       </li>
       {% else %}
       <li class="nav-item">
-      <a class="nav-link" href="{% url 'user_login' %}">Login</a>
+        <a href="{% url 'user_login' %}"><img src="{% static "/media/locked.png" %}" class = "" alt="Login"></a>
+      <!-- <a class="nav-link" href="{% url 'user_login' %}">Login</a> -->
     </li>
       {% endif %}
     </ul>

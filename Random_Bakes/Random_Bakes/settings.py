@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MainPage',
     'django_fields',
+    'djrichtextfield',
 
 ]
 

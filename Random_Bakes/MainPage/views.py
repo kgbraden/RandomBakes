@@ -44,7 +44,11 @@ def batch(request):
     return render(request,'MainApp/batch.html')
 
 def about(request):
-    return render(request,'MainApp/about.html')
+    content = {'Text1': "Random Bakes started out of a desire to perfect a number of baking recipes coupled with the realization that the running through multiple versions of a recipe led to large piles of baked goods that we then needed to figure out what to do with. Random Bakes is a vehicle to allow us to continue experimenting with recipes and find a way to distribute the resulting baked goods.",
+                'Title2': "What is with the name, Random Bakes?",
+                'Text2': "On a walk one morning we were discussing the types of projects that we wanted to work on and after listing out a long list of potential items, we realized that we had a long random list of baked goods. Thus Random Bakes. We’re starting with bagels, but the plan is to offer up a number of random items each week that people can add onto their orders: kettle corn, cupcakes, cookies, et cetera!",}
+                
+    return render(request,'MainApp/about.html', context = content)
 
 def contact(request):
     return render(request,'MainApp/contact.html')
