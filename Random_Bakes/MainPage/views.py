@@ -1,28 +1,30 @@
-from django.shortcuts import render
-from MainPage.models import highlight, ActiveSales, Featurette
-from MainPage.forms import UserForm, UserProfileInfoForm, baking_batch_form
+from django.shortcuts import render, get_object_or_404, redirect
+from MainPage.models import highlight, ActiveSales, Featurette, AboutUs
+from django.utils import timezone
+from MainPage.forms import (UserForm,
+                            UserProfileInfoForm,
+                            baking_batch_form,
+                            FeaturetteForm)
 from check_inventory import importSales, WeeksSales
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.views.generic import View,TemplateView
+from django.views.generic import (View,
+                                  TemplateView,
+                                  ListView,
+                                  DetailView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView)
+from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date, datetime
 
 # Create your views here.
 def index(request):
     cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
-    feat = Featurette.objects.order_by("id")
+    feat = Featurette.objects.filter(type = 'index').order_by("order")
     print(type(feat))
-
-    # cover_content ={'CoverTitle': "Order Bagels",
-    #        'CoverText': "We produce 48 kettle-boiled, hand-rolled bagels every other week and deliver them to the Sacramento region on Sunday mornings. Sold in batches of four with the option of adding Sonoma Clover cream cheese to your order. You choose the toppings. Once we're sold out, that's it for the week!",
-    #        'CoverPhoto': 'static\MainApp\Media\Bagels-two.jpg',
-    #        'CoverAltText': 'Two Bagelss',
-    #        'CoverButton': 'Order Now',
-    #        'CoverButtonLink': 'order_bagels'
-    #        }
-
     cover_content ={'CoverTitle': cover_content2.title,
            'CoverText': cover_content2.story,
            'CoverPhoto': cover_content2.photo2.url,
@@ -33,37 +35,80 @@ def index(request):
            'CoverScript': cover_content2.script,
            'Featurette': feat
            }
-    return render(request,'MainApp/index.html', context = cover_content)
-
-
+    return render(request,'MainPage/index.html', context = cover_content)
 
 def projects(request):
-    return render(request,'MainApp/projects.html')
+    return render(request,'MainPage/projects.html')
 
 def batch(request):
-    return render(request,'MainApp/batch.html')
+    return render(request,'MainPage/batch.html')
 
-def about(request):
-    content = {'Text1': "Random Bakes started out of a desire to perfect a number of baking recipes coupled with the realization that the running through multiple versions of a recipe led to large piles of baked goods that we then needed to figure out what to do with. Random Bakes is a vehicle to allow us to continue experimenting with recipes and find a way to distribute the resulting baked goods.",
-                'Title2': "What is with the name, Random Bakes?",
-                'Text2': "On a walk one morning we were discussing the types of projects that we wanted to work on and after listing out a long list of potential items, we realized that we had a long random list of baked goods. Thus Random Bakes. We’re starting with bagels, but the plan is to offer up a number of random items each week that people can add onto their orders: kettle corn, cupcakes, cookies, et cetera!",}
-                
-    return render(request,'MainApp/about.html', context = content)
+# (ind, 'index'),
+# (abt, 'About Us'),
+# (Snt, 'Sanitation Protocols'),
+# (Lic, 'Licenses'),
+# (proj, 'Projects')
+class AboutUsListView(ListView):
+    template_name = 'MainPage/blank_content.html'
+    queryset = Featurette.objects.filter(type='About Us')
+    context_object_name = 'articles'
+    ordering = ['order']
+
+class SanitationListView(ListView):
+    template_name = 'MainPage/blank_content.html'
+    queryset = Featurette.objects.filter(type = 'Sanitation Protocols')
+    context_object_name = 'articles'
+    ordering = ['order']
+
+class LicenseListView(ListView):
+    template_name = 'MainPage/blank_content.html'
+    queryset = Featurette.objects.filter(type='Licenses')
+    context_object_name = 'articles'
+    ordering = ['order']
+
+class ProjectListView(ListView):
+    template_name = 'MainPage/blank_content.html'
+    queryset = Featurette.objects.filter(type='Projects')
+    context_object_name = 'articles'
+    ordering = ['order']
+
+class FeaturetteListView(ListView):
+    model = Featurette
+class FeaturetteDetailView(DetailView):
+    model = Featurette
+
+class FeaturetteCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    # redirect_field_name = '/MainPage/featurette_update'
+    success_url = '/Baking/success/'
+    form_class = FeaturetteForm
+    model = Featurette
+
+class FeaturetteUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    # redirect_field_name = '#'
+    success_url = '/Baking/success/'
+    form_class = FeaturetteForm
+    model = Featurette
+
+class FeaturetteDeleteView(LoginRequiredMixin, DeleteView):
+    success_url = '/Baking/success/'
+    model = Featurette
 
 def contact(request):
-    return render(request,'MainApp/contact.html')
+    return render(request,'MainPage/contact.html')
 
 def license(request):
-    return render(request,'MainApp/license.html')
+    return render(request,'MainPage/license.html')
 
 class SanitationView(TemplateView):
-    template_name = 'MainApp/sanitation.html'
+    template_name = 'MainPage/sanitation.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['test_injection']= 'This is only a test'
         return context
 # def sanitation(request):
-#     return render(request,'MainApp/sanitation.html')
+#     return render(request,'MainPage/sanitation.html')
 
 def next_batch(batch):
     b = batch.split("_")
@@ -119,7 +164,7 @@ def order(request):
            'DeliveryInfo': DeliveryInfo,
            'BagelsSold': str(sold),
            'BagelsAvailable':  str(available)}
-    return render(request,'MainApp/order.html', context = cover_content)
+    return render(request,'MainPage/order.html', context = cover_content)
 
 def registration(request):
     registered = False
@@ -145,7 +190,7 @@ def registration(request):
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
 
-    return render(request,'MainApp/registration.html',
+    return render(request,'MainPage/registration.html',
                     {'user_form': user_form,
                     'profile_form': profile_form,
                     'registered':  registered})
@@ -157,11 +202,12 @@ def thankyou(request):
     else:
         BATCH_ID = "Didn't"
         Customer = "Work"
-        return render(request, 'MainApp/ThankYou.html',
+        return render(request, 'MainPage/thankyou.html',
                      {'BATCH_ID': BATCH_ID,
                       'Customer': Customer
                      })
-
+def success(request):
+    return render(request,'MainPage/sucess.html')
 def enterbatch(request):
     formfilled = False
 
@@ -174,7 +220,7 @@ def enterbatch(request):
             print(batch_form.errors )
     else:
         batch_form = baking_batch_form()
-    return render(request, 'MainApp/enter_batch.html',
+    return render(request, 'MainPage/enter_batch.html',
                   {'batch_form': batch_form,
                   'formfilled': formfilled})
 
@@ -200,4 +246,4 @@ def user_login(request):
             print("Someone tried to login")
             return HttpResponse("Invalid login.")
     else:
-        return render(request,'MainApp/user_login.html', {})
+        return render(request,'MainPage/user_login.html', {})

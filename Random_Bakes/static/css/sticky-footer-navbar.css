@@ -5,7 +5,7 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: ##444ec2;
 }
 
 /* Custom default button */
@@ -81,6 +81,27 @@ body {
   max-width: 60em;
   background-color: rgba(0, 0, 0, .1);
 }
+.feature-content {
+background-color: #f5f5f5;
+resize: vertical;
+overflow: auto;
+color: rgb(0,0,0);
+padding-left: 15px;
+padding-right: 5px;
+
+}
+
+.textinputclass-sm{
+  width: 50px;
+}
+.textinputclass{
+  resize: horizontal;
+  background-color: #f5f5f5;
+  color: rgb(0,0,0);
+  padding-left: 10px;
+  overflow: auto;
+}
+
 @media (min-width: 48em) {
   .masthead-brand {
     float: left;

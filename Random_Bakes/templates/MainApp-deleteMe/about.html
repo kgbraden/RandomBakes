@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends "MainApp/base.html" %}
+{% block body_block %}
+<!-- _______________________________________________________________________ -->
+{% load static %}
+  <div class="jumbotron text-dark ">
+    <h1> About us</h1>
+    {% for content in aboutUs %}
+    <div class="container">
+      <h3>{{content.title|safe|}}</h3>
+      <p class ='text-left'>{{content.description|safe|linebreaks}}</p>
+    </div>
+  </div>
+<!-- _______________________________________________________________________ -->
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends "MainPage/base.html" %}
+{% block body_block %}
+<!-- _______________________________________________________________________ -->
+{% load static %}
+  <div class="jumbotron text-dark ">
+    <h1> {{aboutUs.new_context_entry}}</h1>
+    {% for content in articles %}
+    {% if  content.order < 2 %}
+    <h1>{{content.type}}</h1>
+    {% endif%}
+    <div class="container text-left">
+
+      <h3>{{content.title|safe}}</h3>
+      {% if content.subtitle|safe %}
+      <h4>{{ content.subtitle|safe }}</h4>
+      {% endif %}
+      {% if content.photo %}
+        {%if forloop.counter|divisibleby:2 %}
+            <img src="{{content.photo.url}}" class="img-fluid mx-auto rounded float-left p-3" alt="{{content.photo_alt}}">
+        {% else %}
+
+            <img src="{{content.photo.url}}" class="img-fluid mx-auto rounded-circle float-right p-3" alt="{{content.photo_alt}}">
+        {% endif %}
+      {% endif %}
+      {% if content.description %}
+        <p class =''>{{content.description|safe|linebreaks}}</p>
+      {% endif %}
+      {% if content.Story %}
+        <p class =''>{{content.Story|safe|linebreaks}}</p>
+      {% endif %}
+
+      {% if content.button%}
+      <a href="{{content.button_link}}" class = " {{content.button_class}}">{{content.button}}</a>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <a class = "" href="{% url 'Baking:featurette_update' pk=content.pk %}">edit</a> &middot;
+      <a class = "" href="{% url 'Baking:featurette_remove' pk=content.pk %}">delete</a>
+      {% endif %}
+      <hr class="featurette-divider ">
+    </div>
+    {% endfor %}
+    {% if user.is_authenticated %}
+    <a class = "btn btn-outline-success" href="{% url 'Baking:featurette_new'%}">Add Content</a>
+    {% endif%}
+  </div>
+<!-- _______________________________________________________________________ -->
+
+{% endblock %}

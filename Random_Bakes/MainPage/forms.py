@@ -6,7 +6,8 @@ from MainPage.models import (UserProfileInfo,
                              Ingredients,
                              PreFerment,
                              Dough,
-                             ShapingFinishing)
+                             ShapingFinishing,
+                             Featurette,)
 
 class UserForm(forms.ModelForm):
     password =  forms.CharField(widget=forms.PasswordInput())
@@ -41,3 +42,24 @@ class baking_batch_form(forms.ModelForm):
                   'ShapingFinishing',
                   'batch_photo',
                   'batch_final_notes')
+
+class FeaturetteForm(forms.ModelForm):
+    class Meta():
+        model = Featurette
+        # fields = ('title', 'type', 'order','subtitle', 'description','Story','photo','photo_alt','button', 'button_link, ''button_class')
+        fields = ('__all__')
+        # forms.ImageField(label=_('Company Logo'),required=False, error_messages = {'invalid':_("Image files only")}, widget=forms.FileInput)
+        photo = forms.ImageField()
+        widgets = {
+                   'title': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}),
+                   # 'type': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                   'order': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                   'subtitle': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}),
+                   'description':forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}) ,
+                   'Story': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}),
+                   # 'photo': forms.ClearableFileInput,
+                   'photo_alt': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                   'button': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                   'button_link': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                   'button_class':forms.TextInput(attrs= {'class': 'textinputclass'})
+        }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "MainPage/base.html" %}
+{% block body_block %}
+
+<div class="jumbotron text-dark">
+  <h1>Please Login</h1>
+  <form  action="{% url 'Baking:user_login' %}" method="post">
+    {% csrf_token %}
+    <label for="username">UserName:</label>
+    <input type="text" name="username" class="form-control"placeholder="Enter Username">
+
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password">
+
+    <input type="submit" class= "btn btn-lg" value="Login">
+  </form>
+</div>
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from datetime import datetime
 # Create your models here.
 class highlight(models.Model):
@@ -11,17 +12,50 @@ class highlight(models.Model):
     button = models.CharField(max_length = 18)
     button_link = models.CharField(max_length = 264)
     button_class =models.CharField(max_length = 264, default = "index")
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+    def get_absolute_url(self):
+        return reverse("featurette_detail",kwargs={'pk':self.pk})
     def __str__(self):
         return self.title
+
 class Featurette(models.Model):
-    title = models.CharField(max_length = 35, unique = True)
-    subtitle = models.CharField(max_length = 40, default ="")
-    description = models.TextField(max_length = 430, default="Description goes here.")
-    Story = models.TextField(default="None")
-    photo = models.ImageField(upload_to='highlight_images', default = '/media/photo-placeholder-icon.jpg')
-    button = models.CharField(max_length = 18)
+    ind = 'index'
+    abt = 'About Us'
+    Snt = 'Sanitation Protocols'
+    Lic = 'Licenses'
+    proj = 'Projects'
+    type_choices = [
+                    (ind, 'index'),
+                    (abt, 'About Us'),
+                    (Snt, 'Sanitation'),
+                    (Lic, 'Licenses'),
+                    (proj, 'Projects')
+    ]
+    title = models.CharField(max_length = 80, unique = True)
+    type = models.CharField(max_length = 35,
+                            choices=type_choices)
+    order =  models.PositiveIntegerField(default = 1)
+    subtitle = models.CharField(max_length = 40, default ="", blank=True)
+    description = models.TextField(max_length = 430, default="Description goes here.", blank=True)
+    Story = models.TextField(blank=True)
+    photo = models.ImageField(upload_to='highlight_images', blank=True)
+    photo_alt = models.CharField(max_length = 25, blank=True)
+    button = models.CharField(max_length = 18, blank=True)
     button_link = models.CharField(max_length = 264, default = "#")
-    button_class =models.CharField(max_length = 264, default = "btn btn-lg btn-primary cover-heading")
+    button_class =models.CharField(max_length = 264, default = "btn btn-sm btn-outline-secondary")
+
+
+    def __str__(self):
+        return '%s (%s)' %(self.title, self.type)
+
+class AboutUs(models.Model):
+    content = models.ManyToManyField('Featurette', related_name='features')
+    # type = models.CharField(max_length = 35)
+
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
@@ -110,9 +144,9 @@ class baking_batch(models.Model):
     batch_type = models.CharField(max_length = 100)
     room_temp = models.DecimalField(decimal_places=1, max_digits = 4)
     room_humid = models.DecimalField(decimal_places=1, max_digits = 4)
-    PreFerment =models.OneToOneField('PreFerment', on_delete=models.CASCADE)
-    Dough = models.OneToOneField('Dough', on_delete=models.CASCADE)
-    ShapingFinishing = models.OneToOneField('ShapingFinishing', on_delete=models.CASCADE)
+    PreFerment =models.ForeignKey('PreFerment', on_delete=models.CASCADE)
+    Dough = models.ForeignKey('Dough', on_delete=models.CASCADE)
+    ShapingFinishing = models.ForeignKey('ShapingFinishing', on_delete=models.CASCADE)
     batch_photo = models.ImageField(upload_to='batch_images', default = '/media/photo-placeholder-icon.jpg')
     batch_final_notes = models.TextField(default="None")
     def __str__(self):
