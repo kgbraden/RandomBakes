@@ -3,7 +3,7 @@ from MainPage.models import highlight, ActiveSales, Featurette, AboutUs
 from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
-                            baking_batch_form,
+                            # baking_batch_form,
                             FeaturetteForm)
 from check_inventory import importSales, WeeksSales
 from django.contrib.auth import authenticate, login, logout

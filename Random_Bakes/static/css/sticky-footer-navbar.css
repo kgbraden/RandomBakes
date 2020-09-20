@@ -81,6 +81,7 @@ body {
   max-width: 60em;
   background-color: rgba(0, 0, 0, .1);
 }
+
 .feature-content {
 background-color: #f5f5f5;
 resize: vertical;
@@ -102,7 +103,30 @@ padding-right: 5px;
   overflow: auto;
 }
 
-@media (min-width: 48em) {
+.featurette-image{
+  max-width:30%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+
+}
+.f-text{
+  padding-left: 5px;
+
+  border-color: red;
+}
+.weight_form{
+
+}
+.time_form{
+
+}
+.temp_form {
+
+}
+/* // small devices (phones, 768px and up) */
+@media (min-width: 576px) {
   .masthead-brand {
     float: left;
     font-family: 'Homemade Apple', cursive;
@@ -112,12 +136,34 @@ padding-right: 5px;
     margin-bottom: 2rem;
 
   }
-
   .masthead-brand {
     margin-bottom: 1;
     font-family: 'Homemade Apple', cursive;
     max-width: 30%;
     min-width: 30%;
     height: auto;
-  }
+ }
+ .featurette-image{
+   max-width:100;
+
+ }
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .featurette-image{
+    max-width:100%;
 }
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .featurette-image{
+    max-width:90%;
+
+                  }
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .featurette-image{
+    max-width:100%;
+    max-width:300px
+                  }
