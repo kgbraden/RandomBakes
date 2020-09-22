@@ -17,10 +17,10 @@
       {% endif %}
       {% if content.photo %}
         {%if forloop.counter|divisibleby:2 %}
-            <img src="{{content.photo.url}}" class="rounded float-left border border-light featurette-image" alt="{{content.photo_alt}}">
+            <img src="{{content.photo.url}}" class="rounded float-left border border-light content-image" alt="{{content.photo_alt}}">
         {% else %}
 <!-- "img-fluid mx-auto rounded-circle float-right p-3 featurette-image" -->
-            <img src="{{content.photo.url}}" class="rounded-circle float-right featurette-image" alt="{{content.photo_alt}}">
+            <img src="{{content.photo.url}}" class="rounded-circle float-right content-image" alt="{{content.photo_alt}}">
         {% endif %}
       {% endif %}
       {% if content.description %}

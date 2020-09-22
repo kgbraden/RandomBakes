@@ -75,23 +75,12 @@ class ActiveSales(models.Model):
     bakingdate = models.DateField(default=datetime.now, blank=True)
     deliverydate = models.DateField(default=datetime.now, blank=True)
     bakingtime = models.TimeField(default=datetime.now, blank=True)
+    class Meta:
+        # otherwise we get "Tutorial Seriess in admin"
+        verbose_name_plural = "ActiveSales"
     def __str__(self):
         return self.batch
-metric_choices = [
-                ('g', 'Grams'),
-                ('Kg', 'Kilogram'),
-                ('mL', 'milliliters'),
-                ('Oz', 'Ounces'),
-                ('Lb', 'Pounds'),
-                ('Tbs', 'Tablespoon'),
-                ('Tsp', 'Teaspoon'),
-                ('Cup', 'Cup')
-    ]
-class Ingredients(models.Model):
-    ingredient = models.CharField(max_length = 264)
-    ingredient_long = models.TextField(blank=True)
-    def __str__(self):
-        return self.ingredient
+
 
 # class fermIngredients(models.Model):
 #     ferm_ingrd_amount = models.DecimalField(decimal_places=2, max_digits = 6)

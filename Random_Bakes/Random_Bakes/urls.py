@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from MainPage import views
+import Recipes.views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,6 +29,7 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name = 'logout'),
     url(r'^user_login/$', views.user_login, name = 'user_login' ),
     url(r'^Baking/', include('MainPage.urls')),
+    url(r'^Recipes/', include('Recipes.urls')),
     ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

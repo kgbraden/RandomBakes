@@ -40,8 +40,8 @@ def index(request):
 def projects(request):
     return render(request,'MainPage/projects.html')
 
-def batch(request):
-    return render(request,'MainPage/batch.html')
+# def batch(request):
+#     return render(request,'MainPage/batch.html')
 
 # (ind, 'index'),
 # (abt, 'About Us'),
@@ -74,6 +74,7 @@ class ProjectListView(ListView):
 
 class FeaturetteListView(ListView):
     model = Featurette
+    
 class FeaturetteDetailView(DetailView):
     model = Featurette
 

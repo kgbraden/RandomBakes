@@ -1,6 +1,7 @@
-from django.conf.urls import url
 from django.urls import path
+from django.conf.urls import url, include
 from MainPage import views
+# from Recipes import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -9,7 +10,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
 
     path('project/', views.ProjectListView.as_view(), name = 'projects'),
-    path('batch/', views.batch, name = 'batch'),
+    # path('batch/', views.batch, name = 'batch'),
     path('contact/', views.contact, name = 'contact'),
     path('license/', views.LicenseListView.as_view(), name = 'license'),
     path('success/', views.success, name = 'success'),
@@ -25,6 +26,7 @@ urlpatterns = [
     url(r'^featurette/new/$', views.FeaturetteCreateView.as_view(), name='featurette_new'),
     url(r'^featurette/(?P<pk>\d+)/edit/$', views.FeaturetteUpdateView.as_view(), name='featurette_update'),
     url(r'^featurette/(?P<pk>\d+)/remove/$', views.FeaturetteDeleteView.as_view(), name='featurette_remove'),
+    # url(r'^Recipes/', include('Recipes.urls')),
     ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

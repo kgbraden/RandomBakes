@@ -17,6 +17,7 @@ import os,sys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'MainPage','templates')
+RECIPES_TEMPLATE_DIR = os.path.join(BASE_DIR, 'Recipes','templates')
 # TEMPLATE_DIR = os.path.join(BASE_DIR, 'MainPage','templates')
 STATIC_DIR =os.path.join(BASE_DIR,'static')
 # MEDIA_DIR = os.path.join(BASE_DIR, 'media')
@@ -65,8 +66,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MainPage',
+    'Recipes',
     'django_fields',
     'djrichtextfield',
+
 
 ]
 
@@ -85,7 +88,7 @@ ROOT_URLCONF = 'Random_Bakes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR, RECIPES_TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -160,8 +163,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-
-LOGIN_URL = '/mainpage/user_login'
 
 STATICFILES_DIRS = [
     STATIC_DIR,

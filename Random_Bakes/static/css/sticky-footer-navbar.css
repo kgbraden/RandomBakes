@@ -104,7 +104,17 @@ padding-right: 5px;
 }
 
 .featurette-image{
-  max-width:30%;
+  width:500px;
+  height:500px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+
+}
+.content-image{
+  width:200px;
+  height:200px;
   padding-left: 10px;
   padding-right: 10px;
   padding-top:10px;
@@ -125,7 +135,20 @@ padding-right: 5px;
 .temp_form {
 
 }
-/* // small devices (phones, 768px and up) */
+/* // small devices (phones, 400px and lower) */
+/* #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+# */
+@media (min-width: 400px) {
+  .featurette-image{
+      width:60%;
+      height: auto;
+   }
+  .content-image{
+    width:50%;
+    height: auto;
+  }
+}
+/* // small devices (phones, 576px and up) */
+/* #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+# */
 @media (min-width: 576px) {
   .masthead-brand {
     float: left;
@@ -139,31 +162,50 @@ padding-right: 5px;
   .masthead-brand {
     margin-bottom: 1;
     font-family: 'Homemade Apple', cursive;
-    max-width: 30%;
-    min-width: 30%;
+    max-width:50%;
+    min-width:50%;
     height: auto;
  }
  .featurette-image{
-   max-width:100;
-
- }
+     width:70%;
+     height: auto;
+  }
+  .content-image{
+    width:30%;
+    height: auto;
+  }
+}
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  .featurette-image{
-    max-width:100%;
+  /* .featurette-image{
+    max-width:50%;
+    min-width:50%;
+    height: auto;
+    } */
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+    }
+    .featurette-image{
+        width:80%;
+        height: auto;
+     }
+     .content-image{
+       width:30%;
+       height: auto;
+     }
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .featurette-image{
-    max-width:90%;
-
-                  }
-
+    max-width:100%;
+    }
+}
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .featurette-image{
     max-width:100%;
-    max-width:300px
-                  }
+
+    }
+}
