@@ -6,6 +6,19 @@
 {% load static %}
 
 {% load py_functions %}
+<script src ="https://form.jotform.com/static/feedback2.js" type="text/javascript"></script><script type="text/javascript">
+    var JFL_202426957335055 = new JotformFeedback({
+      formId: '202426957335055',
+      base: 'https://form.jotform.com/',
+      windowTitle: 'Bagel Order Form',
+      background: '#FFA500',
+      fontColor: '#FFFFFF',
+      type: 'false',
+      height: 500,
+      width: 700,
+      openOnLoad: false
+    });
+</script>
 <div class="cover-container">
   <main role="main" class="inner cover">
     <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
@@ -14,7 +27,7 @@
 
     <p class="lead">
       <!-- <a class="btn btn-lg btn-primary lightbox-202426957335055 cover-heading" style="margin-top: 16px" >{{CoverButton}}</a> -->
-      <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
+      <a class="btn btn-lg btn-primary lightbox-202426957335055 cover-heading" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
     </p>
 
 </div>
