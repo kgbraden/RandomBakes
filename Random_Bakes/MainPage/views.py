@@ -22,7 +22,7 @@ from datetime import date, datetime
 
 # Create your views here.
 def index(request):
-    cover_content2 = highlight.objects.filter(title = "Buy Now")[0]
+    cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
     feat = Featurette.objects.filter(type = 'index').order_by("order")
     print(type(feat))
     cover_content ={'CoverTitle': cover_content2.title,
