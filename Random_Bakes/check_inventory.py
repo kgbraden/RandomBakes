@@ -15,11 +15,14 @@
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 """
 import pygsheets, ast
-
+from pathlib import Path
+import os
 import pandas as pd
 
 def importSales():
-    gc = pygsheets.authorize(service_file='creds.json')
+    path = Path(__file__).resolve(strict=True).parent
+    path = os.path.join(path, 'creds.json')
+    gc = pygsheets.authorize(service_file=path)
 
     sh = gc.open('Bagel Order Form')
     wks = sh.sheet1
