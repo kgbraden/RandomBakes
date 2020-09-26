@@ -43,7 +43,7 @@
       <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading"> &middot; {{ feature.title }} &middot;</h2>
         <H3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-        <p class="lead text-justify">{{ feature.description|escape }}</p>
+        <p class="lead text-justify">{{ feature.description|safe}}</p>
       </div>
       <div class="col-md-5 order-md-1">
         {% if feature.photo.url %}
@@ -60,7 +60,7 @@
     <div class="col-md-7">
       <h2 class="featurette-heading">&middot; {{ feature.title }} &middot;</H2>
       <h3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-      <p class="lead text-justify"> {{feature.description}} </p>
+      <p class="lead text-justify"> {{feature.description|safe}} </p>
     </div>
     <div class="col-md-5">
       <!--  -->

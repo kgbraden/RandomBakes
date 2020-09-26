@@ -5,7 +5,7 @@ from datetime import datetime
 # Create your models here.
 class highlight(models.Model):
     title = models.CharField(max_length = 35, unique = True)
-    story = models.CharField(max_length = 300)
+    story = models.TextField(max_length = 300)
     script = models.TextField(default="None")
     photo2 = models.ImageField(upload_to='highlight_images', default = '/media/photo-placeholder-icon.jpg')
     photo_alt = models.CharField(max_length = 25)
@@ -55,16 +55,27 @@ class Featurette(models.Model):
 class AboutUs(models.Model):
     content = models.ManyToManyField('Featurette', related_name='features')
     # type = models.CharField(max_length = 35)
-
+    class Meta:
+        # otherwise we get "Tutorial Seriess in admin"
+        verbose_name_plural ="About Us"
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-
     profile_pic = models.ImageField(upload_to = 'profile_pics', blank=True)
 
     def __str__(self):
         return self.user.username
-
+class Customer(models.Model):
+        Fname = models.CharField(max_length = 50,  blank=True)
+        Lname = models.CharField(max_length = 50,  blank=True)
+        d_Street1 =models.CharField(max_length = 100,  blank=True)
+        d_Street2 =models.CharField(max_length = 100,  blank=True)
+        d_City = models.CharField(max_length = 3,  blank=True)
+        d_State = models.CharField(max_length = 100,  blank=True)
+        d_Zip = models.CharField(max_length = 10,  blank=True)
+        Phone =models.CharField(max_length = 20,  blank=True)
+        def __str__(self):
+            return '%s %s' %(self.Fname, self.Lname)
 class ActiveSales(models.Model):
     batch = models.CharField(max_length =10, primary_key= True, unique = True)
     active = models.CharField(max_length =5)
@@ -75,13 +86,33 @@ class ActiveSales(models.Model):
     bakingdate = models.DateField(default=datetime.now, blank=True)
     deliverydate = models.DateField(default=datetime.now, blank=True)
     bakingtime = models.TimeField(default=datetime.now, blank=True)
+    Plain_sold = models.PositiveIntegerField(default = 0)
+    Sesame_sold = models.PositiveIntegerField(default = 0)
+    Salt_sold = models.PositiveIntegerField(default = 0)
+    Onion_sold = models.PositiveIntegerField(default = 0)
+    Poppy_sold = models.PositiveIntegerField(default = 0)
+    Garlic_sold = models.PositiveIntegerField(default = 0)
+    Everything_sold = models.PositiveIntegerField(default = 0)
+    RandomBake =  models.TextField(blank = True)
+    RandomBake_sold = models.PositiveIntegerField(default = 0)
+    CreamCheese_sold = models.PositiveIntegerField(default = 0)
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "ActiveSales"
     def __str__(self):
         return self.batch
-
-
+class Orders(models.Model):
+    batch = models.OneToOneField(ActiveSales, on_delete = models.CASCADE)
+    customer = models.OneToOneField(User, on_delete = models.CASCADE)
+    Plain_sold = models.PositiveIntegerField(default = 0)
+    Sesame_sold = models.PositiveIntegerField(default = 0)
+    Salt_sold = models.PositiveIntegerField(default = 0)
+    Onion_sold = models.PositiveIntegerField(default = 0)
+    Poppy_sold = models.PositiveIntegerField(default = 0)
+    Garlic_sold = models.PositiveIntegerField(default = 0)
+    Everything_sold = models.PositiveIntegerField(default = 0)
+    RandomBake_sold = models.PositiveIntegerField(default = 0)
+    CreamCheese_sold = models.PositiveIntegerField(default = 0)
 # class fermIngredients(models.Model):
 #     ferm_ingrd_amount = models.DecimalField(decimal_places=2, max_digits = 6)
 #     ferm_ingred_metric = models.TextField(max_length = 40, choices=metric_choices)

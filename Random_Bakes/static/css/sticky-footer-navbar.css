@@ -75,11 +75,11 @@ body {
 }
 .featurette1-container {
   max-width: 60em;
-  background-color: rgba(0, 0, 0, .3);
+  /* background-color: rgba(0, 0, 0, .3); */
 }
 .featurette2-container {
   max-width: 60em;
-  background-color: rgba(0, 0, 0, .1);
+  /* background-color: rgba(0, 0, 0, .1); */
 }
 
 .feature-content {

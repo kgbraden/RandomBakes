@@ -18,8 +18,8 @@ class UserForm(forms.ModelForm):
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
-        fields = ('profile_pic',)
-#
+        fields = ('__all__')
+#'Fname', 'Lname', 'd_Street1', 'd_Street2', 'd_City', 'd_State', 'd_Zip', 'Phone',
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 
 class FeaturetteForm(forms.ModelForm):

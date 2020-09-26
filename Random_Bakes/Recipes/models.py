@@ -7,7 +7,7 @@ class baking_batch(models.Model):
     batch_type = models.CharField(max_length = 100)
     room_temp = models.DecimalField(decimal_places=1, max_digits = 4, default = 75.0)
     room_humid = models.DecimalField(decimal_places=1, max_digits = 4, default = 50)
-    preFerment = models.OneToOneField('PreFerment', on_delete=models.CASCADE )
+    #preFerment = models.OneToOneField('PreFerment', on_delete=models.CASCADE, blank=True)
     batch_photo = models.ImageField(upload_to='batch_images', default = '/media/photo-placeholder-icon.jpg')
     batch_final_notes = models.TextField(blank=True)
     def __str__(self):

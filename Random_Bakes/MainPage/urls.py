@@ -10,6 +10,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
 
     path('project/', views.ProjectListView.as_view(), name = 'projects'),
+    path('shopping/', views.shopping, name = 'shopping'),
     # path('batch/', views.batch, name = 'batch'),
     path('contact/', views.contact, name = 'contact'),
     path('license/', views.LicenseListView.as_view(), name = 'license'),

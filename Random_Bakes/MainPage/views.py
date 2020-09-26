@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from MainPage.models import highlight, ActiveSales, Featurette, AboutUs
+from MainPage.models import (highlight, ActiveSales, Featurette, AboutUs, Customer, Orders)
 from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
@@ -22,15 +22,25 @@ from datetime import date, datetime
 
 # Create your views here.
 def index(request):
+    B_info = BatchInfo()
+    today = date.today()
     cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
     feat = Featurette.objects.filter(type = 'index').order_by("order")
-    print(type(feat))
+
+    story = cover_content2.story
+    story = story.replace('[[units]]', str(B_info[0]))
+    if B_info[1]: #this indicates that the batch is sold out
+        buttonText = "Sold Out!"
+        buttonLink = "#" #Eventially take to batch info for previous batch.
+    else:
+        buttonText = cover_content2.button
+        buttonLink = cover_content2.button_link
     cover_content ={'CoverTitle': cover_content2.title,
-           'CoverText': cover_content2.story,
+           'CoverText': story,
            'CoverPhoto': cover_content2.photo2.url,
            'CoverAltText': cover_content2.photo_alt,
-           'CoverButton': cover_content2.button,
-           'CoverButtonLink': cover_content2.button_link,
+           'CoverButton': buttonText,
+           'CoverButtonLink': buttonLink,
            'CoverButtonClass': cover_content2.button_class,
            'CoverScript': cover_content2.script,
            'Featurette': feat
@@ -117,6 +127,43 @@ def next_batch(batch):
     sep = "_"
     return sep.join(b)
 
+def BatchInfo():
+    acv_sales = ActiveSales.objects.filter(active ="True")[0]
+    today = date.today()
+    activeBatch = acv_sales.batch
+    nextbatch = next_batch(activeBatch)
+    DeliveryInfo = ""
+    available = acv_sales.units
+    out = True
+    if (acv_sales.start_sales < today) & (today < acv_sales.end_sales):
+        # In sales period
+        deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
+        storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
+        deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
+        sales = importSales()
+        sold = WeeksSales(activeBatch, sales)[1]
+        totsold = sold['totBagels']
+
+        DeliveryInfo = '"%s" is scheduled to be a batch of %s bagels baked and delivered on %s. Deliveries will begin after %s when they have cooled enough for packaging. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery.' %(activeBatch, available, deliverydate, deliverytime)
+        out = False
+        if (acv_sales.soldout == "True"):
+            DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
+            out = True
+        DeliveryInfo += ' For this batch we are scheduled to produce:<ul class="lead text-justify"> <li>%s Plain Bagels</li><li>%s Sesame Bagels</li><li>%s Salt Bagels</li><li>%s Garlic Bagels</li><li>%s Onion Bagels</li><li>%s Poppy Seed Bagels</li><li>%s Everything Bagels</li><li>%s RandomBakes</li><li>%s Tubs of Cream Cheese</li></ul>' %(acv_sales.Plain_sold, acv_sales.Sesame_sold, acv_sales.Salt_sold, acv_sales.Garlic_sold, acv_sales.Onion_sold, acv_sales.Poppy_sold, acv_sales.Everything_sold, acv_sales.RandomBake_sold, acv_sales.CreamCheese_sold)
+
+    else:
+        if ActiveSales.objects.filter(batch =nextbatch).count()==1:
+            #Checks to see if the next batch has been scheduled
+            nBatch = ActiveSales.objects.filter(batch =nextbatch)
+            nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
+            nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
+            DeliveryInfo = "Our next scheduled production run, %s, of %s bagels, will be on %s. Sales open for this batch will open on %s." %(nextbatch, nBatch.units,  nxtdatedelivery, nxtdateopen)
+        else:
+            DeliveryInfo = "We have not scheduled our next scheduled production run. Please check back soon!"
+    feature = Featurette.objects.get(title ='Current Batch')
+    feature.description = DeliveryInfo
+    feature.save()
+    return available, out
 def order(request):
     acv_sales = ActiveSales.objects.filter(active ="True")[0]
     today = date.today()
@@ -136,12 +183,11 @@ def order(request):
     if (acv_sales.start_sales < today) & (today < acv_sales.end_sales):
         # In sales period
         sales = importSales()
-        sold = WeeksSales(acv_sales.batch, sales)[1]
-        sold = sold['totBagels']
-
+        sold = WeeksSales(activeBatch, sales)[1]
+        totsold = sold['totBagels']
         DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when they have cooled enough for packaging. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
         available = acv_sales.units
-        if sold >= available:
+        if acv_sales.soldout =='True':
             cover_content2 = highlight.objects.filter(title = "Sold Out!")[0]
         else:
             cover_content2 = highlight.objects.filter(title = "Buy Now")[0]
@@ -163,7 +209,7 @@ def order(request):
            'CoverButtonClass': cover_content2.button_class,
            'CoverButtonLink': cover_content2.button_link,
            'DeliveryInfo': DeliveryInfo,
-           'BagelsSold': str(sold),
+           'BagelsSold': str(totsold),
            'BagelsAvailable':  str(available)}
     return render(request,'MainPage/order.html', context = cover_content)
 
@@ -209,6 +255,9 @@ def thankyou(request):
                      })
 def success(request):
     return render(request,'MainPage/sucess.html')
+
+def shopping(request):
+    return render(request,'MainPage/shopping.html')
 def enterbatch(request):
     formfilled = False
 

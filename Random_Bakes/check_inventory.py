@@ -18,7 +18,10 @@ import pygsheets, ast
 from pathlib import Path
 import os
 import pandas as pd
-
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Random_Bakes.settings")
+import django
+django.setup()
+from MainPage.models import (ActiveSales, Customer, Orders)
 def importSales():
     path = Path(__file__).resolve(strict=True).parent
     path = os.path.join(path, 'creds.json')
@@ -127,9 +130,11 @@ def ReturnTicket(invoice, df2):
                  'salt': ticket.count("Salt"),
                  'garlic': ticket.count("Garlic"),
                  'onion': ticket.count("Onion"),
+                 'poppy': ticket.count("Poppy"),
                  'everything': ticket.count("Everything"),
                  'creamcheese': amt,
                  'randombake': RndAmt}
+
     ticket = {'Customer Info':customer_clean, 'Order': ticket.split('\n')}
     return ticket, inventory
 
@@ -140,10 +145,12 @@ def WeeksSales(batch, df):
                  'salt':0,
                  'garlic':0,
                  'onion':0,
+                 'poppy':0,
                  'everything': 0,
                  'creamcheese': 0,
                  'randombake': 0,
                  'totBagels': 0}
+
     tickets = {}
     for orders in subdf:
         rtrn = ReturnTicket(orders,df)
@@ -154,14 +161,28 @@ def WeeksSales(batch, df):
             if cat != 'totBagels':
                 inventory[cat] +=invt[cat]
                 inventory['totBagels'] +=invt[cat]
+    invt = ActiveSales.objects.get(active ="True")
+    invt.Plain_sold = inventory['plain']
+    invt.Sesame_sold = inventory['sesame']
+    invt.Salt_sold = inventory['salt']
+    invt.Garlic_sold = inventory['garlic']
+    invt.Onion_sold = inventory['onion']
+    invt.Poppy_sold = inventory['poppy']
+    invt.Everything_sold = inventory['everything']
+    invt.RandomBake_sold = inventory['randombake']
+    invt.CreamCheese_sold = inventory['creamcheese']
+    if inventory['totBagels'] >= invt.units:
+        invt.soldout = 'True'
+    invt.save()
     return tickets, inventory
 
-# df2 = pd.read_csv('orders.csv')
+df2 = pd.read_csv('orders.csv')
+#
+# # invoice = '# INV-X0NY64'
+# invoice = '# INV-GGLOW6'
+# # batch = "BATCH_21"
+importSales()
+print (WeeksSales('BATCH_22',df2)[1])
 
-# invoice = '# INV-X0NY64'
-# invoice = '# INV-N34Z2Q'
-# batch = "BATCH_21"
-# print (ReturnTicket(invoice,df2)[1])
-# importSales()
 
 # print(WeeksSales(batch, df2)[1])

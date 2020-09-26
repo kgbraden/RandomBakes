@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends "MainPage/base.html" %}
+{% block body_block %}
+<!-- _______________________________________________________________________ -->
+{% load static %}
+<script async src="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.js"></script>
+
+<div id="snipcart" data-api-key="ZGNiYWUxZTEtYjQ1OS00ZDYxLTg0MDktNGMxMjRmNWZiYTU0NjM3MzY3NDc5Mzk1NDAzMjEz" hidden></div>
+<button class="snipcart-add-item"
+  data-item-id="Bagel-Four-Pack"
+  data-item-price="12.00"
+  data-item-url="/Baking/shopping"
+  data-item-description="High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh."
+  data-item-image="/media/highlight_images/Plate_of_bagels.png"
+  data-item-name="Four BagelsBagel"
+  data-item-custom1-name="bagel 1 Choices"
+  data-item-custom1-options="Plain|Sesame|Salt|Garlic|Onion|Poppy|Everything"
+  data-item-custom1-value="Plain"
+  data-item-custom2-name="bagel 2 Choices"
+  data-item-custom2-options="Plain|Sesame|Salt|Garlic|Onion|Poppy|Everything"
+  data-item-custom2-value="Plain"
+  data-item-custom3-name="bagel 3 Choices"
+  data-item-custom3-options="Plain|Sesame|Salt|Garlic|Onion|Poppy|Everything"
+  data-item-custom3-value="Plain"
+  data-item-custom4-name="bagel 4 Choices"
+  data-item-custom4-options="Plain|Sesame|Salt|Garlic|Onion|Poppy|Everything"
+  data-item-custom4-value="Plain"
+  data-item-stackable=('never')
+  data-item-max-quantity=2>
+  Add to cart
+</button>
+{% endblock %}
