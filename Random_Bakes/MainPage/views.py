@@ -165,7 +165,7 @@ def BatchInfo():
     feature.save()
     return available, out
 def order(request):
-    acv_sales = ActiveSales.objects.filter(active ="True")[0]
+    acv_sales = ActiveSales.objects.filter(active =True)[0]
     today = date.today()
     deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
     storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')

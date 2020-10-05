@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from MainPage.models import (UserProfileInfo,
                              highlight,
-                             # baking_batch,
+                             ActiveSales,
                              # Ingredient,
                              # PreFerment,
                              # Dough,
@@ -41,4 +41,30 @@ class FeaturetteForm(forms.ModelForm):
                    'button': forms.TextInput(attrs= {'class': 'textinputclass'}),
                    'button_link': forms.TextInput(attrs= {'class': 'textinputclass'}),
                    'button_class':forms.TextInput(attrs= {'class': 'textinputclass'})
+        }
+class ActiveSalesForm(forms.ModelForm):
+    class Meta():
+        model = ActiveSales
+        fields = ('__all__')
+        widgets = {
+                    'batch':forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'active': forms.BooleanField(),
+                    'start_sales':forms.DateField(),
+                    'end_sales': forms.DateField(),
+                    'units': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'soldout': forms.BooleanField(),
+                    'bakingdate': forms.DateField(),
+                    'deliverydate': forms.DateField(),
+                    'bakingtime': forms.TimeField(),
+                    'Plain_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'Sesame_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'Salt_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'Onion_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'Poppy_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'Garlic_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'Everything_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'RandomBake': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}),
+                    'RandomBake_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'CreamCheese_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    'Batch_Notes': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'})
         }

@@ -78,11 +78,11 @@ class Customer(models.Model):
             return '%s %s' %(self.Fname, self.Lname)
 class ActiveSales(models.Model):
     batch = models.CharField(max_length =10, primary_key= True, unique = True)
-    active = models.CharField(max_length =5)
+    active = models.BooleanField()
     start_sales = models.DateField()
     end_sales = models.DateField()
     units = models.PositiveIntegerField()
-    soldout = models.CharField(max_length =5)
+    soldout = models.BooleanField()
     bakingdate = models.DateField(default=datetime.now, blank=True)
     deliverydate = models.DateField(default=datetime.now, blank=True)
     bakingtime = models.TimeField(default=datetime.now, blank=True)
