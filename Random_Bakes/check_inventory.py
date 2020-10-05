@@ -182,7 +182,7 @@ df2 = pd.read_csv('orders.csv')
 # invoice = '# INV-GGLOW6'
 # # batch = "BATCH_21"
 importSales()
-print (WeeksSales('BATCH_22',df2)[1])
+#print (WeeksSales('BATCH_22',df2)[1])
 
 
 # print(WeeksSales(batch, df2)[1])

@@ -96,11 +96,13 @@ class ActiveSales(models.Model):
     RandomBake =  models.TextField(blank = True)
     RandomBake_sold = models.PositiveIntegerField(default = 0)
     CreamCheese_sold = models.PositiveIntegerField(default = 0)
+    Batch_Notes =  models.TextField(blank = True)
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "ActiveSales"
     def __str__(self):
         return self.batch
+
 class Orders(models.Model):
     batch = models.OneToOneField(ActiveSales, on_delete = models.CASCADE)
     customer = models.OneToOneField(User, on_delete = models.CASCADE)

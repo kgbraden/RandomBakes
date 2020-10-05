@@ -10,10 +10,12 @@
   <title>Random Bakes</title>
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
   <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/"> -->
-  <link rel="preconnect" href="https://app.snipcart.com">
+   <!-- <link rel="preconnect" href="https://app.snipcart.com">
   <link rel="preconnect" href="https://cdn.snipcart.com">
-
-  <!-- Bootstrap core CSS -->
+    <script async src="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.js"></script>
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.css" />
+  <div id="snipcart" data-api-key="ZGNiYWUxZTEtYjQ1OS00ZDYxLTg0MDktNGMxMjRmNWZiYTU0NjM3MzY3NDc5Mzk1NDAzMjEz" hidden></div>
+ Bootstrap core CSS -->
 
   <link href="{% static "/assets/dist/css/bootstrap.min.css" %}" rel="stylesheet">
   <link href="{% static "/css/sticky-footer-navbar.css" %}" rel="stylesheet">
@@ -63,11 +65,16 @@
                   <li class="nav-item">
                     <a href="{% url 'user_login' %}"><img src="{% static "/media/locked.png" %}" class = "" alt="Login"></a>
                   </li>
+
                 {% endif %}
+                 <!-- <li class = "nav-item">
+                      <span class="snipcart-items-count"><button class="snipcart-checkout"></button></span>
+                  </li> -->
               </ul>
             </div>
           </nav>
         </header>
+
 <!-- #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+# -->
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     {% block body_block %}

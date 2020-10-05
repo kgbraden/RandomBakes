@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 ##THIS IS A TEST
 
 from pathlib import Path
-import os,sys
+import os,sys, config
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -107,13 +107,34 @@ WSGI_APPLICATION = 'Random_Bakes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+try:
+    z = os.environ['COMPUTERNAME']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config.SSH['pDbase'],
+            'USER': config.SSH['pUser'],
+            'PASSWORD': config.SSH['pPassword'],
+            'HOST': '127.0.0.1',
+            'PORT':'3333',
+        }
     }
-}
-
+except:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config.SSH['pDbase'],
+            'USER': config.SSH['pUser'],
+            'PASSWORD': config.SSH['pPassword'],
+            'HOST': config.SSH['remote_bind_address'],
+        }
+    }
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

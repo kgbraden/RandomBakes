@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from MainPage.models import (highlight, ActiveSales, Featurette, AboutUs, Customer, Orders)
+from MainPage.models import (highlight, ActiveSales, Featurette)
 from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
