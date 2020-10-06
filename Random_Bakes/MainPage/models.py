@@ -77,12 +77,13 @@ class Customer(models.Model):
         def __str__(self):
             return '%s %s' %(self.Fname, self.Lname)
 class ActiveSales(models.Model):
-    batch = models.CharField(max_length =10, primary_key= True, unique = True)
-    active = models.BooleanField()
-    start_sales = models.DateField()
-    end_sales = models.DateField()
+    id = models.AutoField(primary_key=True)
+    batch = models.CharField(max_length =10, unique = True)
+    active = models.BooleanField(default = False)
+    start_sales = models.DateField(blank=True)
+    end_sales = models.DateField(blank=True)
     units = models.PositiveIntegerField()
-    soldout = models.BooleanField()
+    soldout = models.BooleanField(default = False)
     bakingdate = models.DateField(default=datetime.now, blank=True)
     deliverydate = models.DateField(default=datetime.now, blank=True)
     bakingtime = models.TimeField(default=datetime.now, blank=True)
@@ -100,10 +101,13 @@ class ActiveSales(models.Model):
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "ActiveSales"
+    def get_absolute_url(self):
+        return reverse('batch', kwargs={'pk': self.pk})
     def __str__(self):
         return self.batch
 
 class Orders(models.Model):
+    id = models.AutoField(primary_key=True)
     batch = models.OneToOneField(ActiveSales, on_delete = models.CASCADE)
     customer = models.OneToOneField(User, on_delete = models.CASCADE)
     Plain_sold = models.PositiveIntegerField(default = 0)

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "MainPage/base.html" %}
+{% block body_block %}
+<!-- _______________________________________________________________________ -->
+{% load static %}
+  <div class="container">
+    <h1> Feature Entries</h1>
+    {% for b in ActiveSales_list %}
+    <div class="container">
+      <h3> <a href="{% url 'Baking:ActiveSales_detail' pk=b.batch %}">{{b.batch}}</a> </h3>
+      <p class ='text-left'>{{b.batch_notes|safe|linebreaks}}</p>
+    </div>
+    {% endfor %}
+  </div>
+<!-- _______________________________________________________________________ -->
+{% endblock %}

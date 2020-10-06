@@ -3,7 +3,7 @@ from MainPage.models import (highlight, ActiveSales, Featurette)
 from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
-                            # baking_batch_form,
+                            ActiveSalesForm,
                             FeaturetteForm)
 from check_inventory import importSales, WeeksSales
 from django.contrib.auth import authenticate, login, logout
@@ -18,9 +18,13 @@ from django.views.generic import (View,
                                   UpdateView,
                                   DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.http import require_POST
 from datetime import date, datetime
 
 # Create your views here.
+@require_POST
+def orderplaced(request):
+    return HttpResponse("Order Placed!")
 def index(request):
     B_info = BatchInfo()
     today = date.today()
@@ -75,7 +79,7 @@ class LicenseListView(ListView):
     queryset = Featurette.objects.filter(type='Licenses')
     context_object_name = 'articles'
     ordering = ['order']
-
+#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class ProjectListView(ListView):
     template_name = 'MainPage/blank_content.html'
     queryset = Featurette.objects.filter(type='Projects')
@@ -85,9 +89,19 @@ class ProjectListView(ListView):
 class FeaturetteListView(ListView):
     model = Featurette
 
+class ActiveSalesListView(ListView):
+    model = ActiveSales
+    template_name = 'MainPage/batches.html'
+    queryset = ActiveSales.objects.all()
+    context_object_name = 'batches'
+    ordering = ['-end_sales']
+#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteDetailView(DetailView):
     model = Featurette
 
+class ActiveSalesDetailView(DetailView):
+    model = ActiveSales
+#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
     # redirect_field_name = '/MainPage/featurette_update'
@@ -95,6 +109,13 @@ class FeaturetteCreateView(LoginRequiredMixin, CreateView):
     form_class = FeaturetteForm
     model = Featurette
 
+class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    # redirect_field_name = '/MainPage/featurette_update'
+    success_url = '/Baking/success/'
+    form_class = ActiveSalesForm
+    model = ActiveSales
+#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     # redirect_field_name = '#'
@@ -102,10 +123,23 @@ class FeaturetteUpdateView(LoginRequiredMixin, UpdateView):
     form_class = FeaturetteForm
     model = Featurette
 
+class ActiveSalesUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    # redirect_field_name = '#'
+    template_name = 'MainPage/ActiveSales_update.html'
+    success_url = '/Baking/success/'
+    form_class = ActiveSalesForm
+    model = ActiveSales
+
+#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteDeleteView(LoginRequiredMixin, DeleteView):
     success_url = '/Baking/success/'
     model = Featurette
 
+class ActiveSalesDeleteView(LoginRequiredMixin, DeleteView):
+    success_url = '/Baking/success/'
+    model = ActiveSales
+#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 def contact(request):
     return render(request,'MainPage/contact.html')
 

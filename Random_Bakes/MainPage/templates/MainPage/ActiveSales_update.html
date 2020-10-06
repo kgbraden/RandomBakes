@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "MainPage/base.html" %}
+{% block body_block %}
+<!-- _______________________________________________________________________ -->
+{% load static %}
+  <div class="container text-left">
+    <h1>Active Sales Form</h1>
+      <form class="post-form"  method="post" enctype="multipart/form-data">
+        {%csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class= "btn btn-sm btn-primary">Submit</button>
+        <a href="javascript:history.back()" class= "btn btn-sm btn-secondary">Cancel</a>
+      </form>
+      <script>var editor = new MediumEditor('.editable');</script>
+  </div>
+<!-- _______________________________________________________________________ -->
+{% endblock %}
