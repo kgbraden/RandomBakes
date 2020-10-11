@@ -21,7 +21,7 @@ import pandas as pd
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Random_Bakes.settings")
 import django
 django.setup()
-from MainPage.models import (ActiveSales, Customer, Orders)
+from MainPage.models import (ActiveSales, Customer)
 def importSales():
     path = Path(__file__).resolve(strict=True).parent
     path = os.path.join(path, 'creds.json')

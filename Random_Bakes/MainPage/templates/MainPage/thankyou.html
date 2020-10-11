@@ -5,8 +5,13 @@
 {% load static %}
   <div class="jumbotron text-dark ">
     <h1> Thank You</h1>
-      <p>{{BATCH_ID}}</p>
-      <p>{{Customer}}</p>
+      <p>{{BATCH_ID}} is sceduled for delivery on {{delivered}}</p>
+      <p class ="text-justify">{{fName}}, we appreciate your order of: </p>
+        <ul class ="text-justify">
+          {% for t in ticket %}
+            <li>{{t}}</li>
+          {% endfor %}
+        </ul>
   </div>
 <!-- _______________________________________________________________________ -->
 {% endblock %}

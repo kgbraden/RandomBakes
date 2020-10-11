@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class = "h-100">
+<head>
+  <meta charset="utf-8">
+  <title>Random Bakes:Tickets</title>
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+  <link href="{% static "css/print.css" %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Chilanka&display=swap" rel="stylesheet">
+  <style type="text/css">
+
+    table, th, td {
+
+    }
+    .batch{
+        font-weight: bold;
+        font-size: 15px;
+        font-family: 'Homemade Apple', cursive;
+        text-align: center;
+        text-transform: lowercase;
+    }
+    td{
+      width: 170px;
+      height: 300px;
+      padding-top: 0px;
+      padding-left:5px;
+      padding-right:5px;
+        font-size: 9px;
+      font-weight: bold;
+    background-image: url({% static "media/24707-6-blank-tag-photo.png"%});
+    font-family: 'Caveat', cursive;
+
+
+  }
+    </style>
+
+</head>
+  <div>
+    <table>
+        <tr>
+          {% for ticket in tickets %}
+            {%if forloop.counter|divisibleby:4 %}
+              </tr><tr>
+            {%endif%}
+            <td>
+              <div>
+                <p class = "batch">{{ticket.batch}}<p>
+                    <p>{{ticket.invoiceid}}
+                      {{ticket.deliveryinfo|linebreaks }}
+                    {{ticket.cart|linebreaks}}</p>
+          </div>
+        </td>
+        {% endfor %}
+        </tr>
+      </table>
+  </div>
+</body>
+<!-- _______________________________________________________________________ -->

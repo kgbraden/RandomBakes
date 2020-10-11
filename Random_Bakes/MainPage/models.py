@@ -66,16 +66,18 @@ class UserProfileInfo(models.Model):
     def __str__(self):
         return self.user.username
 class Customer(models.Model):
-        Fname = models.CharField(max_length = 50,  blank=True)
-        Lname = models.CharField(max_length = 50,  blank=True)
-        d_Street1 =models.CharField(max_length = 100,  blank=True)
-        d_Street2 =models.CharField(max_length = 100,  blank=True)
-        d_City = models.CharField(max_length = 3,  blank=True)
-        d_State = models.CharField(max_length = 100,  blank=True)
-        d_Zip = models.CharField(max_length = 10,  blank=True)
-        Phone =models.CharField(max_length = 20,  blank=True)
-        def __str__(self):
-            return '%s %s' %(self.Fname, self.Lname)
+    Fname = models.CharField(max_length = 50,  blank=True)
+    Lname = models.CharField(max_length = 50)
+    email = models.EmailField(max_length=254,  blank=True, unique=True)
+    dStreet1 =models.CharField(max_length = 100,  blank=True)
+    dStreet2 =models.CharField(max_length = 100,  blank=True)
+    dCity = models.CharField(max_length = 100,  blank=True)
+    dState = models.CharField(max_length = 3,  blank=True)
+    dZip = models.CharField(max_length = 10,  blank=True)
+    Phone =models.CharField(max_length = 20,  blank=True)
+    customer_Notes =  models.TextField(blank = True)
+    def __str__(self):
+        return '%s %s' %(self.Fname, self.Lname)
 class ActiveSales(models.Model):
     id = models.AutoField(primary_key=True)
     batch = models.CharField(max_length =10, unique = True)
@@ -108,8 +110,9 @@ class ActiveSales(models.Model):
 
 class Orders(models.Model):
     id = models.AutoField(primary_key=True)
-    batch = models.OneToOneField(ActiveSales, on_delete = models.CASCADE)
-    customer = models.OneToOneField(User, on_delete = models.CASCADE)
+    invoiceid = models.CharField(max_length =14, unique = True)
+    batch = models.ForeignKey(ActiveSales, on_delete = models.PROTECT, related_name="order_batch")
+    customer = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name='order_customer')
     Plain_sold = models.PositiveIntegerField(default = 0)
     Sesame_sold = models.PositiveIntegerField(default = 0)
     Salt_sold = models.PositiveIntegerField(default = 0)
@@ -119,6 +122,15 @@ class Orders(models.Model):
     Everything_sold = models.PositiveIntegerField(default = 0)
     RandomBake_sold = models.PositiveIntegerField(default = 0)
     CreamCheese_sold = models.PositiveIntegerField(default = 0)
+    deliveryinfo = models.TextField(blank = True)
+    cart = models.TextField(blank = True)
+    total = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
+    fees = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
+    class Meta:
+        # otherwise we get "Tutorial Seriess in admin"
+        verbose_name_plural = "Orders"
+    def __str__(self):
+        return "%s--%s_%s (%s)" %(self.batch, self.customer.Fname, self.customer.Lname, self.invoiceid)
 # class fermIngredients(models.Model):
 #     ferm_ingrd_amount = models.DecimalField(decimal_places=2, max_digits = 6)
 #     ferm_ingred_metric = models.TextField(max_length = 40, choices=metric_choices)

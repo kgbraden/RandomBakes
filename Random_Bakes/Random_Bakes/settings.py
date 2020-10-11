@@ -54,7 +54,7 @@ SECRET_KEY = find_or_create_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.randombakes.com','127.0.0.1',]
+ALLOWED_HOSTS = ['.randombakes.com','127.0.0.1', '.ngrok.io']
 
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 # Application definition

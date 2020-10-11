@@ -1,5 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from MainPage.models import (highlight, ActiveSales, Featurette)
+from MainPage.models import (highlight,
+                             ActiveSales,
+                             Featurette,
+                             Orders,
+                             Customer)
 from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
@@ -18,13 +22,17 @@ from django.views.generic import (View,
                                   UpdateView,
                                   DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 from datetime import date, datetime
-
+import ast
 # Create your views here.
-@require_POST
+@require_http_methods(["GET", "POST"])
 def orderplaced(request):
+    print(request.GET.get('id', None))
+    print("Worked")
     return HttpResponse("Order Placed!")
+
 def index(request):
     B_info = BatchInfo()
     today = date.today()
@@ -95,6 +103,18 @@ class ActiveSalesListView(ListView):
     queryset = ActiveSales.objects.all()
     context_object_name = 'batches'
     ordering = ['-end_sales']
+
+class OrdersListView(ListView):
+    template_name = 'MainPage/tickets.html'
+    queryset = Orders.objects.all()
+    context_object_name = 'tickets'
+    ordering= ['customer']
+    # current_batch = ActiveSales.objects.get(active=True).batch
+    # print(current_batch)
+    #
+    # queryset = Orders.objects.all()
+    #
+    #
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteDetailView(DetailView):
     model = Featurette
@@ -275,18 +295,102 @@ def registration(request):
                     {'user_form': user_form,
                     'profile_form': profile_form,
                     'registered':  registered})
-
+@csrf_exempt
 def thankyou(request):
+    def parseOrder(orders):
+        products = {'Plain':0, 'Sesame':0, 'Salt':0, 'Poppy':0, 'Garlic':0,
+                    'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0}
+        for order in range(0, len(orders)):
+            print(order)
+            for product in products:
+                if (product == 'Cream') & (orders[order].count(product)==1):
+                    products[product] += int(orders[order][-2])
+                else:
+                    products[product] += orders[order].count(product)
+        return products
     if request.method=='POST':
         BATCH_ID = request.POST.get('batchid76')
-        Customer = request.POST.get('name')
+        Batch_Info = ActiveSales.objects.get(batch=BATCH_ID)
+        FormCustomer = request.POST.getlist('name[]')  #0-firstname  | 1-lastname
+        FormEmail = request.POST.get('email')
+        phone = request.POST.getlist('phonenumber[]')  #0-area code | 1-phone number
+        phone = "%s %s" %(phone[0], phone[1])
+        deliveryaddress = request.POST.getlist('deliveryaddress[]')  #0-address line 1
+                                                                         #1-address line 2
+                                                                         #2-city
+                                                                         #3-State
+                                                                         #4-Zip
+        try:
+            DjangoCustomer = Customer.objects.get(email=FormEmail)
+        except:
+            DjangoCustomer = Customer(Fname =  FormCustomer[0],
+                                      Lname =  FormCustomer[1],
+                                      email =  FormEmail,
+                                      dStreet1 = deliveryaddress[0],
+                                      dStreet2 = deliveryaddress[1],
+                                      dCity =  deliveryaddress[2],
+                                      dState =  deliveryaddress[3],
+                                      dZip =  deliveryaddress[4],
+                                      Phone = phone)
+            DjangoCustomer.save()
+        PayPalData = request.POST.getlist('myproducts[]') #0-products ordered
+                                                       #1-Currency type
+                                                       #2-AMount charged
+                                                       #3-Paypal record
+                                                       #4-Fees charged
+                                                       #5-??????
+                                                       #6-Name of Payer
+                                                       #7-email of Payer
+                                                       #12-Billing st
+                                                       #13-billing City
+                                                       #14-billing State
+                                                       #15-billing Zip
+        try:
+            deliverynotes = [deliveryaddress[0], deliveryaddress[1],
+                             deliveryaddress[2],deliveryaddress[3],
+                             deliveryaddress[4], phone,
+                             request.POST.get('deliverynotes')]
+        except:
+            deliverynotes = [deliveryaddress[0], deliveryaddress[1],
+                             deliveryaddress[2],deliveryaddress[3],
+                             deliveryaddress[4], phone]
+        ticket = ast.literal_eval(PayPalData[0])
+        products = parseOrder(ast.literal_eval(PayPalData[0]))
+        invoice = request.POST.get('invoiceid')
+        delivered = Batch_Info.deliverydate
+
+        NewOrder = Orders(invoiceid = invoice,
+                            batch = Batch_Info,
+                            customer = DjangoCustomer,
+                            Plain_sold = products['Plain'],
+                            Sesame_sold = products['Sesame'],
+                            Salt_sold = products['Salt'],
+                            Onion_sold = products['Onion'],
+                            Poppy_sold = products['Poppy'],
+                            Garlic_sold = products['Garlic'],
+                            Everything_sold = products['Everything'],
+                            RandomBake_sold = products['RandomBake'],
+                            CreamCheese_sold = products['Cream'],
+                            deliveryinfo = deliverynotes,
+                            cart = PayPalData[0],
+                            total = PayPalData[2],
+                            fees = PayPalData[4]
+                        )
+        try:
+            NewOrder.save()
+        except:
+            print("Order Already Saved!")
     else:
         BATCH_ID = "Didn't"
-        Customer = "Work"
-        return render(request, 'MainPage/thankyou.html',
-                     {'BATCH_ID': BATCH_ID,
-                      'Customer': Customer
-                     })
+        Cust = ['work',""]
+
+    return render(request, 'MainPage/thankyou.html',
+                 {'BATCH_ID':NewOrder.batch,
+                  'fName': DjangoCustomer.Fname,
+                  'lName': DjangoCustomer.Lname,
+                  'ticket': ticket,
+                  'delivered': delivered,
+                 })
 def success(request):
     return render(request,'MainPage/sucess.html')
 
