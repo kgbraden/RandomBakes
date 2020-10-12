@@ -195,6 +195,7 @@ def BatchInfo():
         storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
         deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
         sales = importSales()
+
         sold = WeeksSales(activeBatch, sales)[1]
         totsold = sold['totBagels']
 
@@ -218,6 +219,7 @@ def BatchInfo():
     feature.description = DeliveryInfo
     feature.save()
     return available, out
+
 def order(request):
     acv_sales = ActiveSales.objects.filter(active =True)[0]
     today = date.today()
@@ -365,8 +367,7 @@ def thankyou(request):
                             Plain_sold = products['Plain'],
                             Sesame_sold = products['Sesame'],
                             Salt_sold = products['Salt'],
-                            Onion_sold = products['Onion'],
-                            Poppy_sold = products['Poppy'],
+                            Onion_sold = products['Onion'],                            Poppy_sold = products['Poppy'],
                             Garlic_sold = products['Garlic'],
                             Everything_sold = products['Everything'],
                             RandomBake_sold = products['RandomBake'],

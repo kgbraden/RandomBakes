@@ -42,6 +42,7 @@ def importSales():
 def ReturnTicket(invoice, df2):
 
     order = df2.loc[(df2['Invoice ID']==invoice), 'My Products: Products'].values[0]
+
     fname =  df2.loc[(df2['Invoice ID']==invoice), 'First Name'].values[0]
     lname = df2.loc[(df2['Invoice ID']==invoice), 'Last Name'].values[0]
     straddress = df2.loc[(df2['Invoice ID']==invoice), 'Street Address'].values[0]
@@ -81,10 +82,11 @@ def ReturnTicket(invoice, df2):
         order[part] = order[part].replace(" (", "': {'")
         order[part] = order[part].replace(", ", "', '")
         order[part] = order[part].replace(")", "'}}")
+        order[part] = order[part].replace("_ORDER", "_ORDER'}")
 
         if 'Total' in order[part]:
             order[part] = order[part] + "'}"
-        if ("Subtotal" in order[part]) | ("Tax" in order[part]) | (order[part] =="{'"):
+        if ("Subtotal" in order[part]) | ("Tax" in order[part]) | (order[part] =="{'") :
             toDel.append(order[part])
         else:
             order[part] = ast.literal_eval(order[part])
@@ -185,4 +187,4 @@ importSales()
 #print (WeeksSales('BATCH_22',df2)[1])
 
 
-# print(WeeksSales(batch, df2)[1])
+# print(WeeksSales("BATCH_27", df2)[1])
