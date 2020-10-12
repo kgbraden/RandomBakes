@@ -9,7 +9,7 @@ from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
                             ActiveSalesForm,
                             FeaturetteForm)
-from check_inventory import importSales, WeeksSales
+from check_inventory import ProcessSales
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
@@ -194,9 +194,9 @@ def BatchInfo():
         deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
         storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
         deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
-        sales = importSales()
+        # sales = importSales()
 
-        sold = WeeksSales(activeBatch, sales)[1]
+        sold = ProcessSales()
         totsold = sold['totBagels']
 
         DeliveryInfo = '"%s" is scheduled to be a batch of %s bagels baked and delivered on %s. Deliveries will begin after %s when they have cooled enough for packaging. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery.' %(activeBatch, available, deliverydate, deliverytime)
@@ -238,8 +238,8 @@ def order(request):
         NxtSched = False
     if (acv_sales.start_sales < today) & (today < acv_sales.end_sales):
         # In sales period
-        sales = importSales()
-        sold = WeeksSales(activeBatch, sales)[1]
+
+        sold = ProcessSales()
         totsold = sold['totBagels']
         DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when they have cooled enough for packaging. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
         available = acv_sales.units
@@ -303,7 +303,7 @@ def thankyou(request):
         products = {'Plain':0, 'Sesame':0, 'Salt':0, 'Poppy':0, 'Garlic':0,
                     'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0}
         for order in range(0, len(orders)):
-            print(order)
+            #print(order)
             for product in products:
                 if (product == 'Cream') & (orders[order].count(product)==1):
                     products[product] += int(orders[order][-2])
@@ -347,6 +347,12 @@ def thankyou(request):
                                                        #13-billing City
                                                        #14-billing State
                                                        #15-billing Zip
+        if type(PayPalData[4]) == float:
+            fees = PayPalData[4]
+        elif type(PayPalData[5]) == float:
+            fees = PayPalData[5]
+        else:
+            fees = 0
         try:
             deliverynotes = [deliveryaddress[0], deliveryaddress[1],
                              deliveryaddress[2],deliveryaddress[3],
@@ -367,7 +373,8 @@ def thankyou(request):
                             Plain_sold = products['Plain'],
                             Sesame_sold = products['Sesame'],
                             Salt_sold = products['Salt'],
-                            Onion_sold = products['Onion'],                            Poppy_sold = products['Poppy'],
+                            Onion_sold = products['Onion'],
+                            Poppy_sold = products['Poppy'],
                             Garlic_sold = products['Garlic'],
                             Everything_sold = products['Everything'],
                             RandomBake_sold = products['RandomBake'],
@@ -375,7 +382,7 @@ def thankyou(request):
                             deliveryinfo = deliverynotes,
                             cart = PayPalData[0],
                             total = PayPalData[2],
-                            fees = PayPalData[4]
+                            fees = fees
                         )
         try:
             NewOrder.save()
