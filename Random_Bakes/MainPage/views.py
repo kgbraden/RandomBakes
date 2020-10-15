@@ -305,10 +305,11 @@ def thankyou(request):
     def parseOrder(orders):
         products = {'Plain':0, 'Sesame':0, 'Salt':0, 'Poppy':0, 'Garlic':0,
                     'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0}
+        print(orders)
         for order in range(0, len(orders)):
-            #print(order)
+            
             for product in products:
-                if (product == 'Cream') & (orders[order].count(product)==1):
+                if (product == 'Cream') & (orders[order].count(product)!=0):
                     products[product] += int(orders[order][-2])
                 else:
                     products[product] += orders[order].count(product)
@@ -366,13 +367,16 @@ def thankyou(request):
                              deliveryaddress[2],deliveryaddress[3],
                              deliveryaddress[4], phone)
         ticket = ast.literal_eval(PayPalData[0])
-        products = parseOrder(ast.literal_eval(PayPalData[0]))
+        cart= parseOrder(ast.literal_eval(PayPalData[0]))
+        print(cart)
+        products = parseOrder(ticket)
         invoice = request.POST.get('invoiceid')
         delivered = Batch_Info.deliverydate
-        products = ""
+        cart = ""
         for t in ticket:
-            products +='%s\n' %t
-        products.replace(', Bagel ', ', B')
+            cart +='%s\n' %t
+        cart.replace(', Bagel ', ', B')
+        
         NewOrder = Orders(invoiceid = invoice,
                             batch = Batch_Info,
                             customer = DjangoCustomer,
@@ -386,7 +390,7 @@ def thankyou(request):
                             RandomBake_sold = products['RandomBake'],
                             CreamCheese_sold = products['Cream'],
                             deliveryinfo = deliverynotes,
-                            cart = products,
+                            cart = cart,
                             total = PayPalData[2],
                             fees = fees
                         )
