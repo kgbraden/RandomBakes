@@ -54,6 +54,9 @@ def ProcessSales():
         invt.soldout = True
     invt.save()
     return products
+
+
+
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 # def importSales():
 #     path = Path(__file__).resolve(strict=True).parent

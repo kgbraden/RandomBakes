@@ -59,6 +59,7 @@ def index(request):
            }
     return render(request,'MainPage/index.html', context = cover_content)
 
+    
 def projects(request):
     return render(request,'MainPage/projects.html')
 
@@ -106,6 +107,8 @@ class ActiveSalesListView(ListView):
 
 class OrdersListView(ListView):
     template_name = 'MainPage/tickets.html'
+    acv_sales = ActiveSales.objects.get(active ="True")
+    # queryset = Orders.objects.filter(batch = acv_sales.id)
     queryset = Orders.objects.all()
     context_object_name = 'tickets'
     ordering= ['customer']
@@ -354,19 +357,22 @@ def thankyou(request):
         else:
             fees = 0
         try:
-            deliverynotes = [deliveryaddress[0], deliveryaddress[1],
+            deliverynotes = '%s\n%s\n%s, %s %s\n%s\nDelivery Notes: %s' %(deliveryaddress[0], deliveryaddress[1],
                              deliveryaddress[2],deliveryaddress[3],
                              deliveryaddress[4], phone,
-                             request.POST.get('deliverynotes')]
+                             request.POST.get('deliverynotes'))
         except:
-            deliverynotes = [deliveryaddress[0], deliveryaddress[1],
+            deliverynotes = '%s\n%s\n%s, %s %s\n%s' %(deliveryaddress[0], deliveryaddress[1],
                              deliveryaddress[2],deliveryaddress[3],
-                             deliveryaddress[4], phone]
+                             deliveryaddress[4], phone)
         ticket = ast.literal_eval(PayPalData[0])
         products = parseOrder(ast.literal_eval(PayPalData[0]))
         invoice = request.POST.get('invoiceid')
         delivered = Batch_Info.deliverydate
-
+        products = ""
+        for t in ticket:
+            products +='%s\n' %t
+        products.replace(', Bagel ', ', B')
         NewOrder = Orders(invoiceid = invoice,
                             batch = Batch_Info,
                             customer = DjangoCustomer,
@@ -380,7 +386,7 @@ def thankyou(request):
                             RandomBake_sold = products['RandomBake'],
                             CreamCheese_sold = products['Cream'],
                             deliveryinfo = deliverynotes,
-                            cart = PayPalData[0],
+                            cart = products,
                             total = PayPalData[2],
                             fees = fees
                         )

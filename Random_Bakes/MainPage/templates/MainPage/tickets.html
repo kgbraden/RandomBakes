@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en" class = "h-100">
 <head>
   <meta charset="utf-8">
@@ -15,39 +16,59 @@
     .batch{
         font-weight: bold;
         font-size: 15px;
-        font-family: 'Homemade Apple', cursive;
+        font-family: 'Caveat', cursive;
         text-align: center;
-        text-transform: lowercase;
+        /* text-transform: lowercase; */
     }
-    td{
-      width: 170px;
-      height: 300px;
-      padding-top: 0px;
-      padding-left:5px;
-      padding-right:5px;
-        font-size: 9px;
+    .name{
       font-weight: bold;
-    background-image: url({% static "media/24707-6-blank-tag-photo.png"%});
-    font-family: 'Caveat', cursive;
+      font-size: 20px;
+      font-family: 'Caveat', cursive;
+    }
+    .ticket{
+      width: 200px;
+      height: 200px;
+      padding-top: 10px;
+      padding-left:50px;
+      padding-right:50px;
+        font-size: 8px;
+      font-weight: bold;
+      vertical-align: top;
+      font-family: 'Caveat', cursive;
+    /* background-image: url({% static "media/24707-6-blank-tag-photo.png"%}); */
 
+    -webkit-transform:rotate(-180deg);
+    -moz-transform:rotate(-180deg);
+    -o-transform:rotate(-180deg);
+    transform:rotate(-180deg);
+    ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+    border: solid;
 
+  }
+  .ticTable{
+    width: 1024px;
+    height: 768px;
+table-layout: fixed
   }
     </style>
 
 </head>
   <div>
-    <table>
+    <table class = "ticTable">
         <tr>
           {% for ticket in tickets %}
-            {%if forloop.counter|divisibleby:4 %}
+            {%if forloop.counter|divisibleby:5 %}
               </tr><tr>
             {%endif%}
-            <td>
+            <td class ="ticket">
               <div>
-                <p class = "batch">{{ticket.batch}}<p>
-                    <p>{{ticket.invoiceid}}
-                      {{ticket.deliveryinfo|linebreaks }}
-                    {{ticket.cart|linebreaks}}</p>
+                <div class = "batch">{{ticket.batch}}</div>
+                    <div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div>
+                      <div>{{ticket.invoiceid}}</div>
+                      {{ticket.deliveryinfo|linebreaks}}
+
+                    {{ticket.cart}}</p>
           </div>
         </td>
         {% endfor %}
