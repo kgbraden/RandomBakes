@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Chilanka&display=swap" rel="stylesheet">
   <style type="text/css">
 
-    table, th, td {
+    /* table, th, td {
 
-    }
+    } */
     .batch{
         font-weight: bold;
         font-size: 15px;
@@ -22,55 +22,88 @@
     }
     .name{
       font-weight: bold;
-      font-size: 20px;
+      font-size: 24px;
       font-family: 'Caveat', cursive;
+      color: blue;
+    }
+    .blank{
+      width: 200px;
+      height: 100px;
+      text-align:center;
     }
     .ticket{
-      width: 200px;
-      height: 200px;
-      padding-top: 10px;
+      width: 155px;
+      height: 305px;
+      padding-top: 60px;
       padding-left:50px;
-      padding-right:50px;
-        font-size: 8px;
+      padding-right:20px;
+        font-size: 14px;
       font-weight: bold;
-      vertical-align: top;
+      vertical-align: bottom;
       font-family: 'Caveat', cursive;
-    /* background-image: url({% static "media/24707-6-blank-tag-photo.png"%}); */
+      -webkit-transform:rotate(-180deg);
+      -moz-transform:rotate(-180deg);
+      -o-transform:rotate(-180deg);
+      transform:rotate(-180deg);
+    /* ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)"; */
+      filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+      border-left: solid 1px grey;
+      border-right: solid 1px grey;
+  }
 
-    -webkit-transform:rotate(-180deg);
-    -moz-transform:rotate(-180deg);
-    -o-transform:rotate(-180deg);
-    transform:rotate(-180deg);
-    ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
-    border: solid;
-
+  .ticket_upside{
+      width: 155px;
+      height: 305px;
+      padding-top: 60px;
+      padding-left:50px;
+      padding-right:20px;
+        font-size: 14px;
+      font-weight: bold;
+      vertical-align: bottom;
+      font-family: 'Caveat', cursive;
+      border-left: solid 1px grey;
+      border-right: solid 1px grey;
   }
   .ticTable{
     width: 1024px;
     height: 768px;
-table-layout: fixed
+    padding:10;
+    table-layout: fixed;
+  }
+  .blank{
+   
+    height: 20px;
+    
   }
     </style>
 
 </head>
+<body>
   <div>
     <table class = "ticTable">
         <tr>
           {% for ticket in tickets %}
-            {%if forloop.counter|divisibleby:5 %}
-              </tr><tr>
+            {%if forloop.counter <= 4 %}
+              <td class ="ticket">
+            {%elif forloop.counter >= 5 and forloop.counter <= 8%}
+            <td class ="ticket_upside">
+            {%elif forloop.counter >= 9 and forloop.counter <= 12%}
+              <td class ="ticket">
             {%endif%}
-            <td class ="ticket">
-              <div>
-                <div class = "batch">{{ticket.batch}}</div>
+                <div> 
+                  <div class = "batch">{{ticket.batch}}</div>
                     <div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div>
-                      <div>{{ticket.invoiceid}}</div>
-                      {{ticket.deliveryinfo|linebreaks}}
-
-                    {{ticket.cart}}</p>
-          </div>
-        </td>
+                      <div>{{ticket.invoiceid}}
+                        {{ticket.deliveryinfo|linebreaks}}{{ticket.cart|safe|linebreaks}}</div>
+                </div>
+              </td>
+            {%if forloop.counter == 4 or forloop.counter == 8 %}
+              </tr>
+              <tr><td class='blank' colspan=4></td></tr>
+              <tr></tr>
+            {%endif%}
+            
+            
         {% endfor %}
         </tr>
       </table>

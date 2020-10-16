@@ -108,8 +108,8 @@ class ActiveSalesListView(ListView):
 class OrdersListView(ListView):
     template_name = 'MainPage/tickets.html'
     acv_sales = ActiveSales.objects.get(active ="True")
-    # queryset = Orders.objects.filter(batch = acv_sales.id)
-    queryset = Orders.objects.all()
+    queryset = Orders.objects.filter(batch = acv_sales.id)
+    # queryset = Orders.objects.all()
     context_object_name = 'tickets'
     ordering= ['customer']
     # current_batch = ActiveSales.objects.get(active=True).batch
