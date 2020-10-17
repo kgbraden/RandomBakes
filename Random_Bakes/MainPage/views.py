@@ -212,7 +212,7 @@ def BatchInfo():
     else:
         if ActiveSales.objects.filter(batch =nextbatch).count()==1:
             #Checks to see if the next batch has been scheduled
-            nBatch = ActiveSales.objects.filter(batch =nextbatch)
+            nBatch = ActiveSales.objects.get(batch =nextbatch)
             nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
             nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
             DeliveryInfo = "Our next scheduled production run, %s, of %s bagels, will be on %s. Sales open for this batch will open on %s." %(nextbatch, nBatch.units,  nxtdatedelivery, nxtdateopen)
