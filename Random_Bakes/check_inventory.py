@@ -23,6 +23,7 @@ import django
 django.setup()
 from MainPage.models import (ActiveSales, Customer, Orders)
 from django.db.models import Avg, Max, Min, Sum
+import math
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 def ProcessSales():
     products =  {'Plain_sold':0,'Sesame_sold':0, 'Salt_sold':0, 'Onion_sold':0,
@@ -37,9 +38,12 @@ def ProcessSales():
     totalSold = 0
     for product in products:
         unitsSold = Orders.objects.filter(batch=invt.id).aggregate(sum = Sum(product))['sum']
-        products[product] =unitsSold
+        if unitsSold is None:
+            unitsSold = 0 
+        products[product] = unitsSold
         if (product !='RandomBake_sold') & (product != 'CreamCheese_sold'):
             totalSold += unitsSold
+            
     products['totBagels']= totalSold
     invt.Plain_sold = products['Plain_sold']
     invt.Sesame_sold = products['Sesame_sold']

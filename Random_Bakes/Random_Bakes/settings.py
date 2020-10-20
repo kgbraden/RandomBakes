@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 ##THIS IS A TEST
 
 from pathlib import Path
-import os,sys, config
+import os,sys
+import config
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -116,15 +117,18 @@ WSGI_APPLICATION = 'Random_Bakes.wsgi.application'
 try:
     z = os.environ['COMPUTERNAME']
     DATABASES = {
-        'default': {
+            'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': config.SSH['pDbase'],
             'USER': config.SSH['pUser'],
             'PASSWORD': config.SSH['pPassword'],
             'HOST': '127.0.0.1',
             'PORT':'3333',
-        }
-    }
+            'OPTIONS': {
+                        'sql_mode': 'traditional'
+                        }
+                    }
+                }
 except:
     DATABASES = {
         'default': {
@@ -133,6 +137,9 @@ except:
             'USER': config.SSH['pUser'],
             'PASSWORD': config.SSH['pPassword'],
             'HOST': config.SSH['remote_bind_address'],
+            'OPTIONS': {
+                        'sql_mode': 'traditional'
+                        }
         }
     }
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
