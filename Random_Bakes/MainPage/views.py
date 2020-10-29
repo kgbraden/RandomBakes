@@ -21,6 +21,7 @@ from django.views.generic import (View,
                                   CreateView,
                                   UpdateView,
                                   DeleteView)
+from django.views.generic.edit import FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
@@ -105,22 +106,36 @@ class ActiveSalesListView(ListView):
     context_object_name = 'batches'
     ordering = ['-end_sales']
 
+# class TicketListView(ListView):
+#     template_name = 'MainPage/tickets.html'
+#     acv_sales = ActiveSales.objects.get(active = "True")
+#     queryset = Orders.objects.filter(batch = acv_sales.id)
+#     context_object_name = 'tickets'
+#     ordering= ['customer']
+def TicketListView(request):
+    batches = ActiveSales.objects.all().order_by("-batch")
+    if request.GET.get('batch'):
+        acv_sales = ActiveSales.objects.get(batch = request.GET.get('batch'))
+    else:
+        acv_sales = ActiveSales.objects.get(active = "True")    
+    tickets = Orders.objects.filter(batch = acv_sales.id).order_by('customer')
+    return render(request,'MainPage/tickets.html', {'tickets': tickets, 
+                                                    'batches': batches
+                                                     })
+    
+
 class OrdersListView(ListView):
-    template_name = 'MainPage/tickets.html'
-    acv_sales = ActiveSales.objects.get(active ="True")
-    queryset = Orders.objects.filter(batch = acv_sales.id)
-    # queryset = Orders.objects.all()
-    context_object_name = 'tickets'
-    ordering= ['customer']
-    # current_batch = ActiveSales.objects.get(active=True).batch
-    # print(current_batch)
-    #
-    # queryset = Orders.objects.all()
-    #
-    #
+    
+    model = Orders
+    ordering= ['-batch']
+
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteDetailView(DetailView):
     model = Featurette
+class OrdersDetailView(DetailView):
+    # slug_field='Customer.Lname'
+    # slug_url_kwarg='batch'
+    model = Orders
 
 class ActiveSalesDetailView(DetailView):
     model = ActiveSales

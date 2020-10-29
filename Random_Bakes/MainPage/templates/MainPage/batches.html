@@ -5,11 +5,11 @@
 {% load static %}
   <div class="jumbotron text-dark ">
     <h1>Batches</h1>
+    {% if user.is_authenticated %}
+      <a class = "btn btn-outline-success" href="{% url 'Baking:ActiveSales_new'%}">Add Content</a>
+    {% endif%}
     {% for b in batches %}
     <div class="container text-left">
-      {% if user.is_authenticated %}
-      <a class = "btn btn-outline-success" href="{% url 'Baking:ActiveSales_new'%}">Add Content</a>
-      {% endif%}
       <h2>{{b.batch}} ({{b.start_sales}} to {{b.end_sales}})</h2>
       {% if b.active %}
       <h4>ACTIVE BATCH</h4>
@@ -20,7 +20,7 @@
       </div>
       {% endif %}
       <ul>
-        <li>Plain Sold: {{b.Plain_Sold}}</li>
+        <li>Plain Sold: {{b.Plain_sold}}</li>
         <li>Sesame Sold: {{ b.Sesame_sold }}</li>
         <li>Salt Sold: {{ b.Salt_sold }}</li>
         <li>Onion Sold: {{ b.Onion_sold }}</li>
@@ -34,7 +34,8 @@
       </ul>
       {% if user.is_authenticated %}
       <a class = "" href="{% url 'Baking:ActiveSales_update' pk=b.pk %}">edit</a> &middot;
-      <a class = "" href="{% url 'Baking:ActiveSales_remove' pk=b.pk %}">delete</a>
+      <a class = "" href="{% url 'Baking:ActiveSales_remove' pk=b.pk %}">delete</a> &middot;
+      <a class = "" href="{% url 'Baking:tickets'%}?batch={{b.batch}}">tickets</a> 
       {% endif %}
       <hr class="featurette-divider ">
     </div>

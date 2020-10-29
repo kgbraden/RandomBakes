@@ -126,6 +126,8 @@ class Orders(models.Model):
     cart = models.TextField(blank = True)
     total = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
     fees = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
+    delivorder = models.PositiveIntegerField(default = 0)
+    delivered = models.DateTimeField(blank=True, null=True)
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "Orders"

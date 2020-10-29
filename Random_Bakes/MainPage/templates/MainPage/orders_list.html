@@ -4,13 +4,11 @@
 <!-- _______________________________________________________________________ -->
 {% load static %}
   <div class="container">
-    <h1> Feature Entries</h1>
-    {% for b in ActiveSales_list %}
+    <h1> Orders </h1>
+    {% for order in orders_list %}
     <div class="container">
-      <h3> <a href="{% url 'Baking:ActiveSales_detail' pk=b.batch %}">{{b.batch}}</a> </h3>
-      <p class ='text-left'>{{b.batch_notes|safe|linebreaks}}</p>
-      {% if user.is_authenticated %}
-      <a class = "" href="{% url 'Baking:tickets' pk=content.pk %}">edit</a> &middot;
+      <h3> <a href="{% url 'Baking:order_detail' pk=order.pk %}">{{order.batch}} {{order.customer.Lname}}</a> </h3>
+      
     </div>
     {% endfor %}
   </div>

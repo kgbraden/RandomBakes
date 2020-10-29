@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% extends "MainPage/base.html" %}
+
+{% block body_block %}
+<!-- _______________________________________________________________________ -->
+{% load static %}
+{% load py_functions %}
+  <div class="container ">
+    <h1>Order: {{orders.batch}}</h1>
+    <h2>{{orders.customer.Fname}} {{orders.customer.Lname}}</h2>
+    <h4>{{orders.invoiceid}}</h4> 
+      <div><table class="align-center">
+        <tr>
+          <th>{{orders.deliveryinfo|DeliveryInfo|linebreaks}}</th>
+          <th>{{orders.cart|TicClean|linebreaks}}</th>
+        </tr>
+        <tr>
+          <th><a class="btn btn-secondary" href="{{orders.deliveryinfo|gMap}}" target = '_blank'>Navigate!</a></th>
+          <th><a class="btn btn-warning" href="#" >DELIVERED!</a></th>
+        </tr>
+      </table></div>
+
+<div>    
+
+  </div>
+<!-- _______________________________________________________________________ -->
+{% endblock %}

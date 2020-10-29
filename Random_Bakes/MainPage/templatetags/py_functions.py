@@ -12,25 +12,52 @@ def chk_invt(value):
 def TextManip(value, arg):
     return value.replace(arg, 'Turnip')
 
-@register.simple_tag(name='DeliveryInfo')
+@register.filter(name='DeliveryInfo')
 def DeliveryInfo(value):
-    try:
-        items = ast.literal_eval(value)
-    except:
-            return value
-    ticket = "<table><tr>"
+    delivery = value.replace('\n', '|').split('|')
+    length = len(delivery)
+    x = 0
+    deliv = ''
+    for d in delivery:
+        if (not 'None' in d) & (d!="") & (x !=length):
+            deliv +=d + '\n'
+        elif x==length:
+            deliv +=d
+        x+=1
+    return deliv
+
+@register.filter(name='TicClean')
+def TicketClean(value):
+    items = value.replace(" (",",").replace(')', ',').replace("Bagel ", "B").replace(', ', ',').replace('ack', 'ack:\n').replace('Cream Cheese', 'Cream Cheese: ').split(',')
+    ticket =''
     for item in items:
-        item = item.replace(' (', ', ')
-        item = item.replace(': ', ', ')
-        item = item.replace(')','')
-        item = item.split(', ')
-        x = 0
-        for part in item:
-            x +=1
-            if x ==1:
-                ticket += '<th>' + part + '</th></tr><tr>'
-            elif (not 'Amount' in part) & (not 'USD' in part) & ('Bagel' not in part):
-                ticket += '<td>'+ part + '</td>'
-        ticket += '</tr>'
-    ticket += '</table>'
+        if not ('Amount'in item) | ('Four' in item):
+            if ('B1' in item) | ('B3' in item) | ('B5' in item) | ('B7' in item):
+                ticket += item + " | "
+            elif ('B2' in item) | ('B4' in item) | ('B6' in item) | ('B8' in item) | ('Quantity' in item):
+                ticket += item + "\n"
+            else:
+                ticket += item
     return ticket
+
+@register.filter(name='gMap')
+def gMap(value):
+    delivery = value.replace('\n', '|').split('|')
+    length = len(delivery)
+    x = 1
+    deliv = ''
+    for d in delivery:
+        if (not 'Notes' in d) & (d!="") & (x !=length-1):
+            deliv +=d + '+'
+        print (deliv)
+        x+=1
+    urlEncodings = {" ": '%20',
+                    '"': '%22',
+                    '<': '%3C', 
+                    '>': '%3E',
+                    '#': '%23', 
+                    '%': '%25',
+                    '|': ' 	%7C'}
+    for urlc in urlEncodings:
+        deliv.replace(urlc, urlEncodings[urlc])
+    return 'https://www.google.com/maps/search/?api=1&query='+ deliv
