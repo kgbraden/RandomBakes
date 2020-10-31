@@ -26,6 +26,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from datetime import date, datetime
+from config import sendtext
 import ast
 # Create your views here.
 @require_http_methods(["GET", "POST"])
@@ -39,7 +40,8 @@ def index(request):
     today = date.today()
     cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
     feat = Featurette.objects.filter(type = 'index').order_by("order")
-
+    sold = ProcessSales()
+    totsold = sold['totBagels']
     story = cover_content2.story
     story = story.replace('[[units]]', str(B_info[0]))
     if B_info[1]: #this indicates that the batch is sold out
@@ -56,8 +58,8 @@ def index(request):
            'CoverButtonLink': buttonLink,
            'CoverButtonClass': cover_content2.button_class,
            'CoverScript': cover_content2.script,
-           'Featurette': feat
-           }
+           'Featurette': feat,
+           'TotalSold': totsold}
     return render(request,'MainPage/index.html', context = cover_content)
 
     
@@ -132,6 +134,30 @@ class OrdersListView(ListView):
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteDetailView(DetailView):
     model = Featurette
+
+def send_text(request):
+    if request.method =="POST":
+        OrdId = request.POST['OrderID']
+        phone = request.POST['phone']
+        #deliverorder = request.POST['deliverorder']
+        text = "Your Bagel order is at your front door! Thank you and enjoy!"
+        now = datetime.now()
+        
+        try:
+            OrderTracing = Orders.objects.get(id=OrdId)
+            OrderTracing.delivered = now
+            OrderTracing.save()
+            status = "%s Delivery recorded" %(OrdId)
+        except:
+            status = "Delivery Not recorded"
+    if len(phone)==11:
+        sendtext(phone, text)
+    return redirect("../orders/")
+
+class DeliveryView(ListView):
+    acv_sales = ActiveSales.objects.get(active = "True")    
+    queryset = Orders.objects.filter(batch = acv_sales.id).order_by('delivorder')
+    template_name = "MainPage/orders_list.html"
 class OrdersDetailView(DetailView):
     # slug_field='Customer.Lname'
     # slug_url_kwarg='batch'

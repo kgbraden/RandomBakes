@@ -17,7 +17,12 @@
         </tr>
         <tr>
           <th><a class="btn btn-secondary" href="{{orders.deliveryinfo|gMap}}" target = '_blank'>Navigate!</a></th>
-          <th><a class="btn btn-warning" href="#" >DELIVERED!</a></th>
+          <form action={% url "Baking:text_it" %} method="POST" ><th>
+            {% csrf_token %}
+            <input type="hidden"  name = 'OrderID' id='OrderID' value= '{{orders.id}}'  >
+            <input type="hidden" name='delivorder' id = 'deliverorder' value = {{orders.delivorder}}>
+            <input type="hidden" name = 'phone' id = 'phone' value = {{orders.deliveryinfo|phone_nmbr}}>
+            <input type = "submit" value = 'Delivered' class="btn btn-warning"  ></form></th>
         </tr>
       </table></div>
 

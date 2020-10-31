@@ -39,7 +39,13 @@ def TicketClean(value):
             else:
                 ticket += item
     return ticket
-
+@register.filter(name='phone_nmbr')
+def PhoneNumber(value):
+    delivery = value.replace('\n', '|').split('|')
+    phone = delivery[3].replace(" ", "")
+    if phone[:1] !='1':
+        phone = '1'+phone
+    return phone
 @register.filter(name='gMap')
 def gMap(value):
     delivery = value.replace('\n', '|').split('|')
@@ -60,4 +66,6 @@ def gMap(value):
                     '|': ' 	%7C'}
     for urlc in urlEncodings:
         deliv.replace(urlc, urlEncodings[urlc])
-    return 'https://www.google.com/maps/search/?api=1&query='+ deliv
+    map = 'https://www.google.com/maps/search/?api=1&query='+ deliv
+    directions = 'https://www.google.com/maps/dir/?api=1&destination='+ deliv+"&travelmode=driving"
+    return directions

@@ -7,8 +7,12 @@
     <h1> Orders </h1>
     {% for order in orders_list %}
     <div class="container">
-      <h3> <a href="{% url 'Baking:order_detail' pk=order.pk %}">{{order.batch}} {{order.customer.Lname}}</a> </h3>
-      
+      {% if order.delivered%}
+        <h5>{{order.batch}} {{order.customer.Fname}} {{order.customer.Lname}} | Delivered: {{order.delivered}}</h5>
+      {% else %}
+      <h3> <a href="{% url 'Baking:order_detail' pk=order.pk %}">{{order.batch}} {{order.customer.Fname}} {{order.customer.Lname}} ---> Navigate and Deliver.</a> </h3>
+      {%endif%}
+      <hr class="featurette-divider ">
     </div>
     {% endfor %}
   </div>

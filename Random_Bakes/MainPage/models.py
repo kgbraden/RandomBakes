@@ -127,7 +127,7 @@ class Orders(models.Model):
     total = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
     fees = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
     delivorder = models.PositiveIntegerField(default = 0)
-    delivered = models.DateTimeField(blank=True, null=True)
+    delivered = models.DateTimeField(null = True, blank=True)
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "Orders"
