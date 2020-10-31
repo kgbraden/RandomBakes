@@ -47,6 +47,7 @@
                     {% if user.is_authenticated %}
                       <a  class="dropdown-item" href="{% url 'admin:index'  %}">Admin</a>
                       <a class="dropdown-item" href="{% url 'Baking:ActiveSales_list' %}">Sales Periods</a>
+                      <a class="dropdown-item" href="{% url 'Baking:orders' %}">Orders</a>
                     {% endif %}
                   </div>
                 </li>
