@@ -353,13 +353,13 @@ def thankyou(request):
                     'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0}
         print(orders)
         for order in range(0, len(orders)):
-            if "Additional Bagels" in orders[order]:
-                quant = int(re.findall('Quantity: .+?,',orders[order])[0].replace(",", "").replace("Quantity: ", ""))
-                print (quant)
-                for product in products:
-                    if (product !='Cream') & (product !='RandomBake') & (product in orders[order]):
-                        products[product] += quant
-            elif ("Bagel Four Pack" in orders[order]):
+            # if "Additional Bagels" in orders[order]:
+            #     quant = int(re.findall('Quantity: .+?,',orders[order])[0].replace(",", "").replace("Quantity: ", ""))
+            #     print (quant)
+            #     for product in products:
+            #         if (product !='Cream') & (product !='RandomBake') & (product in orders[order]):
+            #             products[product] += quant
+            if ("Pack" in orders[order]):
                 for product in products:
                     products[product] += orders[order].count(product)
             elif (orders[order].count("Cream")!=0):

@@ -28,7 +28,7 @@ def DeliveryInfo(value):
 
 @register.filter(name='TicClean')
 def TicketClean(value):
-    items = value.replace(" (",",").replace(')', ',').replace("Bagel ", "B").replace(', ', ',').replace('ack', 'ack:\n').replace('Cream Cheese', 'Cream Cheese: ').split(',')
+    items = value.replace(" (",",").replace(')', ',').replace('Additional Bagel Pack', '').replace("Bagel ", "B").replace(', ', ',').replace('Cream Cheese', 'Cream Cheese: ').split(',')
     ticket =''
     for item in items:
         if not ('Amount'in item) | ('Four' in item):
