@@ -62,7 +62,7 @@ def index(request):
            'TotalSold': totsold}
     return render(request,'MainPage/index.html', context = cover_content)
 
-    
+  
 def projects(request):
     return render(request,'MainPage/projects.html')
 
@@ -151,7 +151,8 @@ def send_text(request):
         except:
             status = "Delivery Not recorded"
     if len(phone)==11:
-        sendtext(phone, text)
+        # sendtext(phone, text)
+        print("here I'd send the text")
     return redirect("../orders/")
 
 class DeliveryView(ListView):
