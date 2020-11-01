@@ -32,50 +32,50 @@
       <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
     </p>
 
-{% if Featurette %}
-<div class="container">
-  <!-- START THE FEATURETTES -->
-  {% for feature in Featurette %}
-  {%if forloop.counter|divisibleby:2 %}
-
-    <div class="row featurette featurette2-container">
-      <hr class="featurette-divider ">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading"> &middot; {{ feature.title }} &middot;</h2>
-        <H3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-        <p class="lead text-justify">{{ feature.description|safe}}</p>
+    {% if Featurette %}
+    <div class="container">
+      <!-- START THE FEATURETTES -->
+      {% for feature in Featurette %}
+      {%if forloop.counter|divisibleby:2 %}
+    
+        <div class="row featurette featurette2-container">
+          <hr class="featurette-divider ">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading"> &middot; {{ feature.title }} &middot;</h2>
+            <H3><span class="text-muted">{{ feature.subtitle }}</span></h3>
+            <p class="lead text-justify">{{ feature.description|safe}}</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            {% if feature.photo.url %}
+            <img src=  "{{feature.photo.url}}"  class = "img-fluid featurette-image " alt="" width="500" height="500">
+            {% else %}
+            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+            {% endif %}
+          </div>
+        </div>
+        <hr class="featurette-divider ">
+    
+      {% else %}
+      <div class="row featurette featurette1-container col-sm-4">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">&middot; {{ feature.title }} &middot;</H2>
+          <h3><span class="text-muted">{{ feature.subtitle }}</span></h3>
+          <p class="lead text-justify"> {{feature.description|safe}} </p>
+        </div>
+        <div class="col-md-5">
+          <!--  -->
+          <img src=  "{{feature.photo.url}}"  class = " img-fluid featurette-image " alt="" width="500" height="500">
+    
+        </div>
       </div>
-      <div class="col-md-5 order-md-1">
-        {% if feature.photo.url %}
-        <img src=  "{{feature.photo.url}}"  class = "img-fluid featurette-image " alt="Feature Photo" width="500" height="500">
-        {% else %}
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-        {% endif %}
+    
+      <hr class="featurette-divider">
+     {% endif %}
+     {% endfor %}
+    
       </div>
-    </div>
-    <hr class="featurette-divider ">
-
-  {% else %}
-  <div class="row featurette featurette1-container col-sm-4">
-    <div class="col-md-7">
-      <h2 class="featurette-heading">&middot; {{ feature.title }} &middot;</H2>
-      <h3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-      <p class="lead text-justify"> {{feature.description|safe}} </p>
-    </div>
-    <div class="col-md-5">
-      <!--  -->
-      <img src=  "{{feature.photo.url}}"  class = " img-fluid featurette-image " alt="Feature Photo" width="500" height="500">
-
-    </div>
-  </div>
-
-  <hr class="featurette-divider">
- {% endif %}
- {% endfor %}
-
-  </div>
-    <!-- /END THE FEATURETTES -->
-{% endif %}
-</main>
+        <!-- /END THE FEATURETTES -->
+    {% endif %}
+  </main>
 <!-- _______________________________________________________________________ -->
 {% endblock %}

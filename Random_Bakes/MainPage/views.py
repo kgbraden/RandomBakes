@@ -27,7 +27,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from datetime import date, datetime
 from config import sendtext
-import ast
+import ast, re
 # Create your views here.
 @require_http_methods(["GET", "POST"])
 def orderplaced(request):
@@ -242,8 +242,9 @@ def BatchInfo():
 
         sold = ProcessSales()
         totsold = sold['totBagels']
-
-        DeliveryInfo = '"%s" is scheduled to be a batch of %s bagels baked and delivered on %s. Deliveries will begin after %s when they have cooled enough for packaging. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery.' %(activeBatch, available, deliverydate, deliverytime)
+        DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
+        
+        
         out = False
         if (acv_sales.soldout == "True"):
             DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
@@ -285,7 +286,11 @@ def order(request):
 
         sold = ProcessSales()
         totsold = sold['totBagels']
-        DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when they have cooled enough for packaging. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
+        if acv_sales.RandomBake:
+            DeliveryInfo = "<h3>This week's Random Bake!</h3>" + acv_sales.RandomBake + "<br>"
+            DeliveryInfo += "<h3>Delivery Info</h3>%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
+        else:
+            DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
         available = acv_sales.units
         if acv_sales.soldout =='True':
             cover_content2 = highlight.objects.filter(title = "Sold Out!")[0]
@@ -348,12 +353,19 @@ def thankyou(request):
                     'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0}
         print(orders)
         for order in range(0, len(orders)):
-            
-            for product in products:
-                if (product == 'Cream') & (orders[order].count(product)!=0):
-                    products[product] += int(orders[order][-2])
-                else:
+            if "Additional Bagels" in orders[order]:
+                quant = int(re.findall('Quantity: .+?,',orders[order])[0].replace(",", "").replace("Quantity: ", ""))
+                print (quant)
+                for product in products:
+                    if (product !='Cream') & (product !='RandomBake') & (product in orders[order]):
+                        products[product] += quant
+            elif ("Bagel Four Pack" in orders[order]):
+                for product in products:
                     products[product] += orders[order].count(product)
+            elif (orders[order].count("Cream")!=0):
+                products["Cream"] += int(orders[order][-2])
+            elif (orders[order].count("RandomBake")!=0):
+                products["RandomBake"] += int(orders[order][-2])
         return products
     if request.method=='POST':
         BATCH_ID = request.POST.get('batchid76')
