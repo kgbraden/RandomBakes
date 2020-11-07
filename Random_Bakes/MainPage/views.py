@@ -140,7 +140,7 @@ def send_text(request):
         OrdId = request.POST['OrderID']
         phone = request.POST['phone']
         #deliverorder = request.POST['deliverorder']
-        text = "Your Bagel order is at your front door! Thank you and enjoy!"
+        text = "Your Bagel order is at your front door! Thank you and enjoy! (This is an automated text!)"
         now = datetime.now()
         
         try:
@@ -151,7 +151,7 @@ def send_text(request):
         except:
             status = "Delivery Not recorded"
     if len(phone)==11:
-        # sendtext(phone, text)
+        sendtext(phone, text)
         print("here I'd send the text")
     return redirect("../orders/")
 

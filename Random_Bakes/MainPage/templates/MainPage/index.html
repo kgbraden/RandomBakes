@@ -21,16 +21,19 @@
 </script>
 <div class="cover-container">
   <main role="main" class="inner cover">
-    <h4>Total Bagels Sold This Week: {{TotalSold}}</h4>
-    <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
-    <h1 class="cover-heading ">{{ CoverTitle }}</h1>
-    <p class="lead">{{ CoverText }}</p>
-
-    <p class="lead">
-      <!-- <a class="btn btn-lg btn-primary lightbox-202426957335055 cover-heading" style="margin-top: 16px" >{{CoverButton}}</a> -->
-      <!-- <a class="btn btn-lg btn-primary lightbox-202426957335055 cover-heading" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a> -->
-      <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
-    </p>
+    
+    {% if "Sold Out!" in CoverButton %}
+      <h2>We've Sold Out This Week With {{TotalSold}} sold!</h2>
+      <img src=  "{% static '/media/sold_out_Batch.png' %}"  class = "img-fluid" alt="{{ CoverAltText }}">
+    {% else%}
+      <h4>Total Bagels Sold This Week: {{TotalSold}}</h4>
+      <h1 class="cover-heading ">{{ CoverTitle }}</h1>
+      <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
+      <p class="lead">{{ CoverText }}</p>
+      <p class="lead">
+        <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
+      </p>
+    {% endif %}
 
     {% if Featurette %}
     <div class="container">

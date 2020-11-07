@@ -74,7 +74,7 @@
   }
   .blank{
    
-    height: 20px;
+    height: 130px;
     
   }
     </style>
@@ -111,16 +111,19 @@
               <td class ="ticket">
             {%endif%}
                 <div> 
-                  <div class = "batch">{{ticket.batch}}</div>
-                    <div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div>
-                      <div>{{ticket.invoiceid}}
-                        {{ticket.deliveryinfo|DeliveryInfo|linebreaks}}{{ticket.cart|TicClean|linebreaks}}</div>
+                  <table>
+                    <tr><td><div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div></td></tr>
+                    <tr><td>{{ticket.deliveryinfo|DeliveryInfo|linebreaks}}</td></tr>
+                    <tr><td>{{ticket.cart|TicClean|linebreaks}}</td></tr>
+                  </table>
                 </div>
               </td>
-            {%if forloop.counter == 4 or forloop.counter == 8 %}
+            {%if forloop.counter == 4 or forloop.counter == 12 %}
               </tr>
               <tr><td class='blank' colspan=4></td></tr>
               <tr></tr>
+            {% elif forloop.counter == 8 or forloop.counter == 16%}
+              </tr>
             {%endif%}
         {% endfor %}
         </tr>

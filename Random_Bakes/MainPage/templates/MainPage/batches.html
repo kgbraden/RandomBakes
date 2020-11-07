@@ -28,7 +28,7 @@
         <li>Garlic Sold: {{ b.Garlic_sold }}</li>
         <li>Everything Sold: {{ b.Everything_sold }}</li>
         <li>Cream Cheese Sold: {{ b.CreamCheese_sold }}</li>
-        {% if batch.RandomBake %}
+        {% if b.RandomBake %}
         <li>RandomBake Sold: {{ b.RandomBake_sold }}</li>
         <li>RandomBake Description: {{ b.RandomBake|safe }}</li>
         {%endif%}

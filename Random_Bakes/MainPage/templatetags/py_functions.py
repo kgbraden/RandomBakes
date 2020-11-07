@@ -28,9 +28,11 @@ def DeliveryInfo(value):
 
 @register.filter(name='TicClean')
 def TicketClean(value):
-    items = value.replace(" (",",").replace(')', ',').replace('Additional Bagel Pack', '').replace("Bagel ", "B").replace(', ', ',').replace('Cream Cheese', 'Cream Cheese: ').split(',')
+    items = value.replace(" (",",").replace(')', ',').replace('Additional Bagel Two Pack', '').replace("Bagel ", "B").replace(', ', ',').replace('Cream Cheese', 'Cream Cheese: ').replace('\n', '').split(',')
     ticket =''
     for item in items:
+        if item == "":
+            continue
         if not ('Amount'in item) | ('Four' in item):
             if ('B1' in item) | ('B3' in item) | ('B5' in item) | ('B7' in item):
                 ticket += item + " | "
@@ -38,6 +40,7 @@ def TicketClean(value):
                 ticket += item + "\n"
             else:
                 ticket += item
+    
     return ticket
 @register.filter(name='phone_nmbr')
 def PhoneNumber(value):
