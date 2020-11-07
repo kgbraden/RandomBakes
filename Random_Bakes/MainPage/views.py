@@ -26,6 +26,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from datetime import date, datetime
+from django.db.models.functions import Now
 from config import sendtext
 import ast, re
 # Create your views here.
@@ -141,7 +142,7 @@ def send_text(request):
         phone = request.POST['phone']
         #deliverorder = request.POST['deliverorder']
         text = "Your Bagel order is at your front door! Thank you and enjoy! (This is an automated text!)"
-        now = datetime.now()
+        now = Now()
         
         try:
             OrderTracing = Orders.objects.get(id=OrdId)
