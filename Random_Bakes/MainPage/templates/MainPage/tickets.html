@@ -114,7 +114,38 @@
                   <table>
                     <tr><td><div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div></td></tr>
                     <tr><td>{{ticket.deliveryinfo|DeliveryInfo|linebreaks}}</td></tr>
-                    <tr><td>{{ticket.cart|TicClean|linebreaks}}</td></tr>
+                    <!-- <tr><td>{{ticket.cart|TicClean|linebreaks}}</td></tr> -->
+                    <tr>
+                      <td>
+                        {% if ticket.Plain_sold > 0 %}
+                          Plain: {{ticket.Plain_sold}}
+                        {% endif %}
+                        {% if ticket.Sesame_sold > 0 %}
+                          | Sesame: {{ticket.Sesame_sold}}
+                        {% endif %}
+                        {% if ticket.Salt_sold > 0 %}
+                        | Salt: {{ticket.Salt_sold}}
+                        {% endif %}
+                        {% if ticket.Onion_sold > 0 %}
+                        | Onion: {{ticket.Onion_sold}}
+                        {% endif %}
+                        {% if ticket.Poppy_sold > 0 %}
+                        | Poppy: {{ticket.Poppy_sold}}
+                        {% endif %}
+                        {% if ticket.Garlic_sold > 0 %}
+                        | Garlic: {{ticket.Garlic_sold}}
+                        {% endif %}
+                        {% if ticket.Everything_sold > 0 %}
+                        | Every: {{ticket.Everything_sold}}
+                        {% endif %}
+                        {% if ticket.RandomBake_sold > 0 %}
+                        | R_Bake: {{ticket.RandomBake_sold}}
+                        {% endif %}
+                        {% if ticket.CreamCheese_sold > 0 %}
+                        | C_Cheese: {{ticket.CreamCheese_sold}}
+                        {% endif %}
+                    </tr>
+                   
                   </table>
                 </div>
               </td>

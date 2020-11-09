@@ -29,6 +29,9 @@ from datetime import date, datetime
 from django.db.models.functions import Now
 from config import sendtext
 import ast, re
+from django.core.mail import send_mail
+import secret_key
+
 # Create your views here.
 @require_http_methods(["GET", "POST"])
 def orderplaced(request):
@@ -115,6 +118,7 @@ class ActiveSalesListView(ListView):
 #     queryset = Orders.objects.filter(batch = acv_sales.id)
 #     context_object_name = 'tickets'
 #     ordering= ['customer']
+
 def TicketListView(request):
     batches = ActiveSales.objects.all().order_by("-batch")
     if request.GET.get('batch'):
@@ -122,8 +126,28 @@ def TicketListView(request):
     else:
         acv_sales = ActiveSales.objects.get(active = "True")    
     tickets = Orders.objects.filter(batch = acv_sales.id).order_by('customer')
+    # ordered = []
+    # if tickets.Plain_sold > 0:
+    #     ordered.append('Plain: %s' % tickets.Plain_sold)
+    # if ticket.Sesame_sold > 0:
+    #     ordered.append('Sesame: %s' % ticket.Sesame_sold)            
+    # if ticket.Salt_sold > 0:
+    #     ordered.append('Salt: %s' % ticket.Salt_sold)
+    # if ticket.Onion_sold > 0:
+    #     ordered.append('Onion: %s' % ticket.Onion_sold)
+    # if ticket.Poppy_sold > 0:
+    #     ordered.append('Poppy: %s' % ticket.Poppy_sold)
+    # if ticket.Garlic_sold > 0:
+    #     ordered.append('Garlic: %s' % ticket.Garlic_sold)
+    # if ticket.Everything_sold > 0:
+    #     ordered.append('Every: %s' % ticket.Everything_sold)
+    # if ticket.RandomBake_sold > 0:
+    #     ordered.append('R_Bake: %s' % ticket.RandomBake_sold)
+    # if ticket.CreamCheese_sold > 0:
+    #     ordered.append('C_Cheese: %s' % ticket.CreamCheese_sold)              
     return render(request,'MainPage/tickets.html', {'tickets': tickets, 
-                                                    'batches': batches
+                                                    'batches': batches,
+                                                    
                                                      })
     
 
@@ -143,7 +167,7 @@ def send_text(request):
         #deliverorder = request.POST['deliverorder']
         text = "Your Bagel order is at your front door! Thank you and enjoy! (This is an automated text!)"
         now = Now()
-        
+        # send_mail('test', 'body of the message', 'info@RandomBakes.com', ['kale@ebraden.com'])
         try:
             OrderTracing = Orders.objects.get(id=OrdId)
             OrderTracing.delivered = now
@@ -163,6 +187,7 @@ class DeliveryView(ListView):
 class OrdersDetailView(DetailView):
     # slug_field='Customer.Lname'
     # slug_url_kwarg='batch'
+    # send_mail('test', 'body of the message', 'info@RandomBakes.com', ['kale@ebraden.com'])
     model = Orders
 
 class ActiveSalesDetailView(DetailView):
@@ -259,7 +284,7 @@ def BatchInfo():
             nBatch = ActiveSales.objects.get(batch =nextbatch)
             nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
             nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
-            DeliveryInfo = "Our next scheduled production run, %s, of %s bagels, will be on %s. Sales open for this batch will open on %s." %(nextbatch, nBatch.units,  nxtdatedelivery, nxtdateopen)
+            DeliveryInfo = "Our next scheduled production run, %s, of %s bagels, will be on %s. Sales will open for this batch on %s." %(nextbatch, nBatch.units,  nxtdatedelivery, nxtdateopen)
         else:
             DeliveryInfo = "We have not scheduled our next scheduled production run. Please check back soon!"
     feature = Featurette.objects.get(title ='Current Batch')
@@ -322,7 +347,6 @@ def order(request):
 
 def registration(request):
     registered = False
-
     if request.method =='POST':
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)

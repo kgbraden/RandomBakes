@@ -56,7 +56,12 @@ SECRET_KEY = find_or_create_secret_key()
 DEBUG = True
 
 ALLOWED_HOSTS = ['.randombakes.com','127.0.0.1', '.ngrok.io']
-
+#~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
+EMAIL_HOST = config.host
+EMAIL_PORT = config.port
+EMAIL_HOST_USER = config.user
+EMAIL_HOST_PASSWORD = config.pword
+EMAIL_USE_TLS = True
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 # Application definition
 INSTALLED_APPS = [
