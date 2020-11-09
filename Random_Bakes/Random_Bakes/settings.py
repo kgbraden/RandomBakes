@@ -52,8 +52,7 @@ def find_or_create_secret_key():
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = find_or_create_secret_key()
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = ['.randombakes.com','127.0.0.1', '.ngrok.io']
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
@@ -120,6 +119,7 @@ WSGI_APPLICATION = 'Random_Bakes.wsgi.application'
 #    }
 #}
 try:
+    # This 'try' only works on my local machine anything under here will be triggered when running locally.
     z = os.environ['COMPUTERNAME']
     DATABASES = {
             'default': {
@@ -134,7 +134,9 @@ try:
                         }
                     }
                 }
+    DEBUG = True
 except:
+    # anything under here will be used to configure the system when run from server
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -147,6 +149,8 @@ except:
                         }
         }
     }
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = False
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
