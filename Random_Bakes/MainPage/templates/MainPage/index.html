@@ -29,7 +29,7 @@
       <h4>Total Bagels Sold This Week: {{TotalSold}}</h4>
       <h1 class="cover-heading ">{{ CoverTitle }}</h1>
       <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
-      <p class="lead">{{ CoverText }}</p>
+      <p class="lead  text-justify">{{ CoverText }}</p>
       <p class="lead">
         <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
       </p>
@@ -46,7 +46,17 @@
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading"> &middot; {{ feature.title }} &middot;</h2>
             <H3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-            <p class="lead text-justify">{{ feature.description|safe}}</p>
+            <p class="lead text-justify">{{ feature.description|safe}} 
+            {% if feature.Story %}
+              <br>
+              <p class ='lead text-justify'>{{feature.Story|safe}}</p>
+              
+            {% endif %}
+            </p>
+            {% if user.is_authenticated %}
+            <a class = "" href="{% url 'Baking:featurette_update' pk=feature.pk %}">edit</a> &middot;
+            <a class = "" href="{% url 'Baking:featurette_remove' pk=feature.pk %}">delete</a>
+            {% endif %}
           </div>
           <div class="col-md-5 order-md-1">
             {% if feature.photo.url %}
@@ -57,18 +67,24 @@
           </div>
         </div>
         <hr class="featurette-divider ">
-    
       {% else %}
       <div class="row featurette featurette1-container col-sm-4">
         <div class="col-md-7">
           <h2 class="featurette-heading">&middot; {{ feature.title }} &middot;</H2>
           <h3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-          <p class="lead text-justify"> {{feature.description|safe}} </p>
+          <p class="lead text-justify"> {{feature.description|safe}} 
+            {% if content.Story %}
+              <br>{{feature.Story|safe}}
+            {% endif %}
+            </p>
+          <p class ='lead text-justify'></p>
+          {% if user.is_authenticated %}
+            <a class = "" href="{% url 'Baking:featurette_update' pk=feature.pk %}">edit</a> &middot;
+            <a class = "" href="{% url 'Baking:featurette_remove' pk=feature.pk %}">delete</a>
+          {% endif %}
         </div>
         <div class="col-md-5">
-          <!--  -->
           <img src=  "{{feature.photo.url}}"  class = " img-fluid featurette-image " alt="" width="500" height="500">
-    
         </div>
       </div>
     
