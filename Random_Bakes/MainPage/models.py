@@ -5,7 +5,7 @@ from datetime import datetime
 # Create your models here.
 class highlight(models.Model):
     title = models.CharField(max_length = 35, unique = True)
-    story = models.TextField(max_length = 300)
+    story = models.TextField()
     script = models.TextField(default="None")
     photo2 = models.ImageField(upload_to='highlight_images', default = '/media/photo-placeholder-icon.jpg')
     photo_alt = models.CharField(max_length = 25)
@@ -67,7 +67,8 @@ class UserProfileInfo(models.Model):
         return self.user.username
 class Customer(models.Model):
     Fname = models.CharField(max_length = 50,  blank=True)
-    Lname = models.CharField(max_length = 50)
+    Lname = models.CharField(max_length = 50, blank = True)
+    pref_name = models.CharField(max_length = 50, blank = True)
     email = models.EmailField(max_length=254,  blank=True, unique=True)
     dStreet1 =models.CharField(max_length = 100,  blank=True)
     dStreet2 =models.CharField(max_length = 100,  blank=True)
@@ -76,8 +77,11 @@ class Customer(models.Model):
     dZip = models.CharField(max_length = 10,  blank=True)
     Phone =models.CharField(max_length = 20,  blank=True)
     customer_Notes =  models.TextField(blank = True)
+    mailing_list = models.BooleanField(default = False)
+    rando = models.BooleanField(default = False)
     def __str__(self):
         return '%s %s' %(self.Fname, self.Lname)
+
 class ActiveSales(models.Model):
     id = models.AutoField(primary_key=True)
     batch = models.CharField(max_length =10, unique = True)
@@ -100,6 +104,7 @@ class ActiveSales(models.Model):
     RandomBake_sold = models.PositiveIntegerField(default = 0)
     CreamCheese_sold = models.PositiveIntegerField(default = 0)
     Batch_Notes =  models.TextField(blank = True)
+
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "ActiveSales"
@@ -128,6 +133,11 @@ class Orders(models.Model):
     fees = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
     delivorder = models.PositiveIntegerField(default = 0)
     delivered = models.DateTimeField(null = True, blank=True)
+    delivery_notes = models.TextField(blank = True)
+    delivery_text = models.TextField(blank = True, max_length=255)
+    delivery_completed = models.BooleanField(default = False)
+    text_sent = models.BooleanField(default = False)
+    emil_sent = models.BooleanField(default = False)
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "Orders"
