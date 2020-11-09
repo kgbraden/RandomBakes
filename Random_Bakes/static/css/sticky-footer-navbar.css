@@ -110,6 +110,7 @@ padding-right: 5px;
   padding-right: 10px;
   padding-top:10px;
   padding-bottom:10px;
+  
 
 }
 .content-image{
@@ -169,6 +170,7 @@ padding-right: 5px;
  .featurette-image{
      width:70%;
      height: auto;
+     vertical-align: middle;
   }
   .content-image{
     width:30%;
@@ -189,6 +191,7 @@ padding-right: 5px;
     .featurette-image{
         width:80%;
         height: auto;
+        vertical-align: middle;
      }
      .content-image{
        width:30%;
@@ -200,12 +203,13 @@ padding-right: 5px;
 @media (min-width: 992px) {
   .featurette-image{
     max-width:100%;
+    vertical-align: middle;
     }
 }
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .featurette-image{
     max-width:100%;
-
+    vertical-align: middle;
     }
 }

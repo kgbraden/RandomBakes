@@ -70,14 +70,6 @@ def index(request):
 def projects(request):
     return render(request,'MainPage/projects.html')
 
-# def batch(request):
-#     return render(request,'MainPage/batch.html')
-
-# (ind, 'index'),
-# (abt, 'About Us'),
-# (Snt, 'Sanitation Protocols'),
-# (Lic, 'Licenses'),
-# (proj, 'Projects')
 class AboutUsListView(ListView):
     template_name = 'MainPage/blank_content.html'
     queryset = Featurette.objects.filter(type='About Us')
@@ -260,24 +252,32 @@ def BatchInfo():
     DeliveryInfo = ""
     available = acv_sales.units
     out = True
-    if (acv_sales.start_sales < today) & (today < acv_sales.end_sales):
+    if (acv_sales.start_sales <= today) & (today <= acv_sales.end_sales):
         # In sales period
         deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
         storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
         deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
         # sales = importSales()
-
         sold = ProcessSales()
         totsold = sold['totBagels']
         DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
-        
-        
         out = False
+        batch = '<ul class="lead text-justify">'
+        if acv_sales.Plain_sold>0: batch += '<li>%s Plain Bagels</li>' % (acv_sales.Plain_sold)
+        if acv_sales.Sesame_sold>0: batch += '<li>%s Sesame Bagels</li>' %(acv_sales.Sesame_sold)
+        if acv_sales.Salt_sold>0: batch += '<li>%s Salt Bagels</li>' %(acv_sales.Salt_sold)
+        if acv_sales.Garlic_sold>0: batch += '<li>%s Garlic Bagels</li>' %(acv_sales.Garlic_sold)
+        if acv_sales.Onion_sold>0: batch += '<li>%s Onion Bagels</li>' %(acv_sales.Onion_sold)
+        if acv_sales.Poppy_sold>0: batch += '<li>%s Poppy Seed Bagels</li>' %(acv_sales.Poppy_sold)
+        if acv_sales.Everything_sold>0: batch += '<li>%s Everything Bagels</li>' %(acv_sales.Everything_sold)
+        if acv_sales.RandomBake_sold>0: batch += '<li>%s RandomBakes</li>' %(acv_sales.RandomBake_sold)
+        if acv_sales.CreamCheese_sold>0: batch += '<li>%s Tubs of Cream Cheese</li>' %(acv_sales.CreamCheese_sold)
+        batch += '</ul>'
         if (acv_sales.soldout == "True"):
             DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
             out = True
-        DeliveryInfo += ' For this batch we are scheduled to produce:<ul class="lead text-justify"> <li>%s Plain Bagels</li><li>%s Sesame Bagels</li><li>%s Salt Bagels</li><li>%s Garlic Bagels</li><li>%s Onion Bagels</li><li>%s Poppy Seed Bagels</li><li>%s Everything Bagels</li><li>%s RandomBakes</li><li>%s Tubs of Cream Cheese</li></ul>' %(acv_sales.Plain_sold, acv_sales.Sesame_sold, acv_sales.Salt_sold, acv_sales.Garlic_sold, acv_sales.Onion_sold, acv_sales.Poppy_sold, acv_sales.Everything_sold, acv_sales.RandomBake_sold, acv_sales.CreamCheese_sold)
-
+        DeliveryInfo += ' For this batch we are scheduled to produce:' + batch
+        
     else:
         if ActiveSales.objects.filter(batch =nextbatch).count()==1:
             #Checks to see if the next batch has been scheduled
@@ -476,11 +476,17 @@ def thankyou(request):
         try:
             NewOrder.save()
         except:
-            print("Order Already Saved!")
+            print("Order Already Saved!") 
+        
     else:
         BATCH_ID = "Didn't"
         Cust = ['work',""]
-
+    try:
+        subj = "%s Order placed!" %NewOrder.batch
+        msg = "HUZZAH! %s %s has ordered %s" % {DjangoCustomer.Fname, DjangoCustomer.Lname, NewOrder.cart}
+        send_mail('Order Placed', 'body of the message', 'info@RandomBakes.com', [config.KB, config.TT])
+    except:
+        print("Email Didn't work")
     return render(request, 'MainPage/thankyou.html',
                  {'BATCH_ID':NewOrder.batch,
                   'fName': DjangoCustomer.Fname,
