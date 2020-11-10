@@ -73,7 +73,7 @@ class Customer(models.Model):
     dStreet1 =models.CharField(max_length = 100,  blank=True)
     dStreet2 =models.CharField(max_length = 100,  blank=True)
     dCity = models.CharField(max_length = 100,  blank=True)
-    dState = models.CharField(max_length = 3,  blank=True)
+    dState = models.CharField(max_length = 20,  blank=True)
     dZip = models.CharField(max_length = 10,  blank=True)
     Phone =models.CharField(max_length = 20,  blank=True)
     customer_Notes =  models.TextField(blank = True)
