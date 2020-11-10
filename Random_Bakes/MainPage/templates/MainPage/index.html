@@ -41,7 +41,7 @@
       {% for feature in Featurette %}
       {%if forloop.counter|divisibleby:2 %}
     
-        <div class="row featurette featurette2-container align-middle ">
+        <div class="row featurette featurette2-container">
           <hr class="featurette-divider ">
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading"> &middot; {{ feature.title }} &middot;</h2>
@@ -84,7 +84,7 @@
           {% endif %}
         </div>
         <div class="col-md-5">
-          <img src=  "{{feature.photo.url}}"  class = " img-fluid featurette-image align-middle " alt="" width="500" height="500">
+          <img src=  "{{feature.photo.url}}"  class = " img-fluid featurette-image " alt="" width="500" height="500">
         </div>
       </div>
     

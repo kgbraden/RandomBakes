@@ -417,7 +417,10 @@ def thankyou(request):
                                       dState =  deliveryaddress[3],
                                       dZip =  deliveryaddress[4],
                                       Phone = phone)
-            DjangoCustomer.save()
+            try:
+                DjangoCustomer.save()
+            except:
+                DjangoCustomer = Customer.objects.get(email="info@RandomBakes.com")
         PayPalData = request.POST.getlist('myproducts[]') #0-products ordered
                                                        #1-Currency type
                                                        #2-AMount charged
