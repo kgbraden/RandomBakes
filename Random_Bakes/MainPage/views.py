@@ -160,16 +160,28 @@ def send_text(request):
         text = "Your Bagel order is at your front door! Thank you and enjoy! (This is an automated text!)"
         now = Now()
         # send_mail('test', 'body of the message', 'info@RandomBakes.com', ['kale@ebraden.com'])
+        if len(phone)==11:
+            status = sendtext(phone, text)
+        else:
+            status = "Number not correct length, text not sent. "
+        # try:
+        #     subj = "%s Order placed!" %NewOrder.batch
+        #     msg = "HUZZAH! %s %s has ordered %s" % {DjangoCustomer.Fname, DjangoCustomer.Lname, NewOrder.cart}
+        #     send_mail('Order Placed', 'body of the message', 'info@RandomBakes.com', [config.KB, config.TT])
+        # except:
+        #     print("Email Didn't work")
         try:
+            status += "%s Delivery recorded" %(OrdId)
             OrderTracing = Orders.objects.get(id=OrdId)
             OrderTracing.delivered = now
+            OrderTracing.delivery_notes = status
+            OrderTracing.delivery_completed ==True
             OrderTracing.save()
-            status = "%s Delivery recorded" %(OrdId)
+            
         except:
-            status = "Delivery Not recorded"
-    if len(phone)==11:
-        sendtext(phone, text)
-        print("here I'd send the text")
+            status += "Delivery Not recorded"
+    
+        
     return redirect("../orders/")
 
 class DeliveryView(ListView):
