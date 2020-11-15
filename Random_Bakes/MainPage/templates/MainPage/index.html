@@ -25,6 +25,11 @@
     {% if "Sold Out!" in CoverButton %}
       <h2>We've Sold Out This Week With {{TotalSold}} sold!</h2>
       <img src=  "{% static '/media/sold_out_Batch.png' %}"  class = "img-fluid" alt="{{ CoverAltText }}">
+    {% elif "Sales Not Open Yet" in CoverButton%}
+     <h4>Bagel Sales open Monday Morning!</h4>
+     <h1 class="cover-heading ">{{ CoverButton }}</h1>
+      <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
+      <p class="lead  text-justify">{{ CoverText }}</p>
     {% else%}
       <h4>Total Bagels Sold This Week: {{TotalSold}}</h4>
       <h1 class="cover-heading ">{{ CoverTitle }}</h1>

@@ -51,6 +51,9 @@ def index(request):
     if B_info[1]: #this indicates that the batch is sold out
         buttonText = "Sold Out!"
         buttonLink = "#" #Eventially take to batch info for previous batch.
+    elif not B_info[2]:
+        buttonText = "Sales Not Open Yet"
+        buttonLink = "#"
     else:
         buttonText = cover_content2.button
         buttonLink = cover_content2.button_link
@@ -263,9 +266,15 @@ def BatchInfo():
     nextbatch = next_batch(activeBatch)
     DeliveryInfo = ""
     available = acv_sales.units
-    out = True
+    if (acv_sales.soldout == "True"):
+        DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
+        out = True
+    else:
+        out = False
+    sales_open = False
     if (acv_sales.start_sales <= today) & (today <= acv_sales.end_sales):
         # In sales period
+        sales_open = True
         deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
         storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
         deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
@@ -273,7 +282,7 @@ def BatchInfo():
         sold = ProcessSales()
         totsold = sold['totBagels']
         DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
-        out = False
+        # out = False
         batch = '<ul class="lead text-justify">'
         if acv_sales.Plain_sold>0: batch += '<li>%s Plain Bagels</li>' % (acv_sales.Plain_sold)
         if acv_sales.Sesame_sold>0: batch += '<li>%s Sesame Bagels</li>' %(acv_sales.Sesame_sold)
@@ -285,9 +294,7 @@ def BatchInfo():
         if acv_sales.RandomBake_sold>0: batch += '<li>%s RandomBakes</li>' %(acv_sales.RandomBake_sold)
         if acv_sales.CreamCheese_sold>0: batch += '<li>%s Tubs of Cream Cheese</li>' %(acv_sales.CreamCheese_sold)
         batch += '</ul>'
-        if (acv_sales.soldout == "True"):
-            DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
-            out = True
+        
         DeliveryInfo += ' For this batch we are scheduled to produce:' + batch
         
     else:
@@ -302,7 +309,7 @@ def BatchInfo():
     feature = Featurette.objects.get(title ='Current Batch')
     feature.description = DeliveryInfo
     feature.save()
-    return available, out
+    return available, out, sales_open
 
 def order(request):
     acv_sales = ActiveSales.objects.filter(active =True)[0]
