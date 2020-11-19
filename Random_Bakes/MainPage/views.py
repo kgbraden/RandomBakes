@@ -264,9 +264,10 @@ def BatchInfo():
     today = date.today()
     activeBatch = acv_sales.batch
     nextbatch = next_batch(activeBatch)
+    deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
     DeliveryInfo = ""
     available = acv_sales.units
-    if (acv_sales.soldout == "True"):
+    if (acv_sales.soldout == True):
         DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
         out = True
     else:
@@ -275,7 +276,7 @@ def BatchInfo():
     if (acv_sales.start_sales <= today) & (today <= acv_sales.end_sales):
         # In sales period
         sales_open = True
-        deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
+        
         storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
         deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
         # sales = importSales()
@@ -342,6 +343,9 @@ def order(request):
             cover_content2 = highlight.objects.filter(title = "Sold Out!")[0]
         else:
             cover_content2 = highlight.objects.filter(title = "Buy Now")[0]
+    elif (acv_sales.start_sales > today):
+        ## THIS IS NOT WORKING
+        DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
     else:
         sold = 'N/A'
         available = 'N/A'
