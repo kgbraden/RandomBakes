@@ -15,7 +15,11 @@
         <tr>
           <th>{{orders.deliveryinfo|DeliveryInfo|linebreaks}}</th>
           <!-- <th></th> -->
+          {% if orders.cart %}
           <th>{{orders.cart|TicClean|linebreaks}}</th>
+          {% else %}
+            Manual Entry
+          {% endif %}
         </tr>
         
         <tr>

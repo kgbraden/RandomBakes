@@ -32,6 +32,8 @@
       width: 200px;
       height: 100px;
       text-align:center;
+      border-left: solid 1px grey;
+      border-right: solid 1px grey;
     }
     .ticket{
       width: 155px;
@@ -41,7 +43,7 @@
       padding-right:20px;
         font-size: 14px;
       font-weight: bold;
-      vertical-align: bottom;
+      vertical-align: top;
       font-family: 'Caveat', cursive;
       -webkit-transform:rotate(-180deg);
       -moz-transform:rotate(-180deg);
@@ -61,7 +63,7 @@
       padding-right:20px;
         font-size: 14px;
       font-weight: bold;
-      vertical-align: bottom;
+      vertical-align: top;
       font-family: 'Caveat', cursive;
       border-left: solid 1px grey;
       border-right: solid 1px grey;
@@ -101,7 +103,7 @@
   </div>
   <div>
     <table class = "ticTable">
-        <tr>
+      <tr>
           {% for ticket in tickets %}
             {%if forloop.counter <= 4 %}
               <td class ="ticket">
@@ -111,53 +113,90 @@
               <td class ="ticket">
             {%endif%}
                 <div> 
-                  <table>
-                    <tr><td><div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div></td></tr>
-                    <tr><td>{{ticket.deliveryinfo|DeliveryInfo|linebreaks}}</td></tr>
+                  <table >
+                    <!-- <tr ><td colspan="2"><div class = "batch">&middot;</div></td></tr> -->
+                    <tr><td colspan="2"><div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div></td></tr>
+                    <tr><td colspan="2">{{ticket.deliveryinfo|DeliveryInfo|linebreaks}}</td></tr>
                     <!-- <tr><td>{{ticket.cart|TicClean|linebreaks}}</td></tr> -->
                     <tr>
-                      <td>
-                        {% if ticket.Plain_sold > 0 %}
-                          Plain: {{ticket.Plain_sold}}
-                        {% endif %}
-                        {% if ticket.Sesame_sold > 0 %}
-                          | Sesame: {{ticket.Sesame_sold}}
-                        {% endif %}
-                        {% if ticket.Salt_sold > 0 %}
-                        | Salt: {{ticket.Salt_sold}}
-                        {% endif %}
-                        {% if ticket.Onion_sold > 0 %}
-                        | Onion: {{ticket.Onion_sold}}
-                        {% endif %}
-                        {% if ticket.Poppy_sold > 0 %}
-                        | Poppy: {{ticket.Poppy_sold}}
-                        {% endif %}
-                        {% if ticket.Garlic_sold > 0 %}
-                        | Garlic: {{ticket.Garlic_sold}}
-                        {% endif %}
-                        {% if ticket.Everything_sold > 0 %}
-                        | Every: {{ticket.Everything_sold}}
-                        {% endif %}
-                        {% if ticket.RandomBake_sold > 0 %}
-                        | R_Bake: {{ticket.RandomBake_sold}}
-                        {% endif %}
+                          <td>
+                            {% if ticket.Plain_sold > 0 %}
+                              Plain: {{ticket.Plain_sold}} 
+                            {% endif %}
+                          </td>
+                          <td>
+                            {% if ticket.Sesame_sold > 0 %}
+                              Sesame: {{ticket.Sesame_sold}}
+                            {% endif %}
+                          </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>
+                          {% if ticket.Salt_sold > 0 %}
+                            Salt: {{ticket.Salt_sold}}
+                          {% endif %}
+                          </td>
+                          <td>
+                          {% if ticket.Onion_sold > 0 %}
+                            Onion: {{ticket.Onion_sold}}
+                          {% endif %}
+                          </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>
+                          {% if ticket.Poppy_sold > 0 %}
+                            Poppy: {{ticket.Poppy_sold}}
+                          {% endif %}
+                          </td>
+                          <td>
+                          {% if ticket.Garlic_sold > 0 %}
+                            Garlic: {{ticket.Garlic_sold}}
+                          {% endif %}
+                          </td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>
+                          {% if ticket.Everything_sold > 0 %}
+                            EveryT: {{ticket.Everything_sold}}
+                          {% endif %}
+                          </td>
+                          <td>
+                          {% if ticket.RandomBake_sold > 0 %}
+                          R_Bake: {{ticket.RandomBake_sold}}
+                          {% endif %}
+                          </td>
+                          <td></td>
+                        </tr>
                         {% if ticket.CreamCheese_sold > 0 %}
-                        | C_Cheese: {{ticket.CreamCheese_sold}}
+                          <tr>
+                            <td colspan="2">
+                              Cream Cheese: {{ticket.CreamCheese_sold}}
+                            </td>
+                          </tr>
                         {% endif %}
-                    </tr>
-                   
+                      
+                    
                   </table>
+                  
                 </div>
               </td>
             {%if forloop.counter == 4 or forloop.counter == 12 %}
               </tr>
-              <tr><td class='blank' colspan=4></td></tr>
+              <tr><td class='blank'></td>
+                <td class='blank'></td>
+                <td class='blank'></td>
+                <td class='blank'></td>
+                </tr>
               <tr></tr>
             {% elif forloop.counter == 8 or forloop.counter == 16%}
               </tr>
             {%endif%}
-        {% endfor %}
-        </tr>
+        {% endfor %}  
+      </tr>
+        
       </table>
   </div>
 </body>

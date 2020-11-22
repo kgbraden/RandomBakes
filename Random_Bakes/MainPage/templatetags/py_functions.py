@@ -19,7 +19,8 @@ def DeliveryInfo(value):
     x = 0
     deliv = ''
     for d in delivery:
-        if (not 'None' in d) & (d!="") & (x !=length):
+        if (len(d)>1) & (d!="") & (x !=length) & (not "None" in d):
+            d=d.replace("West", "W.")
             deliv +=d + '\n'
         elif x==length:
             deliv +=d
@@ -45,7 +46,10 @@ def TicketClean(value):
 @register.filter(name='phone_nmbr')
 def PhoneNumber(value):
     delivery = value.replace('\n', '|').split('|')
-    phone = delivery[3].replace(" ", "")
+    if len(delivery) == 4:
+        phone = delivery[2].replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
+    else:
+        phone = delivery[3].replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
     if phone[:1] !='1':
         phone = '1'+phone
     return phone

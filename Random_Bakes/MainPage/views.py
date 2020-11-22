@@ -166,7 +166,7 @@ def send_text(request):
         if len(phone)==11:
             status = sendtext(phone, text)
         else:
-            status = "Number not correct length, text not sent. "
+            status = "%s Number not correct length, text not sent. " %phone
         # try:
         #     subj = "%s Order placed!" %NewOrder.batch
         #     msg = "HUZZAH! %s %s has ordered %s" % {DjangoCustomer.Fname, DjangoCustomer.Lname, NewOrder.cart}
@@ -297,7 +297,11 @@ def BatchInfo():
         batch += '</ul>'
         
         DeliveryInfo += ' For this batch we are scheduled to produce:' + batch
-        
+    elif (acv_sales.start_sales > today):
+        sales_open = False
+        deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
+        DeliveryInfo = "Sales are not open yet for %s. Sales will open on %s. " %(acv_sales.batch, acv_sales.start_sales)
+        DeliveryInfo += "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
     else:
         if ActiveSales.objects.filter(batch =nextbatch).count()==1:
             #Checks to see if the next batch has been scheduled
