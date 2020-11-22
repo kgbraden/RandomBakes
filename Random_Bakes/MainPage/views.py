@@ -300,7 +300,8 @@ def BatchInfo():
     elif (acv_sales.start_sales > today):
         sales_open = False
         deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
-        DeliveryInfo = "Sales are not open yet for %s. Sales will open on %s. " %(acv_sales.batch, acv_sales.start_sales)
+        storeopen = acv_sales.start_sales.strftime('%A, %B %e, %Y')
+        DeliveryInfo = "Sales are not open yet for %s. Sales will open on %s. " %(acv_sales.batch, storeopen)
         DeliveryInfo += "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
     else:
         if ActiveSales.objects.filter(batch =nextbatch).count()==1:
