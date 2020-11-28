@@ -157,19 +157,20 @@
                           </td>
                           <td></td>
                         </tr>
+                        {% if ticket.Everything_sold > 0 %}
                         <tr>
-                          <td>
-                          {% if ticket.Everything_sold > 0 %}
-                            EveryT: {{ticket.Everything_sold}}
-                          {% endif %}
+                          <td colspan="2">
+                            Everything: {{ticket.Everything_sold}}
                           </td>
-                          <td>
-                          {% if ticket.RandomBake_sold > 0 %}
-                          R_Bake: {{ticket.RandomBake_sold}}
-                          {% endif %}
-                          </td>
-                          <td></td>
                         </tr>
+                        {% endif %}
+                        {% if ticket.RandomBake_sold > 0 %}
+                          <tr>
+                            <td colspan="2">
+                              RandomBake: {{ticket.RandomBake_sold}}
+                            </td>
+                          </tr>
+                        {% endif %}
                         {% if ticket.CreamCheese_sold > 0 %}
                           <tr>
                             <td colspan="2">
