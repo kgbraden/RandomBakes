@@ -65,6 +65,21 @@ class UserProfileInfo(models.Model):
 
     def __str__(self):
         return self.user.username
+class Subscription(models.Model):
+    order_descrip = models.CharField(max_length = 50,  blank=True)
+    Plain_sold = models.PositiveIntegerField(default = 0)
+    Sesame_sold = models.PositiveIntegerField(default = 0)
+    Salt_sold = models.PositiveIntegerField(default = 0)
+    Onion_sold = models.PositiveIntegerField(default = 0)
+    Poppy_sold = models.PositiveIntegerField(default = 0)
+    Garlic_sold = models.PositiveIntegerField(default = 0)
+    Everything_sold = models.PositiveIntegerField(default = 0)
+    RandomBake_sold = models.PositiveIntegerField(default = 0)
+    CreamCheese_sold = models.PositiveIntegerField(default = 0)
+    deliveryinfo = models.TextField(blank = True)
+    cart = models.TextField(blank = True)
+    def __str__(self):
+        return self.order_descrip
 class Customer(models.Model):
     Fname = models.CharField(max_length = 50,  blank=True)
     Lname = models.CharField(max_length = 50, blank = True)
@@ -79,6 +94,9 @@ class Customer(models.Model):
     customer_Notes =  models.TextField(blank = True)
     mailing_list = models.BooleanField(default = False)
     rando = models.BooleanField(default = False)
+    subscription = models.BooleanField(default = False)
+    invoice = models.CharField(max_length = 11, blank = True, null = True )
+    base_order = models.ForeignKey(Subscription, on_delete = models.PROTECT, blank = True, null = True, related_name="subscription_order") 
     def __str__(self):
         return '%s %s' %(self.Fname, self.Lname)
 
@@ -143,74 +161,3 @@ class Orders(models.Model):
         verbose_name_plural = "Orders"
     def __str__(self):
         return "%s--%s_%s (%s)" %(self.batch, self.customer.Fname, self.customer.Lname, self.invoiceid)
-# class fermIngredients(models.Model):
-#     ferm_ingrd_amount = models.DecimalField(decimal_places=2, max_digits = 6)
-#     ferm_ingred_metric = models.TextField(max_length = 40, choices=metric_choices)
-#     ingredients =models.ForeignKey(Ingredient, on_delete=models.CASCADE )
-# class baking_batch(models.Model):
-#     batch_id = models.CharField(max_length = 30, primary_key = True)
-#     batch_date = models.DateField()
-#     batch_type = models.CharField(max_length = 100)
-#     room_temp = models.DecimalField(decimal_places=1, max_digits = 4)
-#     room_humid = models.DecimalField(decimal_places=1, max_digits = 4)
-#     batch_photo = models.ImageField(upload_to='batch_images', default = '/media/photo-placeholder-icon.jpg')
-#     batch_final_notes = models.TextField(default="None")
-#     def __str__(self):
-#         return self.batch_id
-#
-# class PreFerment(models.Model):
-#     ferm_ingredients = models.ManyToManyField(fermIngredients)
-#     ferm_started =models.TimeField()
-#     ferm_started =models.TimeField()
-#     ferm_temp_start = models.DecimalField(decimal_places=1, max_digits = 4)
-#     ferm_temp_fermented = models.DecimalField(decimal_places=1, max_digits = 4)
-#     ferm_temp_after_retardation = models.DecimalField(decimal_places=1, max_digits = 4)
-#     ferm_final_weight =  models.DecimalField(decimal_places=2, max_digits = 6)
-#     ferm_notes = models.TextField(default="None")
-#     batch = models.ForeignKey(baking_batch, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return "Preferment info for: " + self.batch
-#
-# class doughIngredients(models.Model):
-#     dough_ingrd_amount = models.DecimalField(decimal_places=2, max_digits = 6)
-#     dough_ingred_metric = models.TextField(max_length = 40, choices=metric_choices)
-#     ingredients =models.ForeignKey(Ingredient, on_delete=models.CASCADE )
-#
-# class Dough(models.Model):
-#     dough_ingredients = models.ManyToManyField(doughIngredients)
-#     dough_mixed_minutes = models.DecimalField(decimal_places=1, max_digits = 4)
-#     dough_mixer_speed = models.PositiveIntegerField()
-#     dough_rest_time = models.DecimalField(decimal_places=1, max_digits = 4)
-#     dough_final_temp = models.DecimalField(decimal_places=1, max_digits = 4)
-#     knead_time = models.DecimalField(decimal_places=1, max_digits = 4)
-#     knead_mixer_spring = models.PositiveIntegerField()
-#     knead_start_temp = models.DecimalField(decimal_places=1, max_digits = 4)
-#     knead_finish_temp = models.DecimalField(decimal_places=1, max_digits = 4)
-#     dough_final_weight =  models.DecimalField(decimal_places=2, max_digits = 6)
-#     dough_photo = models.ImageField(upload_to='batch_images', default = '/media/photo-placeholder-icon.jpg')
-#     kneading_photo = models.ImageField(upload_to='batch_images', default = '/media/photo-placeholder-icon.jpg')
-#     dough_notes = models.TextField(default="None")
-#     batch = models.ForeignKey(baking_batch, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return "Dough info for: " + self.batch
-#
-# class ShapingFinishing(models.Model):
-#     weight_each_item = models.DecimalField(decimal_places=2, max_digits = 6)
-#     items_produced = models.PositiveIntegerField()
-#     retard_started = models.TimeField()
-#     retard_finished = models.TimeField()
-#     shape_photo = models.ImageField(upload_to='batch_images', default = '/media/photo-placeholder-icon.jpg')
-#     preform_rest_time = models.DecimalField(decimal_places=1, max_digits = 4)
-#     postform_rest_time = models.DecimalField(decimal_places=1, max_digits = 4)
-#     boil_time = models.DecimalField(decimal_places=1, max_digits = 4)
-#     oven_first_temp = models.PositiveIntegerField()
-#     oven_first_time = models.PositiveIntegerField()
-#     oven_second_temp = models.PositiveIntegerField()
-#     oven_second_time = models.PositiveIntegerField()
-#     steam_used = models.BooleanField()
-#     steam_time = models.PositiveIntegerField()
-#     baked_photo = models.ImageField(upload_to='batch_images', default = '/media/photo-placeholder-icon.jpg')
-#     shaping_finishing_notes = models.TextField(default="None")
-#     batch = models.ForeignKey(baking_batch, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return "Shaping/Finishing info for: " + self.batch
