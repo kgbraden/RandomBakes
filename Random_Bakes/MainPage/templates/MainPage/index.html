@@ -50,8 +50,8 @@
         <div class="row featurette featurette2-container">
           <hr class="featurette-divider ">
           <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading"> &middot; {{ feature.title }} &middot;</h2>
-            <H3><span class="text-muted">{{ feature.subtitle }}</span></h3>
+            <h2 class="featurette-heading"> &middot; {{ feature.title|safe }} &middot;</h2>
+            <H3><span class="text-muted">{{ feature.subtitle|safe }}</span></h3>
             <p class="lead text-justify">{{ feature.description|safe}} </p>
             {% if feature.Story %}
               <div class="container">
@@ -79,8 +79,8 @@
       {% else %}
       <div class="row featurette featurette1-container col-sm-4">
         <div class="col-md-7">
-          <h2 class="featurette-heading">&middot; {{ feature.title }} &middot;</H2>
-          <h3><span class="text-muted">{{ feature.subtitle }}</span></h3>
+          <h2 class="featurette-heading">&middot; {{ feature.title|safe }} &middot;</H2>
+          <h3><span class="text-muted">{{ feature.subtitle|safe }}</span></h3>
           <p class="lead text-justify"> {{feature.description|safe}} </p>
             {% if feature.Story %}
             <div class="container lead text-justify">
