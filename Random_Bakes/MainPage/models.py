@@ -80,6 +80,7 @@ class Subscription(models.Model):
     cart = models.TextField(blank = True)
     def __str__(self):
         return self.order_descrip
+        
 class Customer(models.Model):
     Fname = models.CharField(max_length = 50,  blank=True)
     Lname = models.CharField(max_length = 50, blank = True)
@@ -121,8 +122,8 @@ class ActiveSales(models.Model):
     RandomBake =  models.TextField(blank = True)
     RandomBake_sold = models.PositiveIntegerField(default = 0)
     CreamCheese_sold = models.PositiveIntegerField(default = 0)
-    Batch_Notes =  models.TextField(blank = True)
-
+    Batch_Notes = models.TextField(blank = True)
+    
     class Meta:
         # otherwise we get "Tutorial Seriess in admin"
         verbose_name_plural = "ActiveSales"

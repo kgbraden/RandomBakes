@@ -52,13 +52,16 @@
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading"> &middot; {{ feature.title }} &middot;</h2>
             <H3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-            <p class="lead text-justify">{{ feature.description|safe}} 
+            <p class="lead text-justify">{{ feature.description|safe}} </p>
             {% if feature.Story %}
-              <br>
-              <p class ='lead text-justify'>{{feature.Story|safe}}</p>
+              <div class="container">
+                <button type="button" class="btn btn2 text-muted collapsed" data-toggle="collapse" data-target="#demo{{forloop.counter}}">Read</button>
+                <div id="demo{{forloop.counter}}" class="collapse lead text-justify">
+                  {{feature.Story|safe}}
+                </div>
+              </div> 
               
             {% endif %}
-            </p>
             {% if user.is_authenticated %}
             <a class = "" href="{% url 'Baking:featurette_update' pk=feature.pk %}">edit</a> &middot;
             <a class = "" href="{% url 'Baking:featurette_remove' pk=feature.pk %}">delete</a>
@@ -78,11 +81,16 @@
         <div class="col-md-7">
           <h2 class="featurette-heading">&middot; {{ feature.title }} &middot;</H2>
           <h3><span class="text-muted">{{ feature.subtitle }}</span></h3>
-          <p class="lead text-justify"> {{feature.description|safe}} 
-            {% if content.Story %}
-              <br>{{feature.Story|safe}}
+          <p class="lead text-justify"> {{feature.description|safe}} </p>
+            {% if feature.Story %}
+            <div class="container lead text-justify">
+              <button type="button" class="btn btn2 text-muted collapsed" data-toggle="collapse" data-target="#demo{{forloop.counter}}">Read</button>
+              <div id="demo{{forloop.counter}}" class="collapse">
+                {{feature.Story|safe}}
+              </div>
+            </div> 
             {% endif %}
-            </p>
+            
           <p class ='lead text-justify'></p>
           {% if user.is_authenticated %}
             <a class = "" href="{% url 'Baking:featurette_update' pk=feature.pk %}">edit</a> &middot;

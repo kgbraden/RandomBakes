@@ -213,6 +213,34 @@ class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
     success_url = '/Baking/success/'
     form_class = ActiveSalesForm
     model = ActiveSales
+    def form_valid(self, form):
+        self.object = form.save()
+        subscriptions = Customer.objects.filter(subscription=True)
+        for c in subscriptions:
+            bat = form.batch
+            order = c.subscription
+            invoice_id = c.invoice + bat[-2:]
+            o = Orders.objects.get_or_create(
+                                    invoiceid = invoice_id,
+                                    batch = bat,
+                                    customer = c,
+                                    Plain_sold = order.Plain_sold,
+                                    Sesame_sold = order.Sesame_sold,
+                                    Salt_sold = order.Salt_sold,
+                                    Onion_sold = order.Onion_sold,
+                                    Poppy_sold = order.Poppy_sold,
+                                    Garlic_sold = order.Garlic_sold,
+                                    Everything_sold = order.Everything_sold,
+                                    RandomBake_sold = order.RandomBake_sold,
+                                    CreamCheese_sold = order.CreamCheese_sold,
+                                    deliveryinfo = order.deliveryinfo,
+                                    cart = order.cart
+            )
+            try:
+                o.save()
+            except:
+                print("already saved!")
+        
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
