@@ -20,8 +20,15 @@
           {% else %}
             Manual Entry
           {% endif %}
+          
         </tr>
-        
+        {% if orders.delivery_notes %}
+          <tr>
+            <td colspan="2">
+              Delivery Notes: {{orders.delivery_notes}}
+            </td>
+          </tr>
+        {% endif %}
         <tr>
           <th><a class="btn btn-secondary" href="{{orders.deliveryinfo|gMap}}" target = '_blank'>Navigate!</a></th>
           
