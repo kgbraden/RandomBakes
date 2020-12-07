@@ -21,7 +21,7 @@ import django
 django.setup()
 
 ##Fake Pop Script
-from MainPage.models import highlight, Orders, Customer, ActiveSales
+from MainPage.models import highlight, Orders, Customer, ActiveSales, Subscription
 
 def add_highlight(cT, cTXT, cP, caTXT, cB, cBL):
     u = highlight.objects.get_or_create(title = cT,
@@ -64,9 +64,6 @@ def dupOrder(cust_email, old_batch, new_Batch, invoice_id):
         o.save()
     except:
         print("already saved!")
-toDup = {"kale@ebraden.com": "Test_12-5", "j.catching@hotmail.com": "JC_DEC1"}
-oBatch = "BATCH_33"
-nBatch = "BATCH_34"
-for d in toDup:
-    dupOrder(d, oBatch, nBatch, toDup[d])
-    print("%s order saved!" % d)
+
+bat = ActiveSales.objects.filter().order_by('-id')[0]
+print(bat.batch)

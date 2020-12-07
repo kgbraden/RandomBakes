@@ -213,34 +213,8 @@ class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
     success_url = '/Baking/success/'
     form_class = ActiveSalesForm
     model = ActiveSales
-    def form_valid(self, form):
-        self.object = form.save()
-        subscriptions = Customer.objects.filter(subscription=True)
-        for c in subscriptions:
-            bat = form.batch
-            order = c.subscription
-            invoice_id = c.invoice + bat[-2:]
-            o = Orders.objects.get_or_create(
-                                    invoiceid = invoice_id,
-                                    batch = bat,
-                                    customer = c,
-                                    Plain_sold = order.Plain_sold,
-                                    Sesame_sold = order.Sesame_sold,
-                                    Salt_sold = order.Salt_sold,
-                                    Onion_sold = order.Onion_sold,
-                                    Poppy_sold = order.Poppy_sold,
-                                    Garlic_sold = order.Garlic_sold,
-                                    Everything_sold = order.Everything_sold,
-                                    RandomBake_sold = order.RandomBake_sold,
-                                    CreamCheese_sold = order.CreamCheese_sold,
-                                    deliveryinfo = order.deliveryinfo,
-                                    cart = order.cart
-            )
-            try:
-                o.save()
-            except:
-                print("already saved!")
-        
+    
+       
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
@@ -556,6 +530,11 @@ def thankyou(request):
 def success(request):
     return render(request,'MainPage/sucess.html')
 
+def ACsuccess(request):
+    bat = ActiveSales.objects.filter().order_by('-id')[0]
+    subscribers(bat.batch)
+    return render(request,'MainPage/sucess.html')
+
 def shopping(request):
     return render(request,'MainPage/shopping.html')
 def enterbatch(request):
@@ -597,3 +576,31 @@ def user_login(request):
             return HttpResponse("Invalid login.")
     else:
         return render(request,'MainPage/user_login.html', {})
+
+def subscribers(newBatch):
+    AC = newBatch.split("_")[1]
+    new_bat = ActiveSales.objects.get(batch = newBatch)
+    subscribers = Customer.objects.filter(subscription = True)
+    for s in subscribers:
+        order = Subscription.objects.get(order_descrip = s.base_order)
+        invoice_id = "%s%s" %(order.order_descrip, AC)
+        o = Orders.objects.get_or_create(
+                                    invoiceid = invoice_id,
+                                    batch = new_bat,
+                                    customer = s,
+                                    Plain_sold = order.Plain_sold,
+                                    Sesame_sold = order.Sesame_sold,
+                                    Salt_sold = order.Salt_sold,
+                                    Onion_sold = order.Onion_sold,
+                                    Poppy_sold = order.Poppy_sold,
+                                    Garlic_sold = order.Garlic_sold,
+                                    Everything_sold = order.Everything_sold,
+                                    RandomBake_sold = order.RandomBake_sold,
+                                    CreamCheese_sold = order.CreamCheese_sold,
+                                    deliveryinfo = order.deliveryinfo,
+                                    cart = order.cart
+        )
+        try:
+            o.save()
+        except:
+            print("already saved!")
