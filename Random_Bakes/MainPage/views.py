@@ -3,7 +3,7 @@ from MainPage.models import (highlight,
                              ActiveSales,
                              Featurette,
                              Orders,
-                             Customer)
+                             Customer, Subscription)
 from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
@@ -210,7 +210,7 @@ class FeaturetteCreateView(LoginRequiredMixin, CreateView):
 class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
     # redirect_field_name = '/MainPage/featurette_update'
-    success_url = '/Baking/success/'
+    success_url = '/Baking/ACsuccess/'
     form_class = ActiveSalesForm
     model = ActiveSales
     
