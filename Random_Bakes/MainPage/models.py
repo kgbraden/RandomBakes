@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import datetime
+import random
 # Create your models here.
 class highlight(models.Model):
     title = models.CharField(max_length = 35, unique = True)
@@ -133,6 +134,7 @@ class ActiveSales(models.Model):
         return self.batch
 
 class Orders(models.Model):
+    randomdeliv = random.randrange(15)
     id = models.AutoField(primary_key=True)
     invoiceid = models.CharField(max_length =14, unique = True)
     batch = models.ForeignKey(ActiveSales, on_delete = models.PROTECT, related_name="order_batch")
@@ -150,7 +152,7 @@ class Orders(models.Model):
     cart = models.TextField(blank = True)
     total = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
     fees = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
-    delivorder = models.PositiveIntegerField(default = 0)
+    delivorder = models.PositiveIntegerField(default = randomdeliv )
     delivered = models.DateTimeField(null = True, blank=True)
     delivery_notes = models.TextField(blank = True)
     delivery_text = models.TextField(blank = True, max_length=255)
