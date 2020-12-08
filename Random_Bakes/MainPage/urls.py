@@ -21,6 +21,7 @@ urlpatterns = [
     # path('tickets/', views.TicketListView.as_view(), name = 'tickets'),
     path('orders/', views.DeliveryView.as_view(), name = 'orders'),
     url(r'^orders/(?P<pk>\d+)/detail/$', views.OrdersDetailView.as_view(), name='order_detail'),
+    url(r'^orders/(?P<pk>\d+)/edit/$', views.OrdersUpdateView.as_view(), name='orders_update'),
     path('send_text/', views.send_text, name ='text_it'),
     path('registration/', views.registration, name = 'registration'),
     path('orderplaced/', views.orderplaced, name = 'orderplaced'),

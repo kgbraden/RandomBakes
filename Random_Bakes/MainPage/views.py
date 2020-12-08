@@ -8,7 +8,8 @@ from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
                             ActiveSalesForm,
-                            FeaturetteForm)
+                            FeaturetteForm, 
+                            OrdersForm)
 from check_inventory import ProcessSales
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -174,9 +175,11 @@ def send_text(request):
         # except:
         #     print("Email Didn't work")
         try:
-            status += "%s Delivery recorded" %(OrdId)
             OrderTracing = Orders.objects.get(id=OrdId)
+            status += " %s Delivery recorded" %(OrderTracing.batch)
+            
             OrderTracing.delivered = now
+            OrderTracing.delivorder= OrderTracing.delivorder+20
             OrderTracing.delivery_notes = status
             OrderTracing.delivery_completed ==True
             OrderTracing.save()
@@ -231,6 +234,12 @@ class ActiveSalesUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ActiveSalesForm
     model = ActiveSales
 
+class OrdersUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    template_name = 'MainPage/order_form.html'
+    success_url = '/Baking/orders/'
+    form_class = OrdersForm
+    model = Orders
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteDeleteView(LoginRequiredMixin, DeleteView):
     success_url = '/Baking/success/'
