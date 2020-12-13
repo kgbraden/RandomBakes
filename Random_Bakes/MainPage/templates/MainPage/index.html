@@ -55,7 +55,7 @@
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading"> &middot; {{ feature.title|safe }} &middot;</h2>
             <H3><span class="text-muted">{{ feature.subtitle|safe }}</span></h3>
-            <p class="lead text-justify">{{ feature.description|safe}} </p>
+            <div class="lead text-justify">{{ feature.description|safe}} <div>
             {% if feature.Story %}
               <div class="container">
                 <button type="button" class="btn btn2 text-muted collapsed" data-toggle="collapse" data-target="#demo{{forloop.counter}}">Read</button>
@@ -84,7 +84,7 @@
         <div class="col-md-7">
           <h2 class="featurette-heading">&middot; {{ feature.title|safe }} &middot;</H2>
           <h3><span class="text-muted">{{ feature.subtitle|safe }}</span></h3>
-          <p class="lead text-justify"> {{feature.description|safe}} </p>
+          <div class="lead text-justify"> {{feature.description|safe}} </div>
             {% if feature.Story %}
             <div class="container lead text-justify">
               <button type="button" class="btn btn2 text-muted collapsed" data-toggle="collapse" data-target="#demo{{forloop.counter}}">Read</button>
