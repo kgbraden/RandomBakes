@@ -38,6 +38,9 @@
       <h4>Total Bagels Sold This Week: {{TotalSold}}</h4>
       <h1 class="cover-heading ">{{ CoverTitle }}</h1>
       <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
+      <p class="lead">
+        <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
+      </p>
       <p class="lead  text-justify">{{ CoverText|safe|linebreaks }}</p>
       <p class="lead">
         <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" role="button">{{CoverButton}}</a>
