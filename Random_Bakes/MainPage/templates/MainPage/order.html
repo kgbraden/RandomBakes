@@ -18,11 +18,16 @@
 </script>
 <div class="cover-container">
   <main role="main" class="inner cover">
-    <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
-    <h1 class="cover-heading ">{{ CoverTitle }}</h1>
-    <p class="lead">{{ CoverText }}</p>
-    <p class="lead">Bagels being produced this week: {{ BagelsAvailable }}  |  Bagels sold this week: {{ BagelsSold }}</p>
-      <p class="lead text-left">{{DeliveryInfo}}</p>
+    <h1>Friends and Family Early Orders</h1>
+    {% if  "Sold Out!" in CoverTitle %}
+      <img src=  "{% static '/media/sold_out_Batch.png' %}"  class = "img-fluid" alt="Sold Out!">
+    {% else %}
+      <img src=  "{% static '/media/Plate_of_bagels.png' %}"  class = "img-fluid" alt="Sales Open!">
+    {% endif %}
+    <!-- <h1 class="cover-heading ">{{ CoverTitle }}</h1> -->
+    <div class="lead text-left">{{ CoverText }}</div>
+    <div class="lead">Bagels being produced this week: {{ BagelsAvailable }}  |  Bagels sold this week: {{ BagelsSold }}</div>
+      <div class="lead text-left">{{DeliveryInfo}}</div>
     <p class="lead">
       <a class="{{CoverButtonClass}}" href="{{CoverButtonLink}}" style="margin-top: 16px" >{{CoverButton}}</a>
     </p>

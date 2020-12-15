@@ -26,7 +26,7 @@ from django.views.generic.edit import FormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
-from datetime import date, datetime
+from datetime import date, datetime,timedelta
 from django.db.models.functions import Now
 from config import sendtext
 import ast, re
@@ -344,7 +344,7 @@ def order(request):
         nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
     else:
         NxtSched = False
-    if (acv_sales.start_sales < today) & (today < acv_sales.end_sales):
+    if ((acv_sales.start_sales - timedelta(days=1)) < today) & (today < acv_sales.end_sales):
         # In sales period
 
         sold = ProcessSales()
@@ -355,7 +355,7 @@ def order(request):
         else:
             DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
         available = acv_sales.units
-        if acv_sales.soldout =='True':
+        if acv_sales.soldout ==True:
             cover_content2 = highlight.objects.filter(title = "Sold Out!")[0]
         else:
             cover_content2 = highlight.objects.filter(title = "Buy Now")[0]
@@ -364,6 +364,7 @@ def order(request):
         DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
     else:
         sold = 'N/A'
+        totsold = "N/A"
         available = 'N/A'
         cover_content2 = highlight.objects.filter(title = "Sales Closed")[0]
         if NxtSched:
