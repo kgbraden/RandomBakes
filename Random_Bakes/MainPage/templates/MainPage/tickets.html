@@ -107,10 +107,14 @@
           {% for ticket in tickets %}
             {%if forloop.counter <= 4 %}
               <td class ="ticket">
-            {%elif forloop.counter >= 5 and forloop.counter <= 8%}
+            {%elif forloop.counter >= 5 and forloop.counter <= 8 %}
             <td class ="ticket_upside">
-            {%elif forloop.counter >= 9 and forloop.counter <= 12%}
+            {%elif forloop.counter >= 9 and forloop.counter <= 12 %}
               <td class ="ticket">
+            {%elif forloop.counter >= 13 and forloop.counter <= 16 %}
+              <td class ="ticket_upside">
+            {%elif forloop.counter >= 17 and forloop.counter <= 20 %}
+                <td class ="ticket">
             {%endif%}
                 <div> 
                   <table >
