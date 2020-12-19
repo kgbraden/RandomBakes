@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from Recipes.models import baking_batch
-from Recipes.forms import (BakingBatchForm, IngredientForm)
+# from Recipes.models import ingredient
+# from Recipes.forms import (IngredientForm)
                                 # , ShapingFinisihingForm,
 #                             DoughForm, , fermIngredientForm, doughIngredientForm
 #                             )
@@ -22,9 +22,9 @@ from django.views.generic import (View,
 def recipe_success(request):
     return render(request,'MainPage/sucess.html')
 
-class BatchCreateView(CreateView):
-    form_class = BakingBatchForm
-    model = baking_batch
+# class BatchCreateView(CreateView):
+#     form_class = BakingBatchForm
+#     model = baking_batch
 
 # def batch_enter(request):
 #     registered = False

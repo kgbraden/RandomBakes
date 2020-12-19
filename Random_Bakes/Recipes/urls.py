@@ -8,12 +8,12 @@ from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
 
-    path('batch_enter/', views.BatchCreateView.as_view(), name = 'batch_enter'),
+    # path('batch_enter/', views.BatchCreateView.as_view(), name = 'batch_enter'),
     # path('batch/', views.batch_enter, name = 'batch'),
     # path('contact/', views.contact, name = 'contact'),
     # path('license/', views.LicenseListView.as_view(), name = 'license'),
-    path('Recipe/success/', views.recipe_success, name = 'recipe_success'),
-    # path('sanitation/', views.SanitationListView.as_view(), name = 'sanitation'),
+    # path('Recipe/success/', views.recipe_success, name = 'recipe_success'),
+    # # path('sanitation/', views.SanitationListView.as_view(), name = 'sanitation'),
     # path('order/', views.order, name = 'order'),
     # path('registration/', views.registration, name = 'registration'),
     # url(r'^user_login/$', views.user_login, name = 'user_login' ),
