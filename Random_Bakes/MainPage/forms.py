@@ -79,11 +79,14 @@ class OrdersForm(forms.ModelForm):
 class ActiveSalesForm(forms.ModelForm):
     class Meta():
         model = ActiveSales
+        # fields = ('batch', 'active','start_sales', 'units', 'Plain_sold', 'Sesame_sold', 'Salt_sold',
+        #             'Onion_sold', 'Poppy_sold', 'Garlic_sold', 'Everything_sold',
+        #             'RandomBake', 'RandomBake_sold', 'CreamCheese_sold', 'Batch_Notes')
         fields = ('__all__')
         widgets = {
                     'batch':forms.TextInput(attrs= {'class': 'textinputclass'}),
                     # 'active': forms.BooleanField(),
-                    'start_sales':forms.DateField(),
+                    # 'start_sales':forms.DateField(),
                     # 'end_sales': forms.DateField(),
                     'units': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     # 'soldout': forms.BooleanField(),
