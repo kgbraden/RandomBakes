@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^$', views.index, name = 'index'),
     path('admin/', admin.site.urls),
     url(r'^logout/$', views.user_logout, name = 'logout'),
+    url(r'friends&family/', views.order, name = 'friends&family'),
     url(r'^user_login/$', views.user_login, name = 'user_login' ),
     url(r'^Baking/', include('MainPage.urls')),
     url(r'^Recipes/', include('Recipes.urls')),

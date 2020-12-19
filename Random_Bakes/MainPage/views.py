@@ -344,7 +344,7 @@ def order(request):
         nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
     else:
         NxtSched = False
-    if ((acv_sales.start_sales - timedelta(days=1)) < today) & (today < acv_sales.end_sales):
+    if ((acv_sales.start_sales - timedelta(days=1)) <= today) & (today < acv_sales.end_sales):
         # In sales period
 
         sold = ProcessSales()
@@ -361,6 +361,10 @@ def order(request):
             cover_content2 = highlight.objects.filter(title = "Buy Now")[0]
     elif (acv_sales.start_sales > today):
         ## THIS IS NOT WORKING
+        sold = 'N/A'
+        totsold = "N/A"
+        available = 'N/A'
+        cover_content2 = highlight.objects.filter(title = "Sales Closed")[0]
         DeliveryInfo = "%s is scheduled to be baked and delivered on %s. Deliveries will begin after %s when the bagels have cooled enough for packaging. We anticipate deliveries to be completed by 12:00 noon. We will deliver within 10 miles of Tahoe Park and provide contact-less delivery." %(acv_sales.batch, deliverydate, deliverytime)
     else:
         sold = 'N/A'
