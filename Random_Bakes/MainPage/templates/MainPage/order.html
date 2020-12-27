@@ -25,7 +25,7 @@
       <img src=  "{% static '/media/Plate_of_bagels.png' %}"  class = "img-fluid" alt="Sales Open!">
     {% endif %}
     <!-- <h1 class="cover-heading ">{{ CoverTitle }}</h1> -->
-    <div class="lead text-left">{{ CoverText }}</div>
+    <div class="lead text-left">{{ CoverText|safe }}</div>
     <div class="lead">Bagels being produced this week: {{ BagelsAvailable }}  |  Bagels sold this week: {{ BagelsSold }}</div>
       <div class="lead text-left">{{DeliveryInfo}}</div>
     <p class="lead">
