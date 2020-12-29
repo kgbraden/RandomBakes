@@ -9,7 +9,8 @@ from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
                             ActiveSalesForm,
                             FeaturetteForm, 
-                            OrdersForm)
+                            OrdersForm,
+                            CustomerForm)
 from check_inventory import ProcessSales
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -199,7 +200,10 @@ class OrdersDetailView(DetailView):
     # slug_url_kwarg='batch'
     # send_mail('test', 'body of the message', 'info@RandomBakes.com', ['kale@ebraden.com'])
     model = Orders
-
+class CustomersListView(ListView):
+    model = Customer
+    template_name = "MainPage/Customer_list.html"
+    paginate_by = 10
 class ActiveSalesDetailView(DetailView):
     model = ActiveSales
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
@@ -217,7 +221,12 @@ class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
     form_class = ActiveSalesForm
     model = ActiveSales
     
-       
+class CustomersCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    # redirect_field_name = '/MainPage/featurette_update'
+    success_url = '/Baking/success/'
+    form_class = CustomerForm
+    model = Customer       
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
@@ -240,6 +249,13 @@ class OrdersUpdateView(LoginRequiredMixin, UpdateView):
     success_url = '/Baking/orders/'
     form_class = OrdersForm
     model = Orders
+
+class CustomersUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    template_name = 'MainPage/Customer_form.html'
+    success_url = '/Baking/success/'
+    form_class = CustomerForm
+    model = Customer
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#
 class FeaturetteDeleteView(LoginRequiredMixin, DeleteView):
     success_url = '/Baking/success/'

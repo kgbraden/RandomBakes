@@ -19,7 +19,7 @@
   <link href="{% static "/assets/dist/css/bootstrap.min.css" %}" rel="stylesheet">
   <link href="{% static "/css/sticky-footer-navbar.css" %}" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
-
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script> -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
   <style>
     
@@ -48,7 +48,8 @@
             <div class="collapse navbar-collapse" id="navbarsExample04">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="\">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="\"><span data-feather="home" class="sr-only">(current)</span></a>
+                  
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="{% url 'Baking:about' %}">About Us</a>
@@ -57,27 +58,39 @@
                   <a class="nav-link" href="{% url 'Baking:license' %}">Licenses</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'Baking:sanitation' %}">Sanitation Protocols</a>
+                  <a class="nav-link" href="{% url 'Baking:sanitation' %}">Sanitation</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item active"> <a class="nav-link" href="{% url 'Baking:contact' %}">Contact Us</a></li>
+                <!-- <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More...</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown04">
                     <a class="dropdown-item" href="{% url 'Baking:projects' %}">Projects<span class="sr-only">(current)</span></a>
-                    <a class="dropdown-item" href="{% url 'Baking:contact' %}">Contact Us</a>
-                    {% if user.is_authenticated %}
-                      <a  class="dropdown-item" href="{% url 'admin:index'  %}">Admin</a>
-                      <a class="dropdown-item" href="{% url 'Baking:ActiveSales_list' %}">Sales Periods</a>
-                      <a class="dropdown-item" href="{% url 'Baking:orders' %}">Orders</a>
-                    {% endif %}
+                   
+                    
                   </div>
-                </li>
+                </li> -->
                 {% if user.is_authenticated %}
-                  <li class="nav-item">
-                    <a href="{% url 'logout' %}"><img src="{% static "/media/unlocked.png" %}" class = "" alt="Logout"></a>
+                  <li>
+                    <a href="{% url 'logout' %}"><span class="nav-item" data-feather="unlock"></span></a>&ThickSpace; 
+                    <!-- <img src="{% static "/media/unlocked.png" %}" class = "" alt="Logout"> -->
                   </li>
+                  <li>
+                    <a   href="{% url 'admin:index'  %}"><span class="nav-item" data-feather="database"></span></a>&ThickSpace; 
+                  </li>
+                  <li>
+                    <a  href="{% url 'Baking:ActiveSales_list' %}"><span class="nav-item" data-feather="calendar"></a>&ThickSpace;
+                  </li> 
+                  <li >
+                    <a href="{% url 'Baking:orders' %}"><span class="nav-item" data-feather="truck"></a>&ThickSpace;
+                  </li>
+                  <li >
+                    <a href="{% url 'Baking:customers' %}"><span class="nav-item" data-feather="users"></a>&ThickSpace;
+                  </li>
+                          
                 {% else %}
-                  <li class="nav-item">
-                    <a href="{% url 'user_login' %}"><img src="{% static "/media/locked.png" %}" class = "" alt="Login"></a>
+                  <li class="nav-item inactive">
+                    <a href="{% url 'user_login' %}"><span class="nav-item"data-feather="lock"></span></a>
+                    <!-- <img src="{% static "/media/locked.png" %}" class = "" alt="Login"> -->
                   </li>
 
                 {% endif %}
@@ -95,13 +108,19 @@
     {% endblock %}
     </div>
     <!-- <div class="inner"> -->
+      
       <footer class="footer mt-auto py-3 text-dark">
         &copy; 2020 Random Bakes
       </footer>
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-   <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-   <!-- <script src="{% static "/assets/js/vendor/popper.min.js" %}"></script> -->
-   <script src="{% static "/assets/dist/js/bootstrap.min.js" %}"></script>
  </div>
+ 
 </body>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+      <!-- <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script> -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+      <script src="{% static "/assets/dist/js/bootstrap.min.js" %}"></script>  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script src="{% static "/assets/dist/js/dashboard.js" %}"></script></body>
 </html>

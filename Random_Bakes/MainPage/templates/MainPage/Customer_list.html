@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends "MainPage/base.html" %}
+{% block body_block %}
+<!-- _______________________________________________________________________ -->
+{% load static %}
+  <div class="container">
+    <h1> Customers </h1>
+    {% for customer in customer_list %}
+    <div class="text-left">
+      {{customer.Fname}} {{customer.Lname}} ({{customer.email}}) <a href="{% url 'Baking:customers_update' pk=customer.pk %}">edit</a>
+    </div>
+    
+      <hr class="featurette-divider">
+    
+    {% endfor %}
+  </div>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<!-- _______________________________________________________________________ -->
+{% endblock %}

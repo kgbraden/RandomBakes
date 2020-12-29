@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from MainPage.models import (UserProfileInfo,
                              highlight,
                              ActiveSales,
+                             Customer,
                              # Ingredient,
                              # PreFerment,
                              # Dough,
@@ -104,4 +105,26 @@ class ActiveSalesForm(forms.ModelForm):
                     'RandomBake_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     'CreamCheese_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     'Batch_Notes': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'})
+        }
+class CustomerForm(forms.ModelForm):
+    class Meta():
+        model= Customer
+        fields = ('__all__')
+        widgets = {
+                    'Fname': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'Lname': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'pref_name': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'email': forms.EmailInput(attrs={'class': 'textinputclass'}),
+                    'dStreet1': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'dStreet2': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'dCity': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'dState': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'dZip': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'Phone': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    'customer_Notes': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}),
+                    # 'mailing_list'
+                    # 'friend' 
+                    # 'subscription' 
+                    'invoice': forms.TextInput(attrs= {'class': 'textinputclass'}),
+                    # 'base_order'
         }
