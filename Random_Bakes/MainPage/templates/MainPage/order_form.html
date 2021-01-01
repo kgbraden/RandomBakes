@@ -7,6 +7,8 @@
     <h1>Order Edit</h1>
       <form class="post-form"  method="post" enctype="multipart/form-data">
         {%csrf_token %}
+        <button type="submit" class= "btn btn-sm btn-primary">Submit</button>
+
         {{form.as_p}}
         <button type="submit" class= "btn btn-sm btn-primary">Submit</button>
         <a href="javascript:history.back()" class= "btn btn-sm btn-secondary">Cancel</a>

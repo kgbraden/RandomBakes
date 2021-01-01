@@ -191,10 +191,28 @@ def send_text(request):
         
     return redirect("../orders/")
 
+# class DeliveryView(ListView):
+#     acv_sales = ActiveSales.objects.get(active = "True")    
+#     queryset = Orders.objects.filter(batch = acv_sales.id).order_by('delivorder')
+#     template_name = "MainPage/orders_list.html"
+
 class DeliveryView(ListView):
-    acv_sales = ActiveSales.objects.get(active = "True")    
-    queryset = Orders.objects.filter(batch = acv_sales.id).order_by('delivorder')
+       
+    model = Orders
     template_name = "MainPage/orders_list.html"
+    def get_context_data(self, **kwargs):
+        acv_sales = ActiveSales.objects.get(delivery = "True") 
+        context = super(DeliveryView, self).get_context_data(**kwargs)
+        context.update({
+            'orders_list': Orders.objects.filter(batch = acv_sales.id).order_by('delivorder'),
+            'batch': ActiveSales.objects.all(),
+        })
+        return context
+
+    def get_queryset(self):
+        acv_sales = ActiveSales.objects.get(delivery = "True") 
+        return Orders.objects.filter(batch = acv_sales.id).order_by('delivorder')
+
 class OrdersDetailView(DetailView):
     # slug_field='Customer.Lname'
     # slug_url_kwarg='batch'
@@ -291,7 +309,7 @@ def BatchInfo():
     today = date.today()
     activeBatch = acv_sales.batch
     nextbatch = next_batch(activeBatch)
-    deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
+    deliverydate = acv_sales.bakingdate.strftime('%A, %B %e, %Y')
     DeliveryInfo = ""
     available = acv_sales.units
     if (acv_sales.soldout == True):
@@ -335,7 +353,7 @@ def BatchInfo():
             #Checks to see if the next batch has been scheduled
             nBatch = ActiveSales.objects.get(batch =nextbatch)
             nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
-            nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
+            nxtdatedelivery = nBatch.bakingdate.strftime('%A, %B %e, %Y')
             DeliveryInfo = "Our next scheduled production run, %s, of %s bagels, will be on %s. Sales will open for this batch on %s." %(nextbatch, nBatch.units,  nxtdatedelivery, nxtdateopen)
         else:
             DeliveryInfo = "We have not scheduled our next scheduled production run. Please check back soon!"
@@ -347,7 +365,7 @@ def BatchInfo():
 def order(request):
     acv_sales = ActiveSales.objects.filter(active =True)[0]
     today = date.today()
-    deliverydate = acv_sales.deliverydate.strftime('%A, %B %e, %Y')
+    deliverydate = acv_sales.bakingdate.strftime('%A, %B %e, %Y')
     storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
     deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
     activeBatch = acv_sales.batch
@@ -357,7 +375,7 @@ def order(request):
         nBatch = ActiveSales.objects.get(batch =nextbatch)
         NxtSched = True
         nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
-        nxtdatedelivery = nBatch.deliverydate.strftime('%A, %B %e, %Y')
+        nxtdatedelivery = nBatch.bakingdate.strftime('%A, %B %e, %Y')
     else:
         NxtSched = False
     if ((acv_sales.start_sales - timedelta(days=1)) <= today) & (today < acv_sales.end_sales):
@@ -513,7 +531,7 @@ def thankyou(request):
         print(cart)
         products = parseOrder(ticket)
         invoice = request.POST.get('invoiceid')
-        delivered = Batch_Info.deliverydate
+        delivered = Batch_Info.bakingdate
         cart = ""
         for t in ticket:
             cart +='%s\n' %t
