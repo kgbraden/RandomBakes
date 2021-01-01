@@ -201,7 +201,10 @@ class DeliveryView(ListView):
     model = Orders
     template_name = "MainPage/orders_list.html"
     def get_context_data(self, **kwargs):
-        acv_sales = ActiveSales.objects.get(delivery = "True") 
+        try:
+            acv_sales = ActiveSales.objects.get(delivery = "True") 
+        except:
+            acv_sales = ActiveSales.objects.get(active = "True") 
         context = super(DeliveryView, self).get_context_data(**kwargs)
         context.update({
             'orders_list': Orders.objects.filter(batch = acv_sales.id).order_by('delivorder'),
@@ -210,7 +213,10 @@ class DeliveryView(ListView):
         return context
 
     def get_queryset(self):
-        acv_sales = ActiveSales.objects.get(delivery = "True") 
+        try:
+            acv_sales = ActiveSales.objects.get(delivery = "True") 
+        except:
+            acv_sales = ActiveSales.objects.get(active = "True") 
         return Orders.objects.filter(batch = acv_sales.id).order_by('delivorder')
 
 class OrdersDetailView(DetailView):
