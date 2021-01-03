@@ -162,13 +162,17 @@ def send_text(request):
         OrdId = request.POST['OrderID']
         phone = request.POST['phone']
         #deliverorder = request.POST['deliverorder']
-        text = "Your Bagel order is at your front door! Thank you and enjoy! (This is an automated text!)"
+        text = request.POST['message']
+        # text = "Your Bagel order is at your front door! Thank you and enjoy! (This is an automated text!)"
         now = Now()
         # send_mail('test', 'body of the message', 'info@RandomBakes.com', ['kale@ebraden.com'])
-        if len(phone)==11:
-            status = sendtext(phone, text)
+        if (request.POST['sendText']=="Delivered"):
+            if (len(phone)==11):
+                status = sendtext(phone, text)
+            else:
+                status = "%s Number not correct length, text not sent. " %phone
         else:
-            status = "%s Number not correct length, text not sent. " %phone
+            status = "Order delivered, no text notification sent."
         # try:
         #     subj = "%s Order placed!" %NewOrder.batch
         #     msg = "HUZZAH! %s %s has ordered %s" % {DjangoCustomer.Fname, DjangoCustomer.Lname, NewOrder.cart}
@@ -183,6 +187,7 @@ def send_text(request):
             OrderTracing.delivorder= OrderTracing.delivorder+20
             OrderTracing.delivery_notes = status
             OrderTracing.delivery_completed ==True
+            OrderTracing.text_sent == text
             OrderTracing.save()
             
         except:

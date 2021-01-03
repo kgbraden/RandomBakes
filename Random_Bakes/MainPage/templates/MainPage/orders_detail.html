@@ -33,13 +33,22 @@
           <th><a class="btn btn-secondary" href="{{orders.deliveryinfo|gMap}}" target = '_blank'>Navigate!</a></th>
           
           <th>
-            <form action={% url "Baking:text_it" %} method="POST" >
-            {% csrf_token %}
-            <input type="hidden"  name = 'OrderID' id='OrderID' value= '{{orders.id}}'  >
-            <input type="hidden" name='delivorder' id = 'deliverorder' value = {{orders.delivorder}}>
-            <input type="hidden" name = 'phone' id = 'phone' value = {{orders.deliveryinfo|phone_nmbr}}>
-            <input type = "submit" value = 'Delivered' class="btn btn-warning"  ></form>
+            <form action={% url "Baking:text_it" %} method="POST" id="orderform">
+              {% csrf_token %}
+              <input type="hidden"  name = 'OrderID' id='OrderID' value= '{{orders.id}}'  >
+              <input type="hidden" name='delivorder' id = 'deliverorder' value = {{orders.delivorder}}>
+              <input type="hidden" name = 'phone' id = 'phone' value = {{orders.deliveryinfo|phone_nmbr}}>
+              <input type = "submit" value = 'Delivered' name = "sendText" class="btn btn-warning">
           </th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type = "submit" value = 'Delivered-NoText' name = 'sendText' class="btn btn-warning" >
+          </td>
+        </tr>
+      </form>
+        <tr>
+          <td colspan="2"><textarea rows="4" cols="30" name="message" form="orderform" >Your Bagel order is at your front door! Thank you and enjoy! (This is an automated text!) </textarea></td>
         </tr>
       </table></div>
 

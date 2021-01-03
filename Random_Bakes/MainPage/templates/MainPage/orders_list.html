@@ -10,6 +10,7 @@
       {% if order.delivered%}
         <h5>{{order.batch}} {{order.customer.Fname}} {{order.customer.Lname}} | Delivered: {{order.delivered}}</h5>
         <p>{{order.delivery_notes}}</p>
+        <a class = "" href="{% url 'Baking:orders_update' pk=order.pk %}">edit</a>
       {% else %}
       <div class="jumbotron text-dark">
         <h4>{{order.delivorder}}: <a href="{% url 'Baking:order_detail' pk=order.pk %}">{{order.batch}} {{order.customer.Fname}} {{order.customer.Lname}} ---> Navigate and Deliver.</a> </h4>
