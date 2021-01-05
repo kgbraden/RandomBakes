@@ -41,7 +41,7 @@ class Featurette(models.Model):
                             choices=type_choices)
     order =  models.PositiveIntegerField(default = 1)
     subtitle = models.CharField(max_length = 40,  blank=True)
-    description = models.TextField(max_length = 430, default="Description goes here.", blank=True)
+    description = models.TextField(default="Description goes here.", blank=True)
     Story = models.TextField(blank=True)
     photo = models.ImageField(upload_to='highlight_images', blank=True)
     photo_alt = models.CharField(max_length = 25, blank=True)
