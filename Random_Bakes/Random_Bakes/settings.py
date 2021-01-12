@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MainPage',
    
-    'django_fields',
+    #'django_fields',
     'djrichtextfield',
 
 
@@ -120,6 +120,7 @@ WSGI_APPLICATION = 'Random_Bakes.wsgi.application'
 try:
     # This 'try' only works on my local machine anything under here will be triggered when running locally.
     z = os.environ['COMPUTERNAME']
+    
     DATABASES = {
             'default': {
             'ENGINE': 'django.db.backends.mysql',
