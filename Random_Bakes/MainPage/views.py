@@ -68,7 +68,8 @@ def index(request):
            'CoverButtonClass': cover_content2.button_class,
            'CoverScript': cover_content2.script,
            'Featurette': feat,
-           'TotalSold': totsold}
+           'TotalSold': totsold, 
+           'NextSaleOpen':B_info[3]}
     return render(request,'MainPage/index.html', context = cover_content)
 
   
@@ -322,10 +323,16 @@ def BatchInfo():
     nextbatch = next_batch(activeBatch)
     deliverydate = acv_sales.bakingdate.strftime('%A, %B %e, %Y')
     DeliveryInfo = ""
+    nxtdateopen = "Not Set"
     available = acv_sales.units
     if (acv_sales.soldout == True):
         DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
         out = True
+        try:
+            nBatch = ActiveSales.objects.get(batch =nextbatch)
+            nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
+        except:
+            nxtdateopen = "Not Set"
     else:
         out = False
     sales_open = False
@@ -371,7 +378,7 @@ def BatchInfo():
     feature = Featurette.objects.get(title ='Current Batch')
     feature.description = DeliveryInfo
     feature.save()
-    return available, out, sales_open
+    return available, out, sales_open, nxtdateopen
 
 def order(request):
     acv_sales = ActiveSales.objects.filter(active =True)[0]

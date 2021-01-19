@@ -22,7 +22,11 @@
 <div class="cover-container">
     {% if "Sold Out!" in CoverButton %}
       <h2>We've Sold Out This Week With {{TotalSold}} sold!</h2>
-      <h3>Sales for our next batch will open on Monday, 1/11/21!</h3>
+      {%if "Not Set" in NextSaleOpen%}
+        <h3>Sales for our next batch will open soon!</h3>
+      {%else %}
+        <h3>Sales for our next batch will open on {{NextSaleOpen}}!</h3>
+      {%endif%}
       <img src=  "{% static '/media/sold_out_Batch.png' %}"  class = "img-fluid" alt="{{ CoverAltText }}">
     {% elif "Sales Not Open Yet" in CoverButton%}
      <h4>Bagel Sales open Monday Morning!</h4>
