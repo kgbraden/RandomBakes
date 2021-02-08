@@ -80,7 +80,7 @@ class OrdersForm(forms.ModelForm):
 class ActiveSalesForm(forms.ModelForm):
     class Meta():
         model = ActiveSales
-        # fields = ('batch', 'active','start_sales', 'units', 'Plain_sold', 'Sesame_sold', 'Salt_sold',
+        #fields = ('batch', 'active','start_sales', 'units', 'Plain_sold', 'Sesame_sold', 'Salt_sold',
         #             'Onion_sold', 'Poppy_sold', 'Garlic_sold', 'Everything_sold',
         #             'RandomBake', 'RandomBake_sold', 'CreamCheese_sold', 'Batch_Notes')
         fields = ('__all__')
