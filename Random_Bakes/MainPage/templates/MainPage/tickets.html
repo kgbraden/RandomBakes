@@ -120,7 +120,7 @@
                   <table >
                     <!-- <tr ><td colspan="2"><div class = "batch">&middot;</div></td></tr> -->
                     <tr><td colspan="2"><div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div></td></tr>
-                    <tr><td colspan="2">{{ticket.deliveryinfo|DeliveryInfo|truncatechars:140|linebreaks}}</td></tr>
+                    <tr><td colspan="2">{{ticket.deliveryinfo|DeliveryInfo|truncatechars:100|linebreaks}}</td></tr>
                     <!-- <tr><td>{{ticket.cart|TicClean|linebreaks}}</td></tr> -->
                     {%if ticket.Plain_sold > 0 and ticket.Sesame_sold > 0 %}  
                       <tr>
