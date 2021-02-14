@@ -26,6 +26,7 @@ urlpatterns = [
     path('registration/', views.registration, name = 'registration'),
     path('orderplaced/', views.orderplaced, name = 'orderplaced'),
     url(r'^user_login/$', views.user_login, name = 'user_login' ),
+    url(r'route', views.setRoute, name='set_route'),
     url(r'^enter_batch/$', views.enterbatch, name = 'enter_batch' ),
     url(r'^thankyou/$', views.thankyou, name = 'thankyou' ),
     url(r'^about/$', views.AboutUsListView.as_view(), name ='about'),

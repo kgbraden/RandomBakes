@@ -5,6 +5,7 @@
 {% load static %}
   <div class="container">
     <h1> Orders </h1>
+    <th><a class="btn btn-secondary" href="{% url 'Baking:set_route' %}" target = '_blank'>Set Route!</a></th>
     {% for order in orders_list %}
     <div class="container">
       {% if order.delivered%}
