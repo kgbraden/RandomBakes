@@ -8,6 +8,7 @@ from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
                             ActiveSalesForm,
+                            AS_Create_Form,
                             FeaturetteForm, 
                             OrdersForm,
                             CustomerForm)
@@ -248,7 +249,7 @@ class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
     # redirect_field_name = '/MainPage/featurette_update'
     success_url = '/Baking/ACsuccess/'
-    form_class = ActiveSalesForm
+    form_class = AS_Create_Form
     model = ActiveSales
     
 class CustomersCreateView(LoginRequiredMixin, CreateView):
