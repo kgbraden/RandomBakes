@@ -13,6 +13,7 @@ from MainPage.forms import (UserForm,
                             OrdersForm,
                             CustomerForm)
 from check_inventory import ProcessSales
+from check_inventory import route 
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
@@ -73,7 +74,14 @@ def index(request):
            'NextSaleOpen':B_info[3]}
     return render(request,'MainPage/index.html', context = cover_content)
 
-  
+def setRoute(request):
+    try:
+        invt = ActiveSales.objects.get(delivery ="True")
+        return redirect(route(invt.id))
+    except: 
+        web = 'MainPage/index.html'
+    return render(request, web)
+
 def projects(request):
     return render(request,'MainPage/projects.html')
 
