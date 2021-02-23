@@ -255,7 +255,7 @@ class FeaturetteCreateView(LoginRequiredMixin, CreateView):
 
 class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
-    template_name = 'MainPage/ActiveSales_update.html'
+    template_name = 'MainPage/ActiveSales_new.html'
     # redirect_field_name = '/MainPage/featurette_update'
     success_url = '/Baking/ACsuccess/'
     form_class = AS_Create_Form
