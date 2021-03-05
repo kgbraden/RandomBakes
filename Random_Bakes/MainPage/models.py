@@ -79,6 +79,7 @@ class Subscription(models.Model):
     CreamCheese_sold = models.PositiveIntegerField(default = 0)
     deliveryinfo = models.TextField(blank = True)
     cart = models.TextField(blank = True)
+    total = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
     def __str__(self):
         return self.order_descrip
         
@@ -106,7 +107,7 @@ class Customer(models.Model):
 
 class ActiveSales(models.Model):
     d = datetime.now()
-    t = timedelta((12 - d.weekday()) % 7)
+    t = timedelta((12 - d.weekday()) % 14)
     nextSat = d+t
     mon = nextSat +timedelta(days = -5)
     thurs = nextSat +timedelta(days = -2)

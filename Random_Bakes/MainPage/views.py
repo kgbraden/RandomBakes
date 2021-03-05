@@ -674,7 +674,8 @@ def subscribers(newBatch):
                                     RandomBake_sold = order.RandomBake_sold,
                                     CreamCheese_sold = order.CreamCheese_sold,
                                     deliveryinfo = order.deliveryinfo,
-                                    cart = order.cart
+                                    cart = order.cart, 
+                                    total = order.total
         )
         try:
             o.save()
