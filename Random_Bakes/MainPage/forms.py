@@ -47,13 +47,13 @@ class FeaturetteForm(forms.ModelForm):
 class OrdersForm(forms.ModelForm):
     class Meta():
         model = Orders
-        fields = ('invoiceid', 'customer', 'deliveryinfo', 'delivorder', 'cart', 'Plain_sold', 'Sesame_sold', 
+        fields = ('invoiceid', 'customer', 'deliveryinfo', 'delivorder', 'cart', 'total', 'Plain_sold', 'Sesame_sold', 
                     'Salt_sold', 'Onion_sold', 'Poppy_sold', 'Garlic_sold', 'Everything_sold', 
                     'RandomBake_sold', 'CreamCheese_sold', 'delivery_notes', 'delivery_text')
         widgets = {
                     'invoiceid': forms.TextInput(attrs= {'class': 'textinputclass'}),
                     # 'batch': forms.TextInput(attrs= {'class': 'textinputclass'}),
-                    'deliveryinfo': forms.Textarea(attrs= {'class': 'textinputclass'}),
+                    'deliveryinfo': forms.Textarea(attrs= {'class': 'textinputclass-md'}),
                     'delivorder': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     # customer = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name='order_customer')
                     'Plain_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
@@ -66,13 +66,13 @@ class OrdersForm(forms.ModelForm):
                     'RandomBake_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     'CreamCheese_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     
-                    'cart': forms.Textarea(attrs= {'class': 'textinputclass'}),
-                    # total = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
+                    'cart': forms.Textarea(attrs= {'class': 'textinputclass-md'}),
+                    'total': forms.NumberInput(attrs= {'class': 'textinputclass-money'}),
                     # fees = models.DecimalField(max_digits=6, decimal_places=2, default = 0)
                     
                     # delivered = models.DateTimeField(null = True, blank=True)
-                    'delivery_notes': forms.Textarea(attrs= {'class': 'textinputclass'}),
-                    'delivery_text': forms.Textarea(attrs= {'class': 'textinputclass'}),
+                    'delivery_notes': forms.Textarea(attrs= {'class': 'textinputclass-md'}),
+                    'delivery_text': forms.Textarea(attrs= {'class': 'textinputclass-md'}),
                     # delivery_completed = models.BooleanField(default = False)
                     # text_sent = models.BooleanField(default = False)
                     # emil_sent
