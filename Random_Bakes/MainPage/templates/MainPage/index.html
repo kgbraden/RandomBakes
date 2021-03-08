@@ -25,8 +25,10 @@
       {%if "Not Set" in NextSaleOpen%}
         <h3>Sales for our next batch will open soon!</h3>
       {%else %}
-        <h3>Sales for our next batch will open on {{NextSaleOpen}}!</h3>
+        <h3>Sales for our next batch will automatically open on {{NextSaleOpen}}!</h3>
+        
       {%endif%}
+      <h3>Check back here to order!</h3>
       <img src=  "{% static '/media/sold_out_Batch.png' %}"  class = "img-fluid" alt="{{ CoverAltText }}">
     {% elif "Sales Not Open Yet" in CoverButton%}
      <h4>Bagel Sales open Monday Morning!</h4>
