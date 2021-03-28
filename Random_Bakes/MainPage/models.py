@@ -110,7 +110,7 @@ class ActiveSales(models.Model):
     active = models.BooleanField(default = False)
     start_sales = models.DateField(blank=True)
     end_sales = models.DateField(blank=True)
-    units = models.PositiveIntegerField()
+    units = models.PositiveIntegerField(default = 60)
     soldout = models.BooleanField(default = False)
     delivery = models.BooleanField(default = False)
     bakingdate = models.DateField(blank=True)
