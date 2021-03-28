@@ -8,6 +8,7 @@ from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
                             ActiveSalesForm,
+                            AS_Create_Form,
                             FeaturetteForm, 
                             OrdersForm,
                             CustomerForm)
@@ -254,9 +255,10 @@ class FeaturetteCreateView(LoginRequiredMixin, CreateView):
 
 class ActiveSalesCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
+    template_name = 'MainPage/ActiveSales_new.html'
     # redirect_field_name = '/MainPage/featurette_update'
     success_url = '/Baking/ACsuccess/'
-    form_class = ActiveSalesForm
+    form_class = AS_Create_Form
     model = ActiveSales
     
 class CustomersCreateView(LoginRequiredMixin, CreateView):
@@ -672,7 +674,8 @@ def subscribers(newBatch):
                                     RandomBake_sold = order.RandomBake_sold,
                                     CreamCheese_sold = order.CreamCheese_sold,
                                     deliveryinfo = order.deliveryinfo,
-                                    cart = order.cart
+                                    cart = order.cart, 
+                                    total = order.total
         )
         try:
             o.save()

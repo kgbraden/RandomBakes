@@ -20,7 +20,7 @@ import os
 import pandas as pd
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Random_Bakes.settings")
 import django
-django.setup()
+#django.setup()
 from MainPage.models import (ActiveSales, Customer, Orders)
 from django.db.models import Avg, Max, Min, Sum
 import math
