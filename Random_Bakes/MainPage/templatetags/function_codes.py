@@ -26,7 +26,7 @@ from django.db.models import Avg, Max, Min, Sum
 import math
 def route(value):
     invt = ActiveSales.objects.get(active ="True")
-    orders = Orders.objects.filter(batch=value)
+    orders = Orders.objects.filter(batch=value).order_by('delivorder')
     deliv = ''
     #rte = "https://www.google.com/maps/dir/"
     rte = ''
