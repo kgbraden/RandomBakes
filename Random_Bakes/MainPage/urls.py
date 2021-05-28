@@ -18,6 +18,7 @@ urlpatterns = [
     path('sanitation/', views.SanitationListView.as_view(), name = 'sanitation'),
     path('friends&family/', views.order, name = 'friends&family'),
     path('tickets/', views.TicketListView, name = 'tickets'),
+    path('trays/', views.TrayListView, name = 'trays'),
     # path('tickets/', views.TicketListView.as_view(), name = 'tickets'),
     path('orders/', views.DeliveryView.as_view(), name = 'orders'),
     url(r'^orders/(?P<pk>\d+)/detail/$', views.OrdersDetailView.as_view(), name='order_detail'),

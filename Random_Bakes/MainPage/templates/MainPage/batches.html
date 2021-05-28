@@ -42,7 +42,8 @@
       {% if user.is_authenticated %}
       <a class = "" href="{% url 'Baking:ActiveSales_update' pk=b.pk %}">edit</a> &middot;
       <a class = "" href="{% url 'Baking:ActiveSales_remove' pk=b.pk %}">delete</a> &middot;
-      <a class = "" href="{% url 'Baking:tickets'%}?batch={{b.batch}}">tickets</a> 
+      <a class = "" href="{% url 'Baking:tickets'%}?batch={{b.batch}}">tickets</a> &middot;
+      <a class = "" href="{% url 'Baking:trays'%}?batch={{b.batch}}">tray worksheet</a> 
       {% endif %}
       <hr class="featurette-divider ">
     </div>

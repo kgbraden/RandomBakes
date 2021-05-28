@@ -76,3 +76,6 @@ def gMap(value):
     map = 'https://www.google.com/maps/search/?api=1&query='+ deliv
     directions = 'https://www.google.com/maps/dir/?api=1&destination='+ deliv+"&travelmode=driving"
     return directions
+@register.filter(name='times') 
+def times(number):
+    return range(number)

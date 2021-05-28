@@ -156,8 +156,13 @@ def TicketListView(request):
                                                     'batches': batches,
                                                     
                                                      })
-    
-
+def TrayListView(request):    
+        
+    acv_sales = ActiveSales.objects.filter(active =True)[0]
+    print (acv_sales.Plain_sold)
+    return render(request,'MainPage/trays.html', {'sold': acv_sales,
+                                                    'plainrange': range(acv_sales.Plain_sold),
+                                                     })
 class OrdersListView(ListView):
     
     model = Orders
