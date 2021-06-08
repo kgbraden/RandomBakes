@@ -19,15 +19,16 @@
       openOnLoad: false
     });
 </script>
-
-<div class = "jumbotron text-dark">
-  <h1>NOTICE</h1>
-  <p class = "text-left">Our oven door cracked on May 29th and we are still waiting for replacement glass. At this point it is unclear when 
-    the replacement glass will be here ans we do not want to open orders until we are sure that we will be able to bake. 
-    In addition we will be out of town on June 19th and 26th, so the next date that we will be taking orders will probably be 
-    Monday, June 28th for delivery on Saturday July 3rd. </p>
-</div>
-
+{% if Notices %}
+    <div class="container">
+      <!-- START THE FEATURETTES -->
+      {% for notice in Notices %}
+      <div class = "jumbotron text-dark">
+        <h1>{{ notice.title|safe }}</h1>
+        <p class = "text-left">{{notice.description}} </p>
+      </div>
+      {%endfor%}
+{%endif%}
 <div class="cover-container">
     {% if "Sold Out!" in CoverButton %}
       <h2>We've Sold Out This Week With {{TotalSold}} sold!</h2>

@@ -173,3 +173,27 @@ class Orders(models.Model):
         verbose_name_plural = "Orders"
     def __str__(self):
         return "%s--%s_%s (%s)" %(self.batch, self.customer.Fname, self.customer.Lname, self.invoiceid)
+class Notices(models.Model):
+    ind = 'index'
+    abt = 'About Us'
+    Snt = 'Sanitation Protocols'
+    Lic = 'Licenses'
+    proj = 'Projects'
+    type_choices = [
+                    (ind, 'index'),
+                    (abt, 'About Us'),
+                    (Snt, 'Sanitation'),
+                    (Lic, 'Licenses'),
+                    (proj, 'Projects')
+    ]
+    title = models.CharField(max_length = 80, unique = True)
+    type = models.CharField(max_length = 35,
+                            choices=type_choices)
+    subtitle = models.CharField(max_length = 40,  blank=True)
+    description = models.TextField(blank=True)
+    active = models.BooleanField(default = False)
+    class Meta:
+        # otherwise we get "Tutorial Seriess in admin"
+        verbose_name_plural = "Notices"
+    def __str__(self):
+        return "%s (%s)" %(self.title, self.type)

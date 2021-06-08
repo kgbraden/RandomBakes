@@ -3,7 +3,9 @@ from MainPage.models import (highlight,
                              ActiveSales,
                              Featurette,
                              Orders,
-                             Customer, Subscription)
+                             Customer, 
+                             Subscription, 
+                             Notices)
 from django.utils import timezone
 from MainPage.forms import (UserForm,
                             UserProfileInfoForm,
@@ -48,6 +50,7 @@ def index(request):
     today = date.today()
     cover_content2 = highlight.objects.filter(title = "Order Bagels")[0]
     feat = Featurette.objects.filter(type = 'index').order_by("order")
+    notice = Notices.objects.filter(type = 'index', active = "True")
     sold = ProcessSales()
     totsold = sold['totBagels']
     story = cover_content2.story
@@ -71,7 +74,8 @@ def index(request):
            'CoverScript': cover_content2.script,
            'Featurette': feat,
            'TotalSold': totsold, 
-           'NextSaleOpen':B_info[3]}
+           'NextSaleOpen':B_info[3], 
+           'Notices': notice}
     return render(request,'MainPage/index.html', context = cover_content)
 
 def setRoute(request):
