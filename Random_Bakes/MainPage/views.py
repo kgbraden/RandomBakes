@@ -288,7 +288,7 @@ class ActiveSalesUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     # redirect_field_name = '#'
     template_name = 'MainPage/ActiveSales_update.html'
-    success_url = '/Baking/success/'
+    success_url = '/Baking/ACsuccess/'
     form_class = ActiveSalesForm
     model = ActiveSales
 
