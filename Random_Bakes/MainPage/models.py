@@ -48,10 +48,18 @@ class Featurette(models.Model):
     button = models.CharField(max_length = 18, blank=True)
     button_link = models.CharField(max_length = 264, default = "#")
     button_class =models.CharField(max_length = 264, default = "btn btn-sm btn-outline-secondary")
-
-
     def __str__(self):
         return '%s (%s)' %(self.title, self.type)
+    
+class RandomBakeItem(models.Model):
+    title = models.CharField(max_length = 80, unique = True)
+    description = models.TextField(blank=True)
+    story = models.TextField(blank=True)
+    photo = models.ImageField(upload_to='RandomBake_images', blank=True)
+    amount = models.CharField(max_length = 80)
+    cost = models.DecimalField(max_digits=6, decimal_places=2, default = 5.00)
+    def __str__(self):
+        return '%s ($%s)' %(self.title, self.cost)
 
 class AboutUs(models.Model):
     content = models.ManyToManyField('Featurette', related_name='features')
@@ -130,6 +138,7 @@ class ActiveSales(models.Model):
     Garlic_sold = models.PositiveIntegerField(default = 0)
     Everything_sold = models.PositiveIntegerField(default = 0)
     RandomBake =  models.TextField(blank = True)
+    rbItem = models.ForeignKey(RandomBakeItem, on_delete = models.PROTECT, blank = True, null = True, related_name="RB_Item")
     RandomBake_sold = models.PositiveIntegerField(default = 0)
     CreamCheese_sold = models.PositiveIntegerField(default = 0)
     Batch_Notes = models.TextField(blank = True)
