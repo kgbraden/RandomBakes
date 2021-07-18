@@ -78,20 +78,6 @@ def index(request):
            'Notices': notice}
     return render(request,'MainPage/index.html', context = cover_content)
 
-def email(request):
-    acv_sales = ActiveSales.objects.filter(active ="True")[0]
-    today = date.today()
-    activeBatch = acv_sales.batch
-    nextbatch = next_batch(activeBatch)
-    deliverydate = acv_sales.bakingdate.strftime('%A, %B %e')
-    salesopen = acv_sales.start_sales.strftime('%A, %B %e')
-    rBake = acv_sales.RandomBake
-    context = {"Batch": acv_sales.batch, 
-               "SalesStart": acv_sales.start_sales.strftime('%A, %B %e'), 
-               "DeliveryDate": acv_sales.bakingdate.strftime('%A, %B %e'), 
-               "RandomBake": acv_sales.RandomBake}
-    return render(request, 'MainPage/email.html', context = context)
-
 def setRoute(request):
     try:
         invt = ActiveSales.objects.get(delivery ="True")

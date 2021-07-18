@@ -45,7 +45,6 @@ urlpatterns = [
     url(r'^ActiveSales/new/$', views.ActiveSalesCreateView.as_view(), name='ActiveSales_new'),
     url(r'^ActiveSales/(?P<pk>\d+)/edit/$', views.ActiveSalesUpdateView.as_view(), name='ActiveSales_update'),
     url(r'^ActiveSales/(?P<pk>\d+)/remove/$', views.ActiveSalesDeleteView.as_view(), name='ActiveSales_remove'),
-    path('email/', views.email, name = 'email'),
     # url(r'^Recipes/', include('Recipes.urls')),
     ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
