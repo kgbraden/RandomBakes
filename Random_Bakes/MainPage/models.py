@@ -100,7 +100,6 @@ class Customer(models.Model):
     subscription = models.BooleanField(default = False)
     invoice = models.CharField(max_length = 11, blank = True, null = True )
     base_order = models.ForeignKey(Subscription, on_delete = models.PROTECT, blank = True, null = True, related_name="subscription_order") 
-    
     class Meta:
         ordering = ['Lname']
     def __str__(self):
