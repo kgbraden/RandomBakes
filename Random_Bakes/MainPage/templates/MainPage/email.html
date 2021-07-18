@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 {% load static %}
+
 {% load py_functions %}
 <html lang="en" class = "h-100">
 <head>
   <meta charset="utf-8">
-  <title>Random Bakes:Tickets</title>
+  <title>Random Bakes:Email Template</title>
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
   <link href="{% static "css/print.css" %}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Chilanka&display=swap" rel="stylesheet">
@@ -16,15 +17,31 @@
   
 
 </head>
-<body>
+<body style='font-size:12.0pt;font-family:"Times New Roman";'>
   <div class="container">
     <div>
+      {% for cust in list%}
+        {% if not cust.friend %}
+          {{cust.email}}; 
+        {%endif%}
+      {%endfor%}
+      tara.thiemann@yahoo.com;
+    </div>
+    <hr class="featurette-divider">
+    <p><strong>SUBJECT:</strong> Bagel orders open tomorrow for {{Batch}}</p>
+    <hr class="featurette-divider">
+    <div >
       <p>Orders will open tomorrow morning ({{SalesStart}} shortly after midnight) for this week’s batch of bagels. {{Batch}} will be delivered on Saturday, {{DeliveryDate}}!<br>
         Our ordering system automatically opens on Monday mornings, so if you want bagels you do not need to wait to see another email from us. 
       </p>
     </div>
     <div>
-      <p>{{RandomBake}}</p>
+      <table>
+        <tr>      
+            <td><img src=  "{{rbitem.photo.url}}"  class = " img-fluid featurette-image " alt="" width="150" height="150"></td>
+            <td>This week's Random Bake will be: {{rbitem.description}}</td>
+          </tr>
+      </table>
     </div>
     <div>
       <p>If you have people that you think might be interested in our bagels, please feel free to send them to our website.</p>
@@ -42,6 +59,38 @@
       <p>Thank you for supporting our crazy hobby, <br>
         <span style='font-size:18.0pt;font-family:"Bradley Hand ITC";color:#1F3864'>Tara &amp; Kale</span></p>
     </div>
+</div>
+
+<hr class="featurette-divider">
+<hr class="featurette-divider">
+
+<div class="container">
+  <h1>Friends and Family email</h1>
+  {% for cust in list%}
+    {% if cust.friend %}
+      {{cust.email}}; 
+    {%endif%}
+  {%endfor%}
+  tara.thiemann@yahoo.com;
+  <hr class="featurette-divider">
+  <p><strong>SUBJECT:</strong> Friend & Family ordering now open tomorrow for {{Batch}}</p>
+  <hr class="featurette-divider">
+  <div >
+    <p>Friend and Family ordering is open <strong>now</strong> for bagels at: <a href = "https://www.RandomBakes.com/friends&family">https://www.RandomBakes.com/friends&family</a> for this week’s batch of bagels. {{Batch}} will be delivered on Saturday, {{DeliveryDate}}!<br>  </p>
+  </div>
+  <div>
+    <table>
+      <tr>      
+          <td><img src=  "{{rbitem.photo.url}}"  class = " img-fluid featurette-image " alt="" width="150" height="150"></td>
+          <td>This week's Random Bake will be: {{rbitem.description}}</td>
+        </tr>
+    </table>
+  </div>
+  <div>
+    <p><strong>Please never feel obliged to order, but if you would like bagels this week, we recommend placing your order today!</strong><br>
+      For the most up-to-date Random Bakes bagel news, <a href="https://www.facebook.com/RandomBakedBagels/">follow us on Facebook!</a>!
+    </p>
+  </div>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
