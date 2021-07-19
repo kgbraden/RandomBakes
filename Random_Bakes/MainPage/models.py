@@ -149,7 +149,7 @@ class ActiveSales(models.Model):
     def get_absolute_url(self):
         return reverse('batch', kwargs={'pk': self.pk})
     def __str__(self):
-        return self.batch
+        return "%s--(%s)" %(self.batch, self.bakingdate)
 
 class Orders(models.Model):
     randomdeliv = random.randrange(15)
