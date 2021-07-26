@@ -75,7 +75,8 @@ def index(request):
            'Featurette': feat,
            'TotalSold': totsold, 
            'NextSaleOpen':B_info[3], 
-           'Notices': notice}
+           'Notices': notice,
+           'RB': B_info[4]}
     return render(request,'MainPage/index.html', context = cover_content)
 
 
@@ -344,6 +345,7 @@ def BatchInfo():
     deliverydate = acv_sales.bakingdate.strftime('%A, %B %e, %Y')
     DeliveryInfo = ""
     nxtdateopen = "Not Set"
+    rb = ""
     available = acv_sales.units
     if (acv_sales.soldout == True):
         DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
@@ -359,7 +361,7 @@ def BatchInfo():
     if (acv_sales.start_sales <= today) & (today <= acv_sales.end_sales):
         # In sales period
         sales_open = True
-        
+        rb = acv_sales.rbItem
         storedate = acv_sales.start_sales.strftime('%A, %B %e, %Y')
         deliverytime = acv_sales.bakingtime.strftime('%I:%M %p')
         # sales = importSales()
@@ -390,6 +392,7 @@ def BatchInfo():
         if ActiveSales.objects.filter(batch =nextbatch).count()==1:
             #Checks to see if the next batch has been scheduled
             nBatch = ActiveSales.objects.get(batch =nextbatch)
+            rb = nBatch.rbItem
             nxtdateopen =  nBatch.start_sales.strftime('%A, %B %e, %Y')
             nxtdatedelivery = nBatch.bakingdate.strftime('%A, %B %e, %Y')
             DeliveryInfo = "Our next scheduled production run, %s, of %s bagels, will be on %s. Sales will open for this batch on %s." %(nextbatch, nBatch.units,  nxtdatedelivery, nxtdateopen)
@@ -398,7 +401,7 @@ def BatchInfo():
     feature = Featurette.objects.get(title ='Current Batch')
     feature.description = DeliveryInfo
     feature.save()
-    return available, out, sales_open, nxtdateopen
+    return available, out, sales_open, nxtdateopen, rb
 
 def order(request):
     acv_sales = ActiveSales.objects.filter(active =True)[0]
@@ -501,6 +504,7 @@ def thankyou(request):
             #     for product in products:
             #         if (product !='Cream') & (product !='RandomBake') & (product in orders[order]):
             #             products[product] += quant
+            
             if ("Pack" in orders[order]):
                 for product in products:
                     products[product] += orders[order].count(product)
@@ -508,6 +512,7 @@ def thankyou(request):
                 products["Cream"] += int(orders[order][-2])
             elif (orders[order].count("RandomBake")!=0):
                 products["RandomBake"] += int(orders[order][-2])
+            print("The answer you are looking for is: %s" %products)
         return products
     if request.method=='POST':
         BATCH_ID = request.POST.get('batchid76')
