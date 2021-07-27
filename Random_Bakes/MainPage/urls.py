@@ -16,6 +16,7 @@ urlpatterns = [
     path('success/', views.success, name = 'success'),
     path('ACsuccess/', views.ACsuccess, name = 'ACsuccess'),
     path('sanitation/', views.SanitationListView.as_view(), name = 'sanitation'),
+    path('RBs/', views.RBsListView.as_view(), name = 'RBs'),
     path('friends&family/', views.order, name = 'friends&family'),
     path('tickets/', views.TicketListView, name = 'tickets'),
     path('trays/', views.TrayListView, name = 'trays'),

@@ -103,6 +103,12 @@ class SanitationListView(ListView):
     context_object_name = 'articles'
     ordering = ['order']
 
+class RBsListView(ListView):
+    template_name = 'MainPage/blank_content.html'
+    queryset = Featurette.objects.filter(type = 'Projects')
+    context_object_name = 'articles'
+    ordering = ['order']
+
 class LicenseListView(ListView):
     template_name = 'MainPage/blank_content.html'
     queryset = Featurette.objects.filter(type='Licenses')
