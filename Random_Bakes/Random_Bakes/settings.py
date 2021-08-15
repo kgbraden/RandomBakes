@@ -128,7 +128,7 @@ try:
             'USER': config.SSH['pUser'],
             'PASSWORD': config.SSH['pPassword'],
             'HOST': '127.0.0.1',
-            'PORT':'3333',
+            'PORT':'3306',
             'OPTIONS': {
                         'sql_mode': 'traditional'
                         }

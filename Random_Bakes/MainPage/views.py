@@ -76,7 +76,8 @@ def index(request):
            'TotalSold': totsold, 
            'NextSaleOpen':B_info[3], 
            'Notices': notice,
-           'RB': B_info[4]}
+           'RB': B_info[4], 
+           'LastBaked': B_info[5]}
     return render(request,'MainPage/index.html', context = cover_content)
 
 
@@ -352,6 +353,11 @@ def BatchInfo():
     DeliveryInfo = ""
     nxtdateopen = "Not Set"
     rb = ""
+    LastBaked = []
+    if acv_sales.rbItem:
+        prev = ActiveSales.objects.filter(rbItem = acv_sales.rbItem)
+        for x in prev:
+            if x !=acv_sales: LastBaked.append(x.bakingdate.strftime('%B %d, %Y'))
     available = acv_sales.units
     if (acv_sales.soldout == True):
         DeliveryInfo = "We're sorry, %s is sold out. We are producing %s bagels to be delivered on %s." %(activeBatch, available, deliverydate)
@@ -408,7 +414,7 @@ def BatchInfo():
     feature = Featurette.objects.get(title ='Current Batch')
     feature.description = DeliveryInfo
     feature.save()
-    return available, out, sales_open, nxtdateopen, rb
+    return available, out, sales_open, nxtdateopen, rb, LastBaked
 
 def order(request):
     acv_sales = ActiveSales.objects.filter(active =True)[0]
