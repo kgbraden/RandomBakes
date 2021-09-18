@@ -30,8 +30,9 @@
     <hr class="featurette-divider">
     <p><strong>SUBJECT:</strong> Bagel orders open tomorrow for {{Batch}}</p>
     <hr class="featurette-divider">
+    <span style='font-size:11.0pt;font-family:"Times New roman";'>
     <div >
-      <p>Orders will open tomorrow morning ({{SalesStart}} shortly after midnight) for this week’s batch of bagels. {{Batch}} will be delivered on Saturday, {{DeliveryDate}}!<br>
+      <p>Orders will open tomorrow morning, {{SalesStart}} shortly after midnight, for this week’s batch of bagels. {{Batch}} will be delivered on {{DeliveryDate}}!<br>
         Our ordering system automatically opens on Monday mornings, so if you want bagels you do not need to wait to see another email from us. 
       </p>
     </div>
@@ -39,7 +40,7 @@
       <table>
         <tr>      
             <td><img src=  "{{rbitem.photo.url}}"  class = " img-fluid featurette-image " alt="" width="150" height="150"></td>
-            <td>This week's Random Bake will be: {{rbitem.description}}</td>
+            <td>This week's Random Bake will be: <strong>{{rbitem.title}}!</strong> {{rbitem.description}}</td>
           </tr>
       </table>
     </div>
@@ -55,6 +56,7 @@
         We’d also appreciate feedback on Facebook and for the most up-to-date Random Bakes bagel news, <a href="https://www.facebook.com/RandomBakedBagels/">follow us on Facebook!</a>!
       </p>
     </div>
+  </span>
     <div>
       <p>Thank you for supporting our crazy hobby, <br>
         <span style='font-size:18.0pt;font-family:"Bradley Hand ITC";color:#1F3864'>Tara &amp; Kale</span></p>
@@ -73,16 +75,17 @@
   {%endfor%}
   tara.thiemann@yahoo.com;
   <hr class="featurette-divider">
-  <p><strong>SUBJECT:</strong> Friend & Family ordering now open tomorrow for {{Batch}}</p>
+  <p><strong>SUBJECT:</strong> Friend & Family ordering now open for {{Batch}}</p>
   <hr class="featurette-divider">
+  <span style='font-size:11.0pt;font-family:"Times New roman";'>
   <div >
-    <p>Friend and Family ordering is open <strong>now</strong> for bagels at: <a href = "https://www.RandomBakes.com/friends&family">https://www.RandomBakes.com/friends&family</a> for this week’s batch of bagels. {{Batch}} will be delivered on Saturday, {{DeliveryDate}}!<br>  </p>
+    <p>Friend and Family ordering is open <strong>now</strong> for bagels at: <a href = "https://www.RandomBakes.com/friends&family">https://www.RandomBakes.com/friends&family</a> for this week’s batch of bagels. {{Batch}} will be delivered on {{DeliveryDate}}!<br>  </p>
   </div>
   <div>
     <table>
       <tr>      
           <td><img src=  "{{rbitem.photo.url}}"  class = " img-fluid featurette-image " alt="" width="150" height="150"></td>
-          <td>This week's Random Bake will be: {{rbitem.description}}</td>
+          <td>This week's Random Bake will be: <strong>{{rbitem.title}}!</strong> {{rbitem.description}}</td>
         </tr>
     </table>
   </div>
@@ -92,6 +95,7 @@
     </p>
   </div>
 </div>
+</span>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <!-- _______________________________________________________________________ -->
