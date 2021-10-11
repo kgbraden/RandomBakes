@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'route', views.setRoute, name='set_route'),
     url(r'^enter_batch/$', views.enterbatch, name = 'enter_batch' ),
     url(r'^thankyou/$', views.thankyou, name = 'thankyou' ),
+    url(r'^TYnew/$', views.TYnew, name = 'TYnew' ),
     url(r'^about/$', views.AboutUsListView.as_view(), name ='about'),
     url(r'^customers/$', views.CustomersListView.as_view(), name ='customers'),
     url(r'^customers/(?P<pk>\d+)/edit/$', views.CustomersUpdateView.as_view(), name='customers_update'),

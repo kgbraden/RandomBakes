@@ -631,6 +631,164 @@ def thankyou(request):
                   'ticket': ticket,
                   'delivered': delivered,
                  })
+@csrf_exempt
+def TYnew(request):
+    def parseOrder(orders):
+        products = {'Plain':0, 'Sesame':0, 'Salt':0, 'Poppy':0, 'Garlic':0,
+                    'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0, 'DogTreats': 0, 'EvMix':0}
+        #print(orders)
+        for order in range(0, len(orders)):
+            # if "Additional Bagels" in orders[order]:
+            #     quant = int(re.findall('Quantity: .+?,',orders[order])[0].replace(",", "").replace("Quantity: ", ""))
+            #     print (quant)
+            #     for product in products:
+            #         if (product !='Cream') & (product !='RandomBake') & (product in orders[order]):
+            #             products[product] += quant
+            #print(order)
+            ord = orders[order]
+            #print(ord)
+            if ("Pack" in ord):
+                bTYPE = ord[(ord.find("Bagels: ")):(ord.find(", Q"))].replace("Bagels: ", "")
+                bTYPE = bTYPE.replace(" seed", "")
+                products[bTYPE] += int(ord[(ord.find("Quantity: ")):-1].replace("Quantity: ", ""))
+                
+                #print(bTYPE,products)
+            elif (orders[order].count("Cream")!=0):
+                products["Cream"] += int(orders[order][-2])
+            elif (orders[order].count("RandomBake")!=0):
+                products["RandomBake"] += int(orders[order][-2])
+            elif (orders[order].count("Dog")!=0):
+                products["DogTreats"] += int(orders[order][-2])
+            elif (orders[order].count("Mix")!=0):
+                products["EvMix"] += int(orders[order][-2])
+            #print("The answer you are looking for is: %s" %products)
+            
+        return products
+        
+    if request.method=='POST':
+        BATCH_ID = request.POST.get('batchid76')
+        Batch_Info = ActiveSales.objects.get(batch=BATCH_ID)
+        FormCustomer = request.POST.getlist('name[]')  #0-firstname  | 1-lastname
+        FormEmail = request.POST.get('email')
+        phone = request.POST.getlist('phonenumber[]')  #0-area code | 1-phone number
+        phone = "%s %s" %(phone[0], phone[1])
+        deliveryaddress = request.POST.getlist('deliveryaddress[]')  #0-address line 1
+                                                                         #1-address line 2
+                                                                         #2-city
+                                                                         #3-State
+                                                                         #4-Zip
+        try:
+            DjangoCustomer = Customer.objects.get(email=FormEmail)
+        except:
+            DjangoCustomer = Customer(Fname =  FormCustomer[0],
+                                      Lname =  FormCustomer[1],
+                                      email =  FormEmail,
+                                      dStreet1 = deliveryaddress[0],
+                                      dStreet2 = deliveryaddress[1],
+                                      dCity =  deliveryaddress[2],
+                                      dState =  deliveryaddress[3],
+                                      dZip =  deliveryaddress[4],
+                                      Phone = phone)
+            try:
+                DjangoCustomer.save()
+            except:
+                DjangoCustomer = Customer.objects.get(email="info@RandomBakes.com")
+        PayPalData = request.POST.getlist('myproducts[]') #0-products ordered
+                                                       #1-Currency type
+                                                       #2-Delivery
+                                                       #3-total
+                                                       #4-total + delivery
+                                                       
+                                                       #5-??????
+                                                       #6-Name of Payer
+                                                       #7-email of Payer
+                                                       #12-Billing st
+                                                       #13-billing City
+                                                       #14-billing State
+                                                       #15-billing Zip
+        if type(PayPalData[4]) == float:
+            fees = PayPalData[4]
+        elif type(PayPalData[5]) == float:
+            fees = PayPalData[5]
+        else:
+            fees = 0
+        try:
+            deliverynotes = '%s\n%s\n%s, %s %s\n%s\nDelivery Notes: %s' %(deliveryaddress[0], deliveryaddress[1],
+                             deliveryaddress[2],deliveryaddress[3],
+                             deliveryaddress[4], phone,
+                             request.POST.get('deliverynotes'))
+        except:
+            deliverynotes = '%s\n%s\n%s, %s %s\n%s' %(deliveryaddress[0], deliveryaddress[1],
+                             deliveryaddress[2],deliveryaddress[3],
+                             deliveryaddress[4], phone)
+        ticket = ast.literal_eval(PayPalData[0])
+        cart= parseOrder(ast.literal_eval(PayPalData[0]))
+        #print(cart)
+        products = parseOrder(ticket)
+        invoice = request.POST.get('invoiceid')
+        delivered = Batch_Info.bakingdate
+        cart = ""
+        tkts = []
+        for p in products:
+            if products[p]>0:
+                cart += "%s: %s\n" %(p.replace("Cream", "Cream Cheese").replace("DogTreats", "Dog Treats").replace("EvMix", "Everything Mix"), products[p])
+                tkts.append("%s: %s" %(p.replace("Cream", "Cream Cheese").replace("DogTreats", "Dog Treats").replace("EvMix", "Everything Mix"), products[p]))
+        #for t in ticket:
+        #    cart +='%s\n' %t
+        #cart.replace(', Bagel ', ', B')
+        #tkts.append("Delivery: $%s" %PayPalData[2])
+        #tkts.append("Total: $%s") %PayPalData[3]
+        NewOrder = Orders(invoiceid = invoice,
+                            batch = Batch_Info,
+                            customer = DjangoCustomer,
+                            Plain_sold = products['Plain'],
+                            Sesame_sold = products['Sesame'],
+                            Salt_sold = products['Salt'],
+                            Onion_sold = products['Onion'],
+                            Poppy_sold = products['Poppy'],
+                            Garlic_sold = products['Garlic'],
+                            Everything_sold = products['Everything'],
+                            RandomBake_sold = products['RandomBake'],
+                            CreamCheese_sold = products['Cream'],
+                            Dog_sold = products['DogTreats'],
+                            EvMix_sold = products['EvMix'],
+                            deliveryinfo = deliverynotes,
+                            cart = cart,
+                            total = PayPalData[4],
+                            fees = fees
+                        )
+        #print("0: %s, 1: %s, 2: %s, 3: %s, 4: %s" %(PayPalData[0], PayPalData[1], PayPalData[2], PayPalData[3], PayPalData[4]))
+        try:
+            NewOrder.save()
+        except:
+            print("Order Already Saved!") 
+        
+    else:
+        BATCH_ID = "Didn't"
+        Cust = ['work',""]
+    try:
+        subj = "%s Order placed!" %NewOrder.batch
+        msg = "HUZZAH! %s %s has ordered %s" % {DjangoCustomer.Fname, DjangoCustomer.Lname, NewOrder.cart}
+        send_mail('Order Placed', 'body of the message', 'info@RandomBakes.com', [config.KB, config.TT])
+    except:
+        print("Email Didn't work")
+    
+    return render(request, 'MainPage/thankyou.html',
+                 {'BATCH_ID':NewOrder.batch,
+                  'fName': DjangoCustomer.Fname,
+                  'lName': DjangoCustomer.Lname,
+                  'ticket': tkts,
+                  'delivered': delivered,
+                 })
+    """
+    return render(request, 'MainPage/thankyou.html',
+                 {'BATCH_ID':"BATCH_test",
+                  'fName': "Kale",
+                  'lName': "Braden",
+                  'ticket': "ticket",
+                  'delivered': "delivered",
+                 })
+    """             
 def success(request):
     return render(request,'MainPage/sucess.html')
 
