@@ -55,9 +55,11 @@ class RandomBakeItem(models.Model):
     title = models.CharField(max_length = 80, unique = True)
     description = models.TextField(blank=True)
     story = models.TextField(blank=True)
-    photo = models.ImageField(upload_to='RandomBake_images', blank=True)
+    photo = models.ImageField(upload_to='RandomBake_images')
     amount = models.CharField(max_length = 80)
     cost = models.DecimalField(max_digits=6, decimal_places=2, default = 5.00)
+    class Meta:
+        ordering = ['title']
     def __str__(self):
         return '%s ($%s)' %(self.title, self.cost)
 
@@ -119,13 +121,13 @@ class ActiveSales(models.Model):
     nextSat = d+t
     mon = nextSat +timedelta(days = -5)
     thurs = nextSat +timedelta(days = -2)
-    deliv = datetime.strptime('10:00:00', '%I:%M:%S') 
+    deliv = datetime.strptime('10:15:00', '%I:%M:%S') 
     id = models.AutoField(primary_key=True)
     batch = models.CharField(max_length =10, unique = True, default = "BATCH_")
     active = models.BooleanField(default = False)
     start_sales = models.DateField(blank=True)
     end_sales = models.DateField(blank=True)
-    units = models.PositiveIntegerField(default = 60)
+    units = models.PositiveIntegerField(default = 80)
     soldout = models.BooleanField(default = False)
     delivery = models.BooleanField(default = False)
     bakingdate = models.DateField(default = nextSat)

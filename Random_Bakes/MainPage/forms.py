@@ -4,7 +4,7 @@ from MainPage.models import (UserProfileInfo,
                              highlight,
                              ActiveSales,
                              Customer,
-                             # Ingredient,
+                             RandomBakeItem,
                              # PreFerment,
                              # Dough,
                              # ShapingFinishing,
@@ -103,6 +103,7 @@ class ActiveSalesForm(forms.ModelForm):
                     'Garlic_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     'Everything_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     'RandomBake': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}),
+                    #'rbItem': forms.ModelChoiceField(queryset=RandomBakeItem.objects.all()),
                     'RandomBake_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     'CreamCheese_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     'Batch_Notes': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'})
@@ -111,7 +112,7 @@ class ActiveSalesForm(forms.ModelForm):
 class AS_Create_Form(forms.ModelForm):
     class Meta():
         model = ActiveSales
-        fields = ('batch','start_sales', 'end_sales', 'units', 'bakingdate', 'bakingtime', 
+        fields = ('batch','start_sales', 'end_sales', 'units', 'bakingdate', 'bakingtime', 'rbItem',
                   'RandomBake', 'Batch_Notes')
         #             'Onion_sold', 'Poppy_sold', 'Garlic_sold', 'Everything_sold',
         #             'RandomBake', 'RandomBake_sold', 'CreamCheese_sold', 'Batch_Notes')
@@ -135,6 +136,7 @@ class AS_Create_Form(forms.ModelForm):
                     #'Poppy_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     #'Garlic_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     #'Everything_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
+                    #'rbItem': forms.ModelChoiceField(queryset=RandomBakeItem.objects.all()),
                     'RandomBake': forms.Textarea(attrs= {'class': 'editable medium-editor-textarea feature-content'}),
                     #'RandomBake_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
                     #'CreamCheese_sold': forms.NumberInput(attrs= {'class': 'textinputclass-sm'}),
