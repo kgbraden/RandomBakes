@@ -138,6 +138,55 @@ class ActiveSalesListView(ListView):
 #     queryset = Orders.objects.filter(batch = acv_sales.id)
 #     context_object_name = 'tickets'
 #     ordering= ['customer']
+def BuildTicket(tickets):
+    for ticket in tickets:
+        ordered = {}
+        if ticket.Plain_sold > 0:
+            ordered['Plain'] = int(ticket.Plain_sold)
+        if ticket.Sesame_sold > 0:
+            ordered['Sesame'] = ticket.Sesame_sold            
+        if ticket.Salt_sold > 0:
+            ordered['Salt'] = ticket.Salt_sold
+        if ticket.Onion_sold > 0:
+            ordered['Onion'] = ticket.Onion_sold
+        if ticket.Poppy_sold > 0:
+            ordered['Poppy'] = ticket.Poppy_sold
+        if ticket.Garlic_sold > 0:
+            ordered['Garlic'] = ticket.Garlic_sold
+        if ticket.Everything_sold > 0:
+            ordered['Every'] = ticket.Everything_sold
+        if ticket.RandomBake_sold > 0:
+            ordered['R_Bake']= ticket.RandomBake_sold
+        if ticket.CreamCheese_sold > 0:
+            ordered['C_Cheese'] =  ticket.CreamCheese_sold
+        if ticket.Dog_sold >0:
+            ordered.append('Dog_T: %s' % ticket.Dog_sold) 
+        if ticket.EvMix_sold >0:
+            ordered.append('Ev_Mix: %s' % ticket.EvMix_sold)
+        if ticket.AButter_sold >0:
+            ordered.append('A_Butter: %s' % ticket.AButter_sold) 
+        built = "<div><table >"
+        if ticket.recipient:
+            built+= '<tr><td colspan="2"><div class = "name">%s</div></td></tr>' % ticket.recipient
+        else:
+            built +='<tr><td colspan="2"><div class = "name">%s %s</div></td></tr>' %(ticket.customer.Fname, ticket.customer.Lname)
+        built += '<tr><td colspan="2">%s</td></tr>' %ticket.deliveryinfo.replace('\n', '<br>').replace('<br><br>', '<br>').replace('Delivery Notes: None', "")[:100]
+        col = 1
+        for order in ordered:
+            if not (col %2 )==0:
+                built +="<tr><td>%s: %s </td>" %(order, ordered[order])
+            else:
+                built += "<td>%s: %s </td></tr>" %(order, ordered[order])
+            col+=1
+        if not (col %2 )==0:
+            built += "<td></td></tr></table> </div>"
+        else:
+            built += "</table> </div>"
+        ticket.ticket_text =built
+        try:
+                ticket.save()
+        except:
+            print(built)
 
 def TicketListView(request):
     batches = ActiveSales.objects.all().order_by("-batch")
@@ -146,25 +195,7 @@ def TicketListView(request):
     else:
         acv_sales = ActiveSales.objects.get(active = "True")    
     tickets = Orders.objects.filter(batch = acv_sales.id).order_by('customer')
-    # ordered = []
-    # if tickets.Plain_sold > 0:
-    #     ordered.append('Plain: %s' % tickets.Plain_sold)
-    # if ticket.Sesame_sold > 0:
-    #     ordered.append('Sesame: %s' % ticket.Sesame_sold)            
-    # if ticket.Salt_sold > 0:
-    #     ordered.append('Salt: %s' % ticket.Salt_sold)
-    # if ticket.Onion_sold > 0:
-    #     ordered.append('Onion: %s' % ticket.Onion_sold)
-    # if ticket.Poppy_sold > 0:
-    #     ordered.append('Poppy: %s' % ticket.Poppy_sold)
-    # if ticket.Garlic_sold > 0:
-    #     ordered.append('Garlic: %s' % ticket.Garlic_sold)
-    # if ticket.Everything_sold > 0:
-    #     ordered.append('Every: %s' % ticket.Everything_sold)
-    # if ticket.RandomBake_sold > 0:
-    #     ordered.append('R_Bake: %s' % ticket.RandomBake_sold)
-    # if ticket.CreamCheese_sold > 0:
-    #     ordered.append('C_Cheese: %s' % ticket.CreamCheese_sold)              
+    BuildTicket(tickets)   
     return render(request,'MainPage/tickets.html', {'tickets': tickets, 
                                                     'batches': batches,
                                                     

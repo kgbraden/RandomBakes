@@ -116,116 +116,19 @@
             {%elif forloop.counter >= 17 and forloop.counter <= 20 %}
                 <td class ="ticket">
             {%endif%}
-                <div> 
-                  <table >
-                    <!-- <tr ><td colspan="2"><div class = "batch">&middot;</div></td></tr> -->
-                    <tr><td colspan="2"><div class = "name">{{ticket.customer.Fname}} {{ticket.customer.Lname}}</div></td></tr>
-                    <tr><td colspan="2">{{ticket.deliveryinfo|DeliveryInfo|truncatechars:100|linebreaks}}</td></tr>
-                    <!-- <tr><td>{{ticket.cart|TicClean|linebreaks}}</td></tr> -->
-                    {%if ticket.Plain_sold > 0 and ticket.Sesame_sold > 0 %}  
-                      <tr>
-                          <td>
-                            Plain: {{ticket.Plain_sold}} 
-                          </td>
-                          <td>
-                            Sesame: {{ticket.Sesame_sold}}
-                          </td>
-                          <td></td>
-                      </tr>
-                    {%elif ticket.Plain_sold > 0%}
-                      <tr>
-                        <td colspan="2">
-                          Plain: {{ticket.Plain_sold}}
-                        </td>
-                      </tr>
-                    {% elif ticket.Sesame_sold > 0%}
-                      <tr>
-                        <td colspan="2">
-                          Sesame: {{ticket.Sesame_sold}}
-                        </td>
-                      </tr>
-                    {% endif %}
-                    {% if ticket.Salt_sold > 0 and ticket.Onion_sold > 0 %}
-                      <tr>
-                        <td>
-                          Salt: {{ticket.Salt_sold}}
-                        </td>
-                        <td>
-                          Onion: {{ticket.Onion_sold}}
-                        </td>
-                      </tr>
-                    {% elif ticket.Salt_sold > 0 %}
-                      <tr>
-                        <td colspan="2">
-                          Salt: {{ticket.Salt_sold}}
-                        </td>
-                      </tr>
-                    {% elif ticket.Onion_sold > 0%}
-                      <tr>
-                        <td colspan="2">
-                          Onion: {{ticket.Onion_sold}}
-                        </td>
-                      </tr>
-                    {% endif %}
-                    {% if ticket.Poppy_sold > 0 and ticket.Garlic_sold > 0 %}
-                      <tr>
-                        <td>
-                          Poppy: {{ticket.Poppy_sold}}
-                        </td>
-                        <td>
-                          Garlic: {{ticket.Garlic_sold}}
-                        </td>
-                      </tr>
-                    {% elif ticket.Poppy_sold > 0 %}
-                      <tr>
-                        <td colspan="2">
-                          Poppy: {{ticket.Poppy_sold}}
-                        </td>
-                      </tr>
-                    {% elif ticket.Garlic_sold > 0%}
-                      <tr>
-                        <td colspan="2">
-                          Garlic: {{ticket.Garlic_sold}}
-                        </td>
-                      </tr>
-                    {% endif %}
-                    {% if ticket.Everything_sold > 0 %}
-                      <tr>
-                        <td colspan="2">
-                          Everything: {{ticket.Everything_sold}}
-                        </td>
-                      </tr>
-                    {% endif %}
-                    {% if ticket.RandomBake_sold > 0 %}
-                      <tr>
-                        <td colspan="2">
-                          Random Bake: {{ticket.RandomBake_sold}}
-                        </td>
-                      </tr>
-                    {% endif %}
-                    {% if ticket.CreamCheese_sold > 0 %}
-                      <tr>
-                        <td colspan="2">
-                          Cream Cheese: {{ticket.CreamCheese_sold}}
-                        </td>
-                      </tr>
-                    {% endif %}                 
-                  </table>
-                </div>
-              </td>
-            {%if forloop.counter == 4 or forloop.counter == 12 %}
+              {{ticket.ticket_text|safe}}
+              {%if forloop.counter == 4 or forloop.counter == 12 %}
+            </tr>
+            <tr><td class='blank'></td>
+              <td class='blank'></td>
+              <td class='blank'></td>
+              <td class='blank'></td>
               </tr>
-              <tr><td class='blank'></td>
-                <td class='blank'></td>
-                <td class='blank'></td>
-                <td class='blank'></td>
-                </tr>
-              <tr></tr>
-            {% elif forloop.counter == 8 or forloop.counter == 16%}
-              </tr>
-            {%endif%}
-        {% endfor %}  
-      </tr>
+            <tr></tr>
+          {% elif forloop.counter == 8 or forloop.counter == 16%}
+            </tr>
+          {%endif%}
+      {% endfor %}      
         
       </table>
   </div>
