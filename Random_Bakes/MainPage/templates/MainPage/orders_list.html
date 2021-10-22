@@ -14,9 +14,13 @@
         <a class = "" href="{% url 'Baking:orders_update' pk=order.pk %}">edit</a>
       {% else %}
       <div class="jumbotron text-dark">
-        <h4>{{order.delivorder}}: <a href="{% url 'Baking:order_detail' pk=order.pk %}">{{order.batch}} {{order.customer.Fname}} {{order.customer.Lname}} ---> Navigate and Deliver.</a> </h4>
-
-        <p>{{order.deliveryinfo}}</p>
+        <h4>Navigate and Deliver: </h4><h4>{{order.batch}}</h4>
+        {%if order.recipient%}
+        <h4>{{order.delivorder}}: <a href="{% url 'Baking:order_detail' pk=order.pk %}"> {{order.recipient}} (From: {{order.customer.Fname}} {{order.customer.Lname}}) </a> </h4>
+        {%else%}
+        <h4>{{order.delivorder}}: <a href="{% url 'Baking:order_detail' pk=order.pk %}"> {{order.customer.Fname}} {{order.customer.Lname}} </a> </h4>
+        {%endif%}
+        <p>{{order.deliveryinfo|safe|linebreaks}}</p>
         <a class = "" href="{% url 'Baking:orders_update' pk=order.pk %}">edit</a>
       </div> 
       {%endif%}
