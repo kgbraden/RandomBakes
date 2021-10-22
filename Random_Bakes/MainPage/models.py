@@ -161,6 +161,7 @@ class Orders(models.Model):
     invoiceid = models.CharField(max_length =14, unique = True)
     batch = models.ForeignKey(ActiveSales, on_delete = models.PROTECT, related_name="order_batch")
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name='order_customer')
+    recipient = models.TextField(blank = True)
     Plain_sold = models.PositiveIntegerField(default = 0)
     Sesame_sold = models.PositiveIntegerField(default = 0)
     Salt_sold = models.PositiveIntegerField(default = 0)
