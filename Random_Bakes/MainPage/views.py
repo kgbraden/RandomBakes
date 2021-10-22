@@ -666,7 +666,7 @@ def thankyou(request):
 def TYnew(request):
     def parseOrder(orders):
         products = {'Plain':0, 'Sesame':0, 'Salt':0, 'Poppy':0, 'Garlic':0,
-                    'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0, 'DogTreats': 0, 'EvMix':0}
+                    'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0, 'DogTreats': 0, 'EvMix':0,'AButter':0 }
         #print(orders)
         for order in range(0, len(orders)):
             # if "Additional Bagels" in orders[order]:
@@ -692,6 +692,8 @@ def TYnew(request):
                 products["DogTreats"] += int(orders[order][-2])
             elif (orders[order].count("Mix")!=0):
                 products["EvMix"] += int(orders[order][-2])
+            elif (orders[order].count("Butter")!=0):
+                products["AButter"] += int(orders[order][-2])
             #print("The answer you are looking for is: %s" %products)
             
         return products
@@ -762,8 +764,8 @@ def TYnew(request):
         tkts = []
         for p in products:
             if products[p]>0:
-                cart += "%s: %s\n" %(p.replace("Cream", "Cream Cheese").replace("DogTreats", "Dog Treats").replace("EvMix", "Everything Mix"), products[p])
-                tkts.append("%s: %s" %(p.replace("Cream", "Cream Cheese").replace("DogTreats", "Dog Treats").replace("EvMix", "Everything Mix"), products[p]))
+                cart += "%s: %s\n" %(p.replace("Cream", "Cream Cheese").replace("DogTreats", "Dog Treats").replace("EvMix", "Everything Mix").replace("AButter", "Apple Butter"), products[p])
+                tkts.append("%s: %s" %(p.replace("Cream", "Cream Cheese").replace("DogTreats", "Dog Treats").replace("EvMix", "Everything Mix").replace("AButter", "Apple Butter"), products[p]))
         #for t in ticket:
         #    cart +='%s\n' %t
         #cart.replace(', Bagel ', ', B')
@@ -783,6 +785,7 @@ def TYnew(request):
                             CreamCheese_sold = products['Cream'],
                             Dog_sold = products['DogTreats'],
                             EvMix_sold = products['EvMix'],
+                            AButter_sold = products['AButter'],
                             deliveryinfo = deliverynotes,
                             cart = cart,
                             total = PayPalData[4],
