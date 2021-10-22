@@ -160,11 +160,11 @@ def BuildTicket(tickets):
         if ticket.CreamCheese_sold > 0:
             ordered['C_Cheese'] =  ticket.CreamCheese_sold
         if ticket.Dog_sold >0:
-            ordered.append('Dog_T: %s' % ticket.Dog_sold) 
+            ordered['Dog_T']= ticket.Dog_sold
         if ticket.EvMix_sold >0:
-            ordered.append('Ev_Mix: %s' % ticket.EvMix_sold)
+            ordered['Ev_Mix'] = ticket.EvMix_sold
         if ticket.AButter_sold >0:
-            ordered.append('A_Butter: %s' % ticket.AButter_sold) 
+            ordered['A_Butter'] = ticket.AButter_sold
         built = "<div><table >"
         if ticket.recipient:
             built+= '<tr><td colspan="2"><div class = "name">%s</div></td></tr>' % ticket.recipient
