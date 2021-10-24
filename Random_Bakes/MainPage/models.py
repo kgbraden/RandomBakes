@@ -141,6 +141,7 @@ class ActiveSales(models.Model):
     Everything_sold = models.PositiveIntegerField(default = 0)
     Dog_sold = models.PositiveIntegerField(default = 0)
     EvMix_sold = models.PositiveIntegerField(default = 0)
+    AButter_sold = models.PositiveIntegerField(default = 0)
     RandomBake =  models.TextField(blank = True)
     rbItem = models.ForeignKey(RandomBakeItem, on_delete = models.PROTECT, blank = True, null = True, related_name="RB_Item")
     RandomBake_sold = models.PositiveIntegerField(default = 0)

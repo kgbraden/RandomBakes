@@ -28,7 +28,8 @@ import math
 def ProcessSales():
     products =  {'Plain_sold':0,'Sesame_sold':0, 'Salt_sold':0, 'Onion_sold':0,
                 'Poppy_sold':0,'Garlic_sold':0, 'Everything_sold':0,
-                'RandomBake_sold':0, 'CreamCheese_sold':0}
+                'RandomBake_sold':0, 'CreamCheese_sold':0, 'Dog_sold': 0, 
+                'EvMix_sold':0, 'AButter_sold':0}
     try:
         invt = ActiveSales.objects.get(active ="True")
     except:
@@ -54,6 +55,9 @@ def ProcessSales():
     invt.Everything_sold = products['Everything_sold']
     invt.RandomBake_sold = products['RandomBake_sold']
     invt.CreamCheese_sold = products['CreamCheese_sold']
+    invt.Dog_sold = products['Dog_sold']
+    invt.EvMix_sold = products['EvMix_sold']
+    invt.AButter_sold = products['AButter_sold']
     if totalSold >= invt.units:
         invt.soldout = True
     invt.save()
