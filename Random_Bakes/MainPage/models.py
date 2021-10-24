@@ -183,7 +183,7 @@ class Orders(models.Model):
     delivered = models.DateTimeField(null = True, blank=True)
     delivery_notes = models.TextField(blank = True)
     delivery_text = models.TextField(blank = True, max_length=255)
-    ticket_text = models.TextField(blank = True, max_length=255)
+    ticket_text = models.TextField(blank = True)
     delivery_completed = models.BooleanField(default = False)
     text_sent = models.BooleanField(default = False)
     emil_sent = models.BooleanField(default = False)
