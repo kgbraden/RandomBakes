@@ -210,4 +210,5 @@ STATICFILES_DIRS = [
 
 Login_URL = 'MainPage/user_login'
 DEFAULT_IMAGE_PATH = '/media/photo-placeholder-icon.jpg'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 #~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+#

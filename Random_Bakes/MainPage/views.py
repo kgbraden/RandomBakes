@@ -508,6 +508,9 @@ def order(request):
            'BagelsAvailable':  str(available)}
     return render(request,'MainPage/order.html', context = cover_content)
 
+def special_order(request):
+    return render(request,'MainPage/special_order.html')
+
 def registration(request):
     registered = False
     if request.method =='POST':

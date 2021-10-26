@@ -42,7 +42,13 @@ def ProcessSales():
         if unitsSold is None:
             unitsSold = 0 
         products[product] = unitsSold
-        if (product !='RandomBake_sold') & (product != 'CreamCheese_sold'):
+        if (
+            (product !='RandomBake_sold') & 
+            (product != 'CreamCheese_sold') &
+            (product != 'Dog_sold') &
+            (product != 'EvMix_sold') &
+            (product != 'AButter_sold')
+            ):
             totalSold += unitsSold
             
     products['totBagels']= totalSold

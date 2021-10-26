@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+{% extends "MainPage/base.html" %}
+{% block body_block %}
+<script src="https://cdn03.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
+<script src="https://cdn01.jotfor.ms/static/jotform.forms.js?3.3.28679" type="text/javascript"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/punycode/1.4.1/punycode.js"></script>
+<script src="https://cdn02.jotfor.ms/js/payments/minTotalOrderAmountValidation.js?v=3.3.28679" type="text/javascript"></script>
+<script src="https://cdn03.jotfor.ms/js/payments/paypalSPB.js?v=3.3.28679" type="text/javascript"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=Afo1LVZtoaCSq5HI_naZpUMjB2C0_OiB6nNHlGaNe7jwBTunPXnbodmCr4ZTtpL3WT-4RkNG6DQFvX03&commit=true&merchant-id=JRDCSH4JMRB5J&currency=USD&disable-funding=credit&vault=true" data-partner-attribution-id="JotForm_P4P"></script>
+<script src="https://cdn01.jotfor.ms/js/libraries/promise-polyfill.js"></script>
+<script type="text/javascript">	JotForm.newDefaultTheme = false;
+	JotForm.extendsNewTheme = false;
+	JotForm.newPaymentUIForNewCreatedForms = true;
+	JotForm.newPaymentUI = true;
+	JotForm.highlightInputs = false;
+	JotForm.clearFieldOnHide="disable";
+	JotForm.submitError="jumpToFirstError";
+
+	JotForm.init(function(){
+	/*INIT-START*/
+if (window.JotForm && JotForm.accessible) $('input_76').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_74').setAttribute('tabindex',0);
+      JotForm.setCustomHint( 'input_74', 'Any special instructions for delivery? Do you need us to knock or ring the bell when we deliver? (Our default is to just send a text message!)' );
+      productID = {"0":"input_100_1015","1":"input_100_1001","2":"input_100_1008","3":"input_100_1006","11":"input_100_1016","12":"input_100_1007"};
+      paymentType = "product";
+      JotForm.setCurrencyFormat('USD',true, 'point');
+      JotForm.totalCounter({"input_100_1015_0":{"price":"2.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1015_0_1"},"input_100_1015_1":{"price":"2.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1015_1_1"},"input_100_1015_2":{"price":"2.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1015_2_1"},"input_100_1015_3":{"price":"2.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1015_3_1"},"input_100_1015_4":{"price":"2.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1015_4_1"},"input_100_1015_5":{"price":"2.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1015_5_1"},"input_100_1015_6":{"price":"2.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1015_6_1"},"input_100_1001":{"price":"3.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1001_0"},"input_100_1008":{"price":"5.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1008_0"},"input_100_1006":{"price":"6.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1006_0"},"input_100_1016":{"price":"5.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1016_0"},"input_100_1007":{"price":"5.00","shipping":{"flatRate":"4"},"quantityField":"input_100_quantity_1007_0"}});
+      $$('.form-product-custom_quantity').each(function(el, i){el.observe('blur', function(){isNaN(this.value) || this.value < 1 ? this.value = '0' : this.value = parseInt(this.value)})});
+      $$('.form-product-custom_quantity').each(function(el, i){el.observe('focus', function(){this.value == 0 ? this.value = '' : this.value})});
+if(typeof PaymentStock !== "undefined") { PaymentStock.orderedSubproductOptionNames = {"1015":["Bagels"]} } 
+      JotForm.handleProductLightbox();
+      JotForm.paymentProperties = {"payLaterEnabled":"No","payLaterLayout":"text","payLaterLogoType":"inline","payLaterLogoPosition":"left","payLaterTextColor":"black","payLaterTextSize":"12","payLaterBackgroundColor":"blue","payLaterRatio":"20x1","paymentFormProperties":{"products":[{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Kettle boiled, hand rolled bagels. (Select quantity of each toppings you would like).  $2 per bagel.","fitImageToCanvas":"No","hasExpandedOption":"1","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/one_Bagle.png?nc=1\"]","isLowStockAlertEnabled":"No","isStockControlEnabled":"No","lowStockValue":"","name":"Bagel Pack","options":[{"type":"custom","name":"Bagels","properties":"Plain\nSesame\nSalt\nPoppy seed\nGarlic\nOnion\nEverything","defaultQuantity":"","specialPricing":false,"expanded":true,"specialPrices":""},{"type":"quantity","properties":"1\n2\n3\n4\n5\n6\n7\n8\n9\n10","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"2,4,6,8,10,12,14,16,18,20","expanded":false,"specialPricingAllowed":true}],"period":"Monthly","pid":"1015","price":"2.00","recurringtimes":"No Limit","required":"1","selected":"1","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","stockQuantityAmount":"","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"California Heath Code prohibits us from selling schmears with our bagels, but we can add a tub of Sonoma County's Clover cream cheese spread in with your order","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/cream-cheese-spread-new.png?nc=1\"]","isLowStockAlertEnabled":"No","isStockControlEnabled":"No","lowStockValue":"","name":"Cream Cheese","options":[{"type":"quantity","properties":"0\n1\n2\n3","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"0,3,6,9","expanded":false}],"period":"Monthly","pid":"1001","price":"3.00","recurringtimes":"No Limit","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","stockQuantityAmount":"","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Plaited (or braided) with a four stranded “over-under-over” technique, to produce a beautiful (and delicious) loaf. Perfect with soup, sliced for small sandwiches or toast, or made into French toast. $5.00 for one 8\"x4\", 7 oz. loaf.","disabled":"show","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/Plaited_Loaf.png?nc=1\"]","name":"RandomBake","options":[{"type":"quantity","properties":"0\n1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"0,5,10","expanded":false}],"period":"Monthly","pid":"1008","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Apple Butter! $5.00 per 8 fl. oz jar. Use on dinner rolls, corn bread, or also delicious on a bagel. Our Apple Butter goes particularly well with this week's Random Bake!","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/apple.jpg?nc=1\"]","isLowStockAlertEnabled":"No","isStockControlEnabled":"No","lowStockValue":"","name":"Apple Butter","options":[{"type":"quantity","properties":"0\n1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"0,5,10","expanded":false}],"period":"Monthly","pid":"1006","price":"6.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","stockQuantityAmount":"","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Each order contains two Pumpkin Spice Latte cupcakes. ","disabled":"hide","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/PSLcupcake.png?nc=1\"]","name":"RandomBake ","options":[{"type":"quantity","properties":"0\n1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"0,5,10","expanded":false}],"period":"Monthly","pid":"1004","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Each order contains two gingerbread cupcakes with a vanilla buttercream that teases a hint of cinnamon. ","disabled":"hide","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/gingerbread_cupcake.png?nc=1\"]","name":"RandomBake ","options":[{"type":"quantity","properties":"1\n2","name":"Package of two Cupcakes","defaultQuantity":"","specialPricing":false,"specialPrices":"5,10","expanded":false}],"period":"Monthly","pid":"1010","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Each order contains two Toffee-Chocolate cupcakes with a vanilla buttercream . With a piece of toffee in the cupcake and on the frosting! ","disabled":"hide","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/toffee_cupcake.png?nc=1\"]","name":"RandomBake ","options":[{"type":"quantity","properties":"1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"5,10","expanded":false}],"period":"Monthly","pid":"1012","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Caramel Corn! Each order contains one bag (approximately 7 oz) of caramel corn.","disabled":"hide","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/caramelcorn.jpg?nc=1\"]","name":"RandomBake","options":[{"type":"quantity","properties":"1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"5,10","expanded":false}],"period":"Monthly","pid":"1005","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Cinnamon bread!. A delicious bread with a glorious swirl of cinnamon and sugar running through it. $5.00 for one 8\"x4\", 1 lb.. loaf.","disabled":"hide","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/cinnamonbread.png?nc=1\"]","name":"RandomBake","options":[{"type":"quantity","properties":"1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"5,10","expanded":false}],"period":"Monthly","pid":"1011","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"An assortment of five different cookies (three of each, for a total of 15 cookies). The cookies will be “My Grandma’s Oatmeal Cookies”, Molded Ginger Cookies (Speculaas), Brown Butter Chocolate Chip, Chocolate-dipped Peanut Butter Sandwiches, and a Lemon Crinkle. All 15 cookies for $7.00!","disabled":"hide","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/cookies_color.png?nc=1\"]","name":"RandomBake","options":[{"type":"quantity","properties":"0\n1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"0,5,10","expanded":false}],"period":"Monthly","pid":"1009","price":"7.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"An box of 10 Peanut Butter Blossom cookies (peanut butter cookie with a Hershey's kiss in the middle). One box of cookies for $5.00!","disabled":"hide","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/peanutbutterblossom.png?nc=1\"]","isLowStockAlertEnabled":"No","isStockControlEnabled":"No","lowStockValue":"","name":"RandomBake","options":[{"type":"quantity","properties":"1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"5,10","expanded":false}],"period":"Monthly","pid":"1013","price":"5.00","recurringtimes":"No Limit","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","stockQuantityAmount":"","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"One 3 oz. jar of our Everything Topping (bagel not included). A mix of poppy seeds, black & white sesame seeds, dried onion, and smoked-dried garlic. Finished off with a hint of pretzel salt. We're offering these every week now! $5.00 per jar. ","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/Everything_Spice-transp).png?nc=1\"]","isLowStockAlertEnabled":"No","isStockControlEnabled":"No","lowStockValue":"","name":"Everything Mix","options":[{"type":"quantity","properties":"0\n1\n2","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"0,5,10","expanded":false}],"period":"Monthly","pid":"1016","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","stockQuantityAmount":"","trial":""},{"connectedCategories":"[]","connectedProducts":"[]","customPrice":"","customPriceSource":"0","description":"Pumpkin & Peanut Butter dog treats! $5.00 per 6oz  bags. Limited ingredients, perfect for the pickiest pooch! We're offering these every week now!","fitImageToCanvas":"No","hasExpandedOption":"","hasQuantity":"1","hasSpecialPricing":"","icon":"","images":"[\"https://www.jotform.com/uploads/kgbraden/form_files/dog_treats.png?nc=1\"]","isLowStockAlertEnabled":"No","isStockControlEnabled":"No","lowStockValue":"","name":"Dog Treats","options":[{"type":"quantity","properties":"0\n1\n2\n3\n4","name":"Quantity","defaultQuantity":"","specialPricing":false,"specialPrices":"0,5,10,15,20","expanded":false}],"period":"Monthly","pid":"1007","price":"5.00","recurringtimes":"No Limit","required":"","selected":"","setupfee":"","shipping":"{\"flatRate\":\"4\"}","showSubtotal":"1","stockQuantityAmount":"","trial":""}]}}
+      JotForm.alterTexts({"ageVerificationError":"You must be older than {minAge} years old to submit this form.","alphabetic":"This field can only contain letters","alphanumeric":"This field can only contain letters and numbers.","appointmentSelected":"You’ve selected {time} on {date}","ccDonationMinLimitError":"Minimum amount is {minAmount} {currency}","ccInvalidCVC":"CVC number is invalid.","ccInvalidExpireDate":"Expire date is invalid.","ccInvalidExpireMonth":"Expiration month is invalid.","ccInvalidExpireYear":"Expiration year is invalid.","ccInvalidNumber":"Credit Card Number is invalid.","ccMissingDetails":"Please fill up the credit card details.","ccMissingDonation":"Please enter numeric values for donation amount.","ccMissingProduct":"Please select at least one product.","characterLimitError":"Too many Characters.  The limit is","characterMinLimitError":"Too few characters. The minimum is","confirmClearForm":"Are you sure you want to clear the form","confirmEmail":"E-mail does not match","currency":"This field can only contain currency values.","cyrillic":"This field can only contain cyrillic characters","dateInvalid":"This date is not valid. The date format is {format}","dateInvalidSeparate":"This date is not valid. Enter a valid {element}.","dateLimited":"This date is unavailable.","disallowDecimals":"Please enter a whole number.","doneButton":"Done","doneMessage":"Well done! All errors are fixed.","dragAndDropFilesHere_infoMessage":"Drag and drop files here","email":"Enter a valid e-mail address","fillMask":"Field value must fill mask.","freeEmailError":"Free email accounts are not allowed","generalError":"There are errors on the form. Please fix them before continuing.","generalPageError":"There are errors on this page. Please fix them before continuing.","geoNotAvailableDesc":"Location provider not available. Please enter the address manually.","geoNotAvailableTitle":"Position Unavailable","geoPermissionDesc":"Check your browser's privacy settings.","geoPermissionTitle":"Permission Denied","geoTimeoutDesc":"Please check your internet connection and try again.","geoTimeoutTitle":"Timeout","gradingScoreError":"Score total should only be less than or equal to","incompleteFields":"There are incomplete required fields. Please complete them.","inputCarretErrorA":"Input should not be less than the minimum value:","inputCarretErrorB":"Input should not be greater than the maximum value:","lessThan":"Your score should be less than or equal to","maxDigitsError":"The maximum digits allowed is","maxFileSize_infoMessage":"Max. file size","maxSelectionsError":"The maximum number of selections allowed is ","minSelectionsError":"The minimum required number of selections is ","multipleError":"There are {count} errors in this page. Please correct them before moving on.","multipleFileUploads_emptyError":"{file} is empty, please select files again without it.","multipleFileUploads_fileLimitError":"Only {fileLimit} file uploads allowed.","multipleFileUploads_minSizeError":"{file} is too small, minimum file size is {minSizeLimit}.","multipleFileUploads_onLeave":"The files are being uploaded, if you leave now the upload will be cancelled.","multipleFileUploads_sizeError":"{file} is too large, maximum file size is {sizeLimit}.","multipleFileUploads_typeError":"{file} has invalid extension. Only {extensions} are allowed.","multipleFileUploads_uploadFailed":"File upload failed, please remove it and upload the file again.","nextButtonText":"Next","noSlotsAvailable":"No slots available","noUploadExtensions":"File has no extension file type (e.g. .txt, .png, .jpeg)","numeric":"This field can only contain numeric values","oneError":"There is {count} error in this page. Please correct it before moving on.","pastDatesDisallowed":"Date must not be in the past.","pleaseWait":"Please wait...","prevButtonText":"Previous","progressMiddleText":"of","required":"This field is required.","requiredLegend":"All fields marked with * are required and must be filled.","requireEveryCell":"Every cell is required.","requireEveryRow":"Every row is required.","requireOne":"At least one field required.","restrictedDomain":"This domain is not allowed","reviewBackText":"Back to Form","reviewSubmitText":"Review and Submit","seeAllText":"See All","seeErrorsButton":"See Errors","slotUnavailable":"{time} on {date} has been selected is unavailable. Please select another slot.","submissionLimit":"Sorry! Only one entry is allowed.  Multiple submissions are disabled for this form.","submitButtonText":"Submit","uploadExtensions":"You can only upload following files:","uploadFilesize":"File size cannot be bigger than:","uploadFilesizemin":"File size cannot be smaller than:","url":"This field can only contain a valid URL","validateEmail":"You need to validate this e-mail","wordLimitError":"Too many words. The limit is","wordMinLimitError":"Too few words.  The minimum is"});
+      JotForm.alterTexts({"couponApply":"Apply","couponBlank":"Please enter a coupon.","couponChange":"","couponEnter":"Enter coupon","couponExpired":"Coupon is expired. Please try another one.","couponInvalid":"Coupon is invalid.","couponValid":"Coupon is valid.","shippingShipping":"Delivery","taxTax":"Tax","totalSubtotal":"Subtotal","totalTotal":"Total"}, true);
+      FormTranslation.init({"detectUserLanguage":"1","firstPageOnly":"0","options":"English (US)","originalLanguage":"en","primaryLanguage":"en","saveUserLanguage":"1","showStatus":"flag-with-nation","theme":"light-theme","version":"2"});
+	/*INIT-END*/
+	});
+
+   JotForm.prepareCalculationsOnTheFly([null,{"name":"bagelOrder","qid":"1","text":"Bagel Order Form","type":"control_head"},null,null,null,null,{"description":"","labelText":"","name":"image","qid":"6","text":"Service_area.5f4c4bf7230e80.42443815","type":"control_image"},{"name":"deliveryArea","qid":"7","text":"Delivery Area","type":"control_head"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"submit","qid":"70","text":"Submit","type":"control_button"},null,null,{"description":"","name":"deliveryAddress","qid":"73","text":"Delivery Address ","type":"control_address"},{"description":"","name":"deliveryNotes","qid":"74","subLabel":"","text":"Delivery notes:","type":"control_textarea"},{"name":"invoiceId","qid":"75","text":"Invoice ID","type":"control_autoincrement"},{"description":"","name":"batchId76","qid":"76","subLabel":"","text":"Batch ID","type":"control_textbox"},null,null,null,null,null,{"description":"","name":"isYour","qid":"82","subLabel":"","text":"Is your delivery address within 10 miles of Tahoe Park? ","type":"control_dropdown"},{"description":"","name":"name","qid":"83","text":"Name","type":"control_fullname"},{"description":"","name":"email","qid":"84","subLabel":"example@example.com","text":"Email","type":"control_email"},{"description":"","name":"phoneNumber","qid":"85","text":"Phone Number","type":"control_phone"},null,null,null,null,null,null,null,null,null,null,null,null,{"name":"input98","qid":"98","text":"We've changed our order form to allow for more flexibility. Rather than charging slightly more for the first four bagels, we've made all bagels cost $2.00 and added in a $4.00 delivery fee. We've also added in some items which will be available every week: Everything spice mix and Peanut Butter Pumpkin dog treats. \n \n ","type":"control_text"},null,{"name":"myProducts","qid":"100","text":"My Products","type":"control_paypalSPB"}]);
+   setTimeout(function() {
+JotForm.paymentExtrasOnTheFly([null,{"name":"bagelOrder","qid":"1","text":"Bagel Order Form","type":"control_head"},null,null,null,null,{"description":"","labelText":"","name":"image","qid":"6","text":"Service_area.5f4c4bf7230e80.42443815","type":"control_image"},{"name":"deliveryArea","qid":"7","text":"Delivery Area","type":"control_head"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"submit","qid":"70","text":"Submit","type":"control_button"},null,null,{"description":"","name":"deliveryAddress","qid":"73","text":"Delivery Address ","type":"control_address"},{"description":"","name":"deliveryNotes","qid":"74","subLabel":"","text":"Delivery notes:","type":"control_textarea"},{"name":"invoiceId","qid":"75","text":"Invoice ID","type":"control_autoincrement"},{"description":"","name":"batchId76","qid":"76","subLabel":"","text":"Batch ID","type":"control_textbox"},null,null,null,null,null,{"description":"","name":"isYour","qid":"82","subLabel":"","text":"Is your delivery address within 10 miles of Tahoe Park? ","type":"control_dropdown"},{"description":"","name":"name","qid":"83","text":"Name","type":"control_fullname"},{"description":"","name":"email","qid":"84","subLabel":"example@example.com","text":"Email","type":"control_email"},{"description":"","name":"phoneNumber","qid":"85","text":"Phone Number","type":"control_phone"},null,null,null,null,null,null,null,null,null,null,null,null,{"name":"input98","qid":"98","text":"We've changed our order form to allow for more flexibility. Rather than charging slightly more for the first four bagels, we've made all bagels cost $2.00 and added in a $4.00 delivery fee. We've also added in some items which will be available every week: Everything spice mix and Peanut Butter Pumpkin dog treats. \n \n ","type":"control_text"},null,{"name":"myProducts","qid":"100","text":"My Products","type":"control_paypalSPB"}]);}, 20); 
+</script>
+<link href="https://cdn01.jotfor.ms/static/formCss.css?3.3.28679" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="https://cdn02.jotfor.ms/css/styles/nova.css?3.3.28679" />
+<style type="text/css">@media print{.form-section{display:inline!important}.form-pagebreak{display:none!important}.form-section-closed{height:auto!important}.page-section{position:initial!important}}</style>
+<link type="text/css" rel="stylesheet" href="https://cdn03.jotfor.ms/themes/CSS/566a91c2977cdfcd478b4567.css?"/>
+<link type="text/css" rel="stylesheet" href="https://cdn01.jotfor.ms/css/styles/payment/payment_styles.css?3.3.28679" />
+<link type="text/css" rel="stylesheet" href="https://cdn02.jotfor.ms/css/styles/payment/payment_feature.css?3.3.28679" />
+<style type="text/css">
+    .form-label-left{
+        width:150px;
+    }
+    .form-line{
+        padding-top:12px;
+        padding-bottom:12px;
+    }
+    .form-label-right{
+        width:150px;
+    }
+    .form-all{
+        width:690px;
+        color:#cccccc !important;
+        font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, sans-serif;
+        font-size:14px;
+    }
+</style>
+
+<style type="text/css" id="form-designer-style">
+    /* Injected CSS Code */
+.form-all:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.form-all {
+  font-family: "Lucida Grande", sans-serif;
+}
+.form-all {
+  width: 690px;
+}
+.form-label-left,
+.form-label-right {
+  width: 150px;
+}
+.form-label {
+  white-space: normal;
+}
+.form-label.form-label-auto {
+  display: block;
+  float: none;
+  word-break: break-word;
+  text-align: left;
+}
+.form-label-left {
+  display: inline-block;
+  white-space: normal;
+  float: left;
+  text-align: left;
+}
+.form-label-right {
+  display: inline-block;
+  white-space: normal;
+  float: left;
+  text-align: right;
+}
+.form-label-top {
+  white-space: normal;
+  display: block;
+  float: none;
+  text-align: left;
+}
+.form-radio-item label:before {
+  top: 0;
+}
+.form-all {
+  font-size: 14px;
+}
+.form-label {
+  font-weight: bold;
+}
+.form-checkbox-item label,
+.form-radio-item label {
+  font-weight: normal;
+}
+.supernova {
+  background-color: #4e4e4e;
+  background-color: #3e3e3e;
+}
+.supernova body {
+  background-color: transparent;
+}
+/*
+@width30: (unit(@formWidth, px) + 60px);
+@width60: (unit(@formWidth, px)+ 120px);
+@width90: (unit(@formWidth, px)+ 180px);
+*/
+/* | */
+@media screen and (min-width: 480px) {
+  .supernova .form-all {
+    border: 1px solid #252525;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+  }
+}
+/* | */
+/* | */
+@media screen and (max-width: 480px) {
+  .jotform-form .form-all {
+    margin: 0;
+    width: 100%;
+  }
+}
+/* | */
+/* | */
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .jotform-form .form-all {
+    margin: 0;
+    width: 100%;
+  }
+}
+/* | */
+/* | */
+@media screen and (min-width: 480px) and (max-width: 689px) {
+  .jotform-form .form-all {
+    margin: 0;
+    width: 100%;
+  }
+}
+/* | */
+/* | */
+@media screen and (min-width: 768px) {
+  .jotform-form {
+    padding: 60px 0;
+  }
+}
+/* | */
+/* | */
+@media screen and (max-width: 689px) {
+  .jotform-form .form-all {
+    margin: 0;
+    width: 100%;
+  }
+}
+/* | */
+.supernova .form-all,
+.form-all {
+  background-color: #4e4e4e;
+  border: 1px solid transparent;
+}
+.form-header-group {
+  border-color: #353535;
+}
+.form-matrix-table tr {
+  border-color: #353535;
+}
+.form-matrix-table tr:nth-child(2n) {
+  background-color: #414141;
+}
+.form-all {
+  color: #cccccc;
+}
+.form-header-group .form-header {
+  color: #cccccc;
+}
+.form-header-group .form-subHeader {
+  color: #e6e6e6;
+}
+.form-sub-label {
+  color: #e6e6e6;
+}
+.form-label-top,
+.form-label-left,
+.form-label-right,
+.form-html {
+  color: #cccccc;
+}
+.form-checkbox-item label,
+.form-radio-item label {
+  color: #e6e6e6;
+}
+.form-line.form-line-active {
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  background-color: #ffffe0;
+}
+/* omer */
+.form-radio-item,
+.form-checkbox-item {
+  padding-bottom: 0px !important;
+}
+.form-radio-item:last-child,
+.form-checkbox-item:last-child {
+  padding-bottom: 0;
+}
+/* omer */
+.form-single-column .form-checkbox-item,
+.form-single-column .form-radio-item {
+  width: 100%;
+}
+.form-checkbox-item .editor-container div,
+.form-radio-item .editor-container div {
+  position: relative;
+}
+.form-checkbox-item .editor-container div:before,
+.form-radio-item .editor-container div:before {
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  left: 0;
+  width: 18px;
+  height: 18px;
+}
+.form-checkbox-item,
+.form-radio-item {
+  padding-left: 2px;
+}
+.form-checkbox-item input,
+.form-radio-item input {
+  margin-top: 2px;
+}
+.supernova {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center top;
+  background-repeat: repeat;
+}
+.supernova {
+  background-image: none;
+}
+#stage {
+  background-image: none;
+}
+/* | */
+.form-all {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center top;
+  background-repeat: repeat;
+}
+.form-header-group {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center top;
+}
+.form-line {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.form-line {
+  padding: 12px 36px;
+}
+.form-all .qq-upload-button,
+.form-all .form-submit-button,
+.form-all .form-submit-reset,
+.form-all .form-submit-print {
+  font-size: 1em;
+  padding: 9px 15px;
+  font-family: "Lucida Grande", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+.form-all .form-pagebreak-back,
+.form-all .form-pagebreak-next {
+  font-size: 1em;
+  padding: 9px 15px;
+  font-family: "Lucida Grande", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+/*
+& when ( @buttonFontType = google ) {
+	@import (css) "@{buttonFontLink}";
+}
+*/
+h2.form-header {
+  line-height: 1.618em;
+  font-size: 1.714em;
+}
+h2 ~ .form-subHeader {
+  line-height: 1.5em;
+  font-size: 1.071em;
+}
+.form-header-group {
+  text-align: left;
+}
+/*.form-dropdown,
+.form-radio-item,
+.form-checkbox-item,
+.form-radio-other-input,
+.form-checkbox-other-input,*/
+.form-captcha input,
+.form-spinner input,
+.form-error-message {
+  padding: 4px 3px 2px 3px;
+}
+.form-header-group {
+  font-family: "Lucida Grande", sans-serif;
+}
+.form-section {
+  padding: 0px 0px 0px 0px;
+}
+.form-header-group {
+  margin: 12px 36px 12px 36px;
+}
+.form-header-group {
+  padding: 24px 0px 24px 0px;
+}
+.form-textbox,
+.form-textarea {
+  padding: 4px 3px 2px 3px;
+}
+.form-textbox,
+.form-textarea,
+.form-radio-other-input,
+.form-checkbox-other-input,
+.form-captcha input,
+.form-spinner input {
+  background-color: #ffffff;
+}
+.form-matrix-row-headers,
+.form-matrix-column-headers,
+.form-matrix-values {
+  padding: 4px;
+}
+[data-type="control_dropdown"] .form-input,
+[data-type="control_dropdown"] .form-input-wide {
+  width: 150px;
+}
+.form-label {
+  font-family: "Lucida Grande", sans-serif;
+}
+li[data-type="control_image"] div {
+  text-align: left;
+}
+li[data-type="control_image"] img {
+  border: none;
+  border-width: 0px !important;
+  border-style: solid !important;
+  border-color: false !important;
+}
+.form-line-column {
+  width: auto;
+}
+.form-line-error {
+  overflow: hidden;
+  -webkit-transition-property: none;
+  -moz-transition-property: none;
+  -ms-transition-property: none;
+  -o-transition-property: none;
+  transition-property: none;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  background-color: rgba(255, 50, 0, 0.6);
+}
+.form-line-error .form-error-message {
+  background-color: #ff3200;
+  clear: both;
+  float: none;
+}
+.form-line-error .form-error-message .form-error-arrow {
+  border-bottom-color: #ff3200;
+}
+.form-line-error input:not(#coupon-input),
+.form-line-error textarea,
+.form-line-error .form-validation-error {
+  border: 1px solid #ff3200;
+  box-shadow: 0 0 3px #ff3200;
+}
+.form-all {
+  position: relative;
+}
+.form-all:before {
+  content: "";
+  background-image: url("https://www.jotform.com/uploads/kgbraden/form_files/Random_Bakes_white.5f4ec0fb58ed23.70730341.png");
+  display: inline-block;
+  height: 140px;
+  position: absolute;
+  background-size: 349px 140px;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+.form-all {
+  margin-top: 150px !important;
+}
+.form-all:before {
+  top: -150px;
+  background-position: top center;
+}
+.ie-8 .form-all {
+  margin-top: auto;
+  margin-top: initial;
+}
+.ie-8 .form-all:before {
+  display: none;
+}
+[data-type="control_clear"] {
+  display: none;
+}
+/* | */
+@media screen and (max-width: 480px), screen and (max-device-width: 767px) and (orientation: portrait), screen and (max-device-width: 415px) and (orientation: landscape) {
+  .testOne {
+    letter-spacing: 0;
+  }
+  .form-all {
+    border: 0;
+    max-width: initial;
+  }
+  .form-sub-label-container {
+    width: 100%;
+    margin: 0;
+    margin-right: 0;
+    float: left;
+    box-sizing: border-box;
+  }
+  span.form-sub-label-container + span.form-sub-label-container {
+    margin-right: 0;
+  }
+  .form-sub-label {
+    white-space: normal;
+  }
+  .form-address-table td,
+  .form-address-table th {
+    padding: 0 1px 10px;
+  }
+  .form-submit-button,
+  .form-submit-print,
+  .form-submit-reset {
+    width: 100%;
+    margin-left: 0!important;
+  }
+  div[id*=at_] {
+    font-size: 14px;
+    font-weight: 700;
+    height: 8px;
+    margin-top: 6px;
+  }
+  .showAutoCalendar {
+    width: 20px;
+  }
+  img.form-image {
+    max-width: 100%;
+    height: auto;
+  }
+  .form-matrix-row-headers {
+    width: 100%;
+    word-break: break-all;
+    min-width: 80px;
+  }
+  .form-collapse-table,
+  .form-header-group {
+    margin: 0;
+  }
+  .form-collapse-table {
+    height: 100%;
+    display: inline-block;
+    width: 100%;
+  }
+  .form-collapse-hidden {
+    display: none !important;
+  }
+  .form-input {
+    width: 100%;
+  }
+  .form-label {
+    width: 100% !important;
+  }
+  .form-label-left,
+  .form-label-right {
+    display: block;
+    float: none;
+    text-align: left;
+    width: auto!important;
+  }
+  .form-line,
+  .form-line.form-line-column {
+    padding: 2% 5%;
+    box-sizing: border-box;
+  }
+  input[type=text],
+  input[type=email],
+  input[type=tel],
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: initial !important;
+  }
+  .form-radio-other-input,
+  .form-checkbox-other-input {
+    max-width: 55% !important;
+  }
+  .form-dropdown,
+  .form-textarea,
+  .form-textbox {
+    width: 100%!important;
+    box-sizing: border-box;
+  }
+  .form-input,
+  .form-input-wide,
+  .form-textarea,
+  .form-textbox,
+  .form-dropdown {
+    max-width: initial!important;
+  }
+  .form-checkbox-item:not(#foo),
+  .form-radio-item:not(#foo) {
+    width: 100%;
+  }
+  .form-address-city,
+  .form-address-line,
+  .form-address-postal,
+  .form-address-state,
+  .form-address-table,
+  .form-address-table .form-sub-label-container,
+  .form-address-table select,
+  .form-input {
+    width: 100%;
+  }
+  div.form-header-group {
+    padding: 24px 0px !important;
+    margin: 0 12px 2% !important;
+    margin-left: 5%!important;
+    margin-right: 5%!important;
+    box-sizing: border-box;
+  }
+  div.form-header-group.hasImage img {
+    max-width: 100%;
+  }
+  [data-type="control_button"] {
+    margin-bottom: 0 !important;
+  }
+  [data-type=control_fullname] .form-sub-label-container {
+    width: 48%;
+  }
+  [data-type=control_fullname] .form-sub-label-container:first-child {
+    margin-right: 4%;
+  }
+  [data-type=control_phone] .form-sub-label-container {
+    width: 65%;
+    margin-right: 0;
+    margin-left: 0;
+    float: left;
+  }
+  [data-type=control_phone] .form-sub-label-container:first-child {
+    width: 31%;
+    margin-right: 4%;
+  }
+  [data-type=control_datetime] .allowTime-container {
+    width: 100%;
+  }
+  [data-type=control_datetime] .allowTime-container .form-sub-label-container {
+    width: 24%!important;
+    margin-left: 6%;
+    margin-right: 0;
+  }
+  [data-type=control_datetime] .allowTime-container .form-sub-label-container:first-child {
+    margin-left: 0;
+  }
+  [data-type=control_datetime] span + span + span > span:first-child {
+    display: block;
+    width: 100% !important;
+  }
+  [data-type=control_birthdate] .form-sub-label-container,
+  [data-type=control_time] .form-sub-label-container {
+    width: 27.3%!important;
+    margin-right: 6% !important;
+  }
+  [data-type=control_time] .form-sub-label-container:last-child {
+    width: 33.3%!important;
+    margin-right: 0 !important;
+  }
+  .form-pagebreak-back-container,
+  .form-pagebreak-next-container {
+    min-height: 1px;
+    width: 50% !important;
+  }
+  .form-pagebreak-back,
+  .form-pagebreak-next,
+  .form-product-item.hover-product-item {
+    width: 100%;
+  }
+  .form-pagebreak-back-container {
+    padding: 0;
+    text-align: right;
+  }
+  .form-pagebreak-next-container {
+    padding: 0;
+    text-align: left;
+  }
+  .form-pagebreak {
+    margin: 0 auto;
+  }
+  .form-buttons-wrapper {
+    margin: 0!important;
+    margin-left: 0!important;
+  }
+  .form-buttons-wrapper button {
+    width: 100%;
+  }
+  .form-buttons-wrapper .form-submit-print {
+    margin: 0 !important;
+  }
+  table {
+    width: 100%!important;
+    max-width: initial!important;
+  }
+  table td + td {
+    padding-left: 3%;
+  }
+  .form-checkbox-item,
+  .form-radio-item {
+    white-space: normal!important;
+  }
+  .form-checkbox-item input,
+  .form-radio-item input {
+    width: auto;
+  }
+  .form-collapse-table {
+    margin: 0 5%;
+    display: block;
+    zoom: 1;
+    width: auto;
+  }
+  .form-collapse-table:before,
+  .form-collapse-table:after {
+    display: table;
+    content: '';
+    line-height: 0;
+  }
+  .form-collapse-table:after {
+    clear: both;
+  }
+  .fb-like-box {
+    width: 98% !important;
+  }
+  .form-error-message {
+    clear: both;
+    bottom: -10px;
+  }
+  .date-separate,
+  .phone-separate {
+    display: none;
+  }
+  .custom-field-frame,
+  .direct-embed-widgets,
+  .signature-pad-wrapper {
+    width: 100% !important;
+  }
+}
+/* | */
+
+/*__INSPECT_SEPERATOR__*/
+.form-textbox.form-address-postal {
+    width : 55px;
+}
+
+.form-textbox.form-address-state {
+    width : 28px;
+    initial : 'CA';
+}
+
+.form-textbox.form-address-line {
+
+}
+
+.form-sub-label-container {
+
+}
+
+.form-dropdown {
+
+}
+
+.form-header {
+
+}
+
+#header_99 {
+    color : #ff4f00;
+}
+
+
+    /* Injected CSS Code */
+</style>
+
+<form class="jotform-form" action="https://submit.jotform.com/submit/210316249239150/" method="post" name="form_210316249239150" id="210316249239150" accept-charset="utf-8" autocomplete="on">
+  <input type="hidden" name="formID" value="210316249239150" />
+  <input type="hidden" id="JWTContainer" value="" />
+  <input type="hidden" id="cardinalOrderNumber" value="" />
+  <div role="main" class="form-all">
+    <link type="text/css" rel="stylesheet" media="all" href="https://cdn.jotfor.ms/wizards/languageWizard/custom-dropdown/css/lang-dd.css?3.3.28679" />
+    <div class="cont">
+      <input type="text" id="input_language" name="input_language" style="display:none" />
+      <div class="language-dd" id="langDd" style="display:none">
+        <div class="dd-placeholder lang-emp">
+          Language
+        </div>
+        <ul class="lang-list dn" id="langList">
+          <li data-lang="en" class="en">
+            English (US)
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jotfor.ms/js/formTranslation.v2.js?3.3.28679"></script>
+    <ul class="form-section page-section">
+      <li id="cid_1" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group  header-default">
+          <div class="header-text httac htvam">
+            <h2 id="header_1" class="form-header" data-component="header">
+              Bagel Order Form
+            </h2>
+          </div>
+        </div>
+      </li>
+      <li class="form-line form-line-column form-col-1 always-hidden" data-type="control_textbox" id="id_76">
+        <label class="form-label form-label-top" id="label_76" for="input_76"> Batch ID </label>
+        <div id="cid_76" class="form-input-wide always-hidden">
+          <input type="text" id="input_76" name="q76_batchId76" data-type="input-textbox" class="form-readonly form-textbox" data-defaultvalue="BATCH_74" size="20" value="BATCH_74" tabindex="-1" data-component="textbox" aria-labelledby="label_76" readonly="" />
+        </div>
+      </li>
+      <li class="form-line jf-required" data-type="control_fullname" id="id_83">
+        <label class="form-label form-label-top form-label-auto" id="label_83" for="first_83">
+          Name
+          <span class="form-required">
+            *
+          </span>
+        </label>
+        <div id="cid_83" class="form-input-wide jf-required">
+          <div data-wrapper-react="true">
+            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
+              <input type="text" id="first_83" name="q83_name[first]" class="form-textbox validate[required]" data-defaultvalue="" size="10" value="" data-component="first" aria-labelledby="label_83 sublabel_83_first" required="" />
+              <label class="form-sub-label" for="first_83" id="sublabel_83_first" style="min-height:13px" aria-hidden="false"> First Name </label>
+            </span>
+            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="last">
+              <input type="text" id="last_83" name="q83_name[last]" class="form-textbox validate[required]" data-defaultvalue="" size="15" value="" data-component="last" aria-labelledby="label_83 sublabel_83_last" required="" />
+              <label class="form-sub-label" for="last_83" id="sublabel_83_last" style="min-height:13px" aria-hidden="false"> Last Name </label>
+            </span>
+          </div>
+        </div>
+      </li>
+      <li class="form-line form-line-column form-col-1 jf-required" data-type="control_email" id="id_84">
+        <label class="form-label form-label-top" id="label_84" for="input_84">
+          Email
+          <span class="form-required">
+            *
+          </span>
+        </label>
+        <div id="cid_84" class="form-input-wide jf-required">
+          <span class="form-sub-label-container" style="vertical-align:top">
+            <input type="email" id="input_84" name="q84_email" class="form-textbox validate[required, Email]" data-defaultvalue="" size="30" value="" data-component="email" aria-labelledby="label_84 sublabel_input_84" required="" />
+            <label class="form-sub-label" for="input_84" id="sublabel_input_84" style="min-height:13px" aria-hidden="false"> example@example.com </label>
+          </span>
+        </div>
+      </li>
+      <li class="form-line form-line-column form-col-2 jf-required" data-type="control_phone" id="id_85" data-compound-hint=",">
+        <label class="form-label form-label-top" id="label_85" for="input_85_area">
+          Phone Number
+          <span class="form-required">
+            *
+          </span>
+        </label>
+        <div id="cid_85" class="form-input-wide jf-required">
+          <div data-wrapper-react="true">
+            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="areaCode">
+              <input type="tel" id="input_85_area" name="q85_phoneNumber[area]" class="form-textbox validate[required]" data-defaultvalue="" value="" data-component="areaCode" aria-labelledby="label_85 sublabel_85_area" required="" />
+              <span class="phone-separate" aria-hidden="true">
+                 -
+              </span>
+              <label class="form-sub-label" for="input_85_area" id="sublabel_85_area" style="min-height:13px" aria-hidden="false"> Area Code </label>
+            </span>
+            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="phone">
+              <input type="tel" id="input_85_phone" name="q85_phoneNumber[phone]" class="form-textbox validate[required]" data-defaultvalue="" value="" data-component="phone" aria-labelledby="label_85 sublabel_85_phone" required="" />
+              <label class="form-sub-label" for="input_85_phone" id="sublabel_85_phone" style="min-height:13px" aria-hidden="false"> Phone Number </label>
+            </span>
+          </div>
+        </div>
+      </li>
+      <li id="cid_7" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group  header-default">
+          <div class="header-text httal htvam">
+            <h2 id="header_7" class="form-header" data-component="header">
+              Delivery Area
+            </h2>
+            <div id="subHeader_7" class="form-subHeader">
+              We deliver within 10 miles of Tahoe Park in Sacramento.
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_image" id="id_6">
+        <div id="cid_6" class="form-input-wide">
+          <div style="text-align:center">
+            <img alt="" class="form-image" style="border:0" src="https://www.jotform.com/uploads/kgbraden/form_files/Service_area.5f4c4bf7230e80.42443815.PNG" height="174px" width="300px" data-component="image" />
+          </div>
+        </div>
+      </li>
+      <li class="form-line jf-required" data-type="control_dropdown" id="id_82">
+        <label class="form-label form-label-top form-label-auto" id="label_82" for="input_82">
+          Is your delivery address within 10 miles of Tahoe Park?
+          <span class="form-required">
+            *
+          </span>
+        </label>
+        <div id="cid_82" class="form-input-wide jf-required">
+          <select class="form-dropdown validate[required]" style="width:150px;" id="input_82" name="q82_isYour">
+            <option value=""> Please confirm </option>
+            <option value="Yes"> Yes </option>
+            <option value="No"> No </option>
+            <option value="I don&#039;t know, I need to check"> I don&#039;t know, I need to check </option>
+          </select>
+        </div>
+      </li>
+      <li class="form-line jf-required" data-type="control_address" id="id_73" data-compound-hint=",,,,,">
+        <label class="form-label form-label-top form-label-auto" id="label_73" for="input_73_addr_line1">
+          Delivery Address
+          <span class="form-required">
+            *
+          </span>
+        </label>
+        <div id="cid_73" class="form-input-wide jf-required">
+          <div summary="" class="form-address-table jsTest-addressField">
+            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
+              <span class="form-address-line form-address-street-line jsTest-address-lineField">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="input_73_addr_line1" name="q73_deliveryAddress[addr_line1]" class="form-textbox validate[required] form-address-line" data-defaultvalue="" value="" data-component="address_line_1" aria-labelledby="label_73 sublabel_73_addr_line1" required="" />
+                  <label class="form-sub-label" for="input_73_addr_line1" id="sublabel_73_addr_line1" style="min-height:13px" aria-hidden="false"> Street Address </label>
+                </span>
+              </span>
+            </div>
+            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
+              <span class="form-address-line form-address-street-line jsTest-address-lineField">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="input_73_addr_line2" name="q73_deliveryAddress[addr_line2]" class="form-textbox form-address-line" data-defaultvalue="" value="" data-component="address_line_2" aria-labelledby="label_73 sublabel_73_addr_line2" />
+                  <label class="form-sub-label" for="input_73_addr_line2" id="sublabel_73_addr_line2" style="min-height:13px" aria-hidden="false"> Street Address Line 2 </label>
+                </span>
+              </span>
+            </div>
+            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
+              <span class="form-address-line form-address-city-line jsTest-address-lineField ">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="input_73_city" name="q73_deliveryAddress[city]" class="form-textbox validate[required] form-address-city" data-defaultvalue="" value="" data-component="city" aria-labelledby="label_73 sublabel_73_city" required="" />
+                  <label class="form-sub-label" for="input_73_city" id="sublabel_73_city" style="min-height:13px" aria-hidden="false"> City </label>
+                </span>
+              </span>
+              <span class="form-address-line form-address-state-line jsTest-address-lineField ">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="input_73_state" name="q73_deliveryAddress[state]" class="form-textbox validate[required] form-address-state" data-defaultvalue="" value="" data-component="state" aria-labelledby="label_73 sublabel_73_state" required="" />
+                  <label class="form-sub-label" for="input_73_state" id="sublabel_73_state" style="min-height:13px" aria-hidden="false"> State / Province </label>
+                </span>
+              </span>
+            </div>
+            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
+              <span class="form-address-line form-address-zip-line jsTest-address-lineField ">
+                <span class="form-sub-label-container" style="vertical-align:top">
+                  <input type="text" id="input_73_postal" name="q73_deliveryAddress[postal]" class="form-textbox validate[required] form-address-postal" data-defaultvalue="" value="" data-component="zip" aria-labelledby="label_73 sublabel_73_postal" required="" />
+                  <label class="form-sub-label" for="input_73_postal" id="sublabel_73_postal" style="min-height:13px" aria-hidden="false"> Postal / Zip Code </label>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_74">
+        <label class="form-label form-label-top form-label-auto" id="label_74" for="input_74"> Delivery notes: </label>
+        <div id="cid_74" class="form-input-wide">
+          <textarea id="input_74" class="form-textarea" name="q74_deliveryNotes" cols="40" rows="6" data-component="textarea" aria-labelledby="label_74"></textarea>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_text" id="id_98">
+        <div id="cid_98" class="form-input-wide">
+          <div id="text_98" class="form-html" data-component="text">
+            <p>We've changed our order form to allow for more flexibility. Rather than charging slightly more for the first four bagels, we've made all bagels cost $2.00 and added in a $4.00 delivery fee. We've also added in some items which will be available every week: Everything spice mix and Peanut Butter Pumpkin dog treats. </p>
+            <div id="mouseposition-extension-element-full-container" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647; font-weight: 400;">
+               
+            </div>
+            <div id="mouseposition-extension-element-full-container" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647; font-weight: 400;">
+               
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="form-line card-2col" data-type="control_paypalSPB" id="id_100" data-payment="true">
+        <label class="form-label form-label-top" id="label_100" for="input_100"> My Products </label>
+        <div id="cid_100" class="form-input-wide">
+          <div>
+            <div data-wrapper-react="true" class="product-container-wrapper">
+              <div class="filter-container">
+              </div>
+              <input type="hidden" id="use_paypal_button" />
+              <input type="hidden" name="simple_fpc" data-payment_type="paypalSPB" data-component="payment1" value="100" />
+              <input type="hidden" name="payment_total_checksum" id="payment_total_checksum" data-component="payment2" />
+              <div id="image-overlay" class="overlay-content" style="display:none">
+                <img id="current-image" />
+                <span class="lb-prev-button">
+                  prev
+                </span>
+                <span class="lb-next-button">
+                  next
+                </span>
+                <span class="lb-close-button">
+                  ( X )
+                </span>
+                <span class="image-overlay-product-container">
+                  <ul class="form-overlay-item" hasicon="false" hasimages="true" iconvalue="">
+                    <li class="image-overlay-image">
+                      <img src="https://www.jotform.com/uploads/kgbraden/form_files/one_Bagle.png" />
+                    </li>
+                  </ul>
+                  <ul class="form-overlay-item" hasicon="false" hasimages="true" iconvalue="">
+                    <li class="image-overlay-image">
+                      <img src="https://www.jotform.com/uploads/kgbraden/form_files/cream-cheese-spread-new.png" />
+                    </li>
+                  </ul>
+                  <ul class="form-overlay-item" hasicon="false" hasimages="true" iconvalue="">
+                    <li class="image-overlay-image">
+                      <img src="https://www.jotform.com/uploads/kgbraden/form_files/Plaited_Loaf.png" />
+                    </li>
+                  </ul>
+                  <ul class="form-overlay-item" hasicon="false" hasimages="true" iconvalue="">
+                    <li class="image-overlay-image">
+                      <img src="https://www.jotform.com/uploads/kgbraden/form_files/apple.jpg" />
+                    </li>
+                  </ul>
+                  <ul class="form-overlay-item" hasicon="false" hasimages="true" iconvalue="">
+                    <li class="image-overlay-image">
+                      <img src="https://www.jotform.com/uploads/kgbraden/form_files/Everything_Spice-transp).png" />
+                    </li>
+                  </ul>
+                  <ul class="form-overlay-item" hasicon="false" hasimages="true" iconvalue="">
+                    <li class="image-overlay-image">
+                      <img src="https://www.jotform.com/uploads/kgbraden/form_files/dog_treats.png" />
+                    </li>
+                  </ul>
+                </span>
+              </div>
+              <div data-wrapper-react="true">
+                <span class="form-product-item  on_col1 show_image show_desc show_option show_subtotal show_sub_product full_img new_ui" categories="non-categorized" pid="1015" aria-labelledby="label_100">
+                  <div data-wrapper-react="true" class="form-product-item-detail new_ui">
+                    <div class="p_col">
+                      <div class="p_checkbox">
+                        <input type="checkbox" class="form-checkbox form-product-has-subproducts form-product-input" id="input_100_1015" name="q100_myProducts[][id]" value="1015_expanded" checked="" disabled="" />
+                        <div class="checked">
+                        </div>
+                        <div class="select_border">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p_image">
+                      <div role="img" aria-label="Bagel Pack" class="image_area form-product-image-with-options" style="background-image:url(&quot;https://www.jotform.com/uploads/kgbraden/form_files/one_Bagle.png&quot;)">
+                        <div class="image_zoom">
+                        </div>
+                      </div>
+                    </div>
+                    <div for="input_100_1015" class="form-product-container">
+                      <span data-wrapper-react="true">
+                        <div class="title_description">
+                          <span class="form-product-name" id="product-name-input_100_1015">
+                            Bagel Pack
+                          </span>
+                          <span class="form-product-description" id="product-name-description-input_100_1015">
+                            Kettle boiled, hand rolled bagels. (Select quantity of each toppings you would like). $2 per bagel.
+                          </span>
+                        </div>
+                        <span class="form-product-details">
+                          <b>
+                            <span data-wrapper-react="true">
+                              $
+                              <span id="input_100_1015_price">
+                                2.00
+                              </span>
+                            </span>
+                          </b>
+                        </span>
+                      </span>
+                      <table id="input_100_1015_subproducts" class="form-product-child-table">
+                        <tbody>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-sub-label">
+                                Bagels
+                              </span>
+                            </th>
+                            <th style="text-align:left">
+                              <span class="form-product-options-text form-sub-label">
+                                Quantity
+                              </span>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-product-child-label" style="font-size:0.786em">
+                                Plain
+                              </span>
+                            </th>
+                            <td style="text-align:center" data-title="Quantity">
+                              <span class="select_cont">
+                                <select class="form-dropdown  form-subproduct-quantity form-subproduct-option" name="q100_myProducts[special_1015_0][item_1]" id="input_100_quantity_1015_0_1">
+                                  <option value="0">  </option>
+                                  <option value="1"> 1 </option>
+                                  <option value="2"> 2 </option>
+                                  <option value="3"> 3 </option>
+                                  <option value="4"> 4 </option>
+                                  <option value="5"> 5 </option>
+                                  <option value="6"> 6 </option>
+                                  <option value="7"> 7 </option>
+                                  <option value="8"> 8 </option>
+                                  <option value="9"> 9 </option>
+                                  <option value="10"> 10 </option>
+                                </select>
+                              </span>
+                            </td>
+                            <td>
+                              <input type="hidden" value="Plain" name="q100_myProducts[special_1015_0][item_0]" />
+                              <input type="checkbox" checked="" id="input_100_1015_0" style="display:none" name="q100_myProducts[][id]" value="1015_0" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-product-child-label" style="font-size:0.786em">
+                                Sesame
+                              </span>
+                            </th>
+                            <td style="text-align:center" data-title="Quantity">
+                              <span class="select_cont">
+                                <select class="form-dropdown  form-subproduct-quantity form-subproduct-option" name="q100_myProducts[special_1015_1][item_1]" id="input_100_quantity_1015_1_1">
+                                  <option value="0">  </option>
+                                  <option value="1"> 1 </option>
+                                  <option value="2"> 2 </option>
+                                  <option value="3"> 3 </option>
+                                  <option value="4"> 4 </option>
+                                  <option value="5"> 5 </option>
+                                  <option value="6"> 6 </option>
+                                  <option value="7"> 7 </option>
+                                  <option value="8"> 8 </option>
+                                  <option value="9"> 9 </option>
+                                  <option value="10"> 10 </option>
+                                </select>
+                              </span>
+                            </td>
+                            <td>
+                              <input type="hidden" value="Sesame" name="q100_myProducts[special_1015_1][item_0]" />
+                              <input type="checkbox" checked="" id="input_100_1015_1" style="display:none" name="q100_myProducts[][id]" value="1015_1" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-product-child-label" style="font-size:0.786em">
+                                Salt
+                              </span>
+                            </th>
+                            <td style="text-align:center" data-title="Quantity">
+                              <span class="select_cont">
+                                <select class="form-dropdown  form-subproduct-quantity form-subproduct-option" name="q100_myProducts[special_1015_2][item_1]" id="input_100_quantity_1015_2_1">
+                                  <option value="0">  </option>
+                                  <option value="1"> 1 </option>
+                                  <option value="2"> 2 </option>
+                                  <option value="3"> 3 </option>
+                                  <option value="4"> 4 </option>
+                                  <option value="5"> 5 </option>
+                                  <option value="6"> 6 </option>
+                                  <option value="7"> 7 </option>
+                                  <option value="8"> 8 </option>
+                                  <option value="9"> 9 </option>
+                                  <option value="10"> 10 </option>
+                                </select>
+                              </span>
+                            </td>
+                            <td>
+                              <input type="hidden" value="Salt" name="q100_myProducts[special_1015_2][item_0]" />
+                              <input type="checkbox" checked="" id="input_100_1015_2" style="display:none" name="q100_myProducts[][id]" value="1015_2" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-product-child-label" style="font-size:0.786em">
+                                Poppy seed
+                              </span>
+                            </th>
+                            <td style="text-align:center" data-title="Quantity">
+                              <span class="select_cont">
+                                <select class="form-dropdown  form-subproduct-quantity form-subproduct-option" name="q100_myProducts[special_1015_3][item_1]" id="input_100_quantity_1015_3_1">
+                                  <option value="0">  </option>
+                                  <option value="1"> 1 </option>
+                                  <option value="2"> 2 </option>
+                                  <option value="3"> 3 </option>
+                                  <option value="4"> 4 </option>
+                                  <option value="5"> 5 </option>
+                                  <option value="6"> 6 </option>
+                                  <option value="7"> 7 </option>
+                                  <option value="8"> 8 </option>
+                                  <option value="9"> 9 </option>
+                                  <option value="10"> 10 </option>
+                                </select>
+                              </span>
+                            </td>
+                            <td>
+                              <input type="hidden" value="Poppy seed" name="q100_myProducts[special_1015_3][item_0]" />
+                              <input type="checkbox" checked="" id="input_100_1015_3" style="display:none" name="q100_myProducts[][id]" value="1015_3" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-product-child-label" style="font-size:0.786em">
+                                Garlic
+                              </span>
+                            </th>
+                            <td style="text-align:center" data-title="Quantity">
+                              <span class="select_cont">
+                                <select class="form-dropdown  form-subproduct-quantity form-subproduct-option" name="q100_myProducts[special_1015_4][item_1]" id="input_100_quantity_1015_4_1">
+                                  <option value="0">  </option>
+                                  <option value="1"> 1 </option>
+                                  <option value="2"> 2 </option>
+                                  <option value="3"> 3 </option>
+                                  <option value="4"> 4 </option>
+                                  <option value="5"> 5 </option>
+                                  <option value="6"> 6 </option>
+                                  <option value="7"> 7 </option>
+                                  <option value="8"> 8 </option>
+                                  <option value="9"> 9 </option>
+                                  <option value="10"> 10 </option>
+                                </select>
+                              </span>
+                            </td>
+                            <td>
+                              <input type="hidden" value="Garlic" name="q100_myProducts[special_1015_4][item_0]" />
+                              <input type="checkbox" checked="" id="input_100_1015_4" style="display:none" name="q100_myProducts[][id]" value="1015_4" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-product-child-label" style="font-size:0.786em">
+                                Onion
+                              </span>
+                            </th>
+                            <td style="text-align:center" data-title="Quantity">
+                              <span class="select_cont">
+                                <select class="form-dropdown  form-subproduct-quantity form-subproduct-option" name="q100_myProducts[special_1015_5][item_1]" id="input_100_quantity_1015_5_1">
+                                  <option value="0">  </option>
+                                  <option value="1"> 1 </option>
+                                  <option value="2"> 2 </option>
+                                  <option value="3"> 3 </option>
+                                  <option value="4"> 4 </option>
+                                  <option value="5"> 5 </option>
+                                  <option value="6"> 6 </option>
+                                  <option value="7"> 7 </option>
+                                  <option value="8"> 8 </option>
+                                  <option value="9"> 9 </option>
+                                  <option value="10"> 10 </option>
+                                </select>
+                              </span>
+                            </td>
+                            <td>
+                              <input type="hidden" value="Onion" name="q100_myProducts[special_1015_5][item_0]" />
+                              <input type="checkbox" checked="" id="input_100_1015_5" style="display:none" name="q100_myProducts[][id]" value="1015_5" />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="text-align:left">
+                              <span class="form-product-child-label" style="font-size:0.786em">
+                                Everything
+                              </span>
+                            </th>
+                            <td style="text-align:center" data-title="Quantity">
+                              <span class="select_cont">
+                                <select class="form-dropdown  form-subproduct-quantity form-subproduct-option" name="q100_myProducts[special_1015_6][item_1]" id="input_100_quantity_1015_6_1">
+                                  <option value="0">  </option>
+                                  <option value="1"> 1 </option>
+                                  <option value="2"> 2 </option>
+                                  <option value="3"> 3 </option>
+                                  <option value="4"> 4 </option>
+                                  <option value="5"> 5 </option>
+                                  <option value="6"> 6 </option>
+                                  <option value="7"> 7 </option>
+                                  <option value="8"> 8 </option>
+                                  <option value="9"> 9 </option>
+                                  <option value="10"> 10 </option>
+                                </select>
+                              </span>
+                            </td>
+                            <td>
+                              <input type="hidden" value="Everything" name="q100_myProducts[special_1015_6][item_0]" />
+                              <input type="checkbox" checked="" id="input_100_1015_6" style="display:none" name="q100_myProducts[][id]" value="1015_6" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <br/>
+                      <span class="form-special-subtotal">
+                        <span class="form-item-subtotal">
+                          Item subtotal:
+                        </span>
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="input_100_1015_item_subtotal">
+                            0.00
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </span>
+                <div class="p_item_separator ">
+                </div>
+                <span class="form-product-item  on_col2 show_image show_desc show_option show_subtotal full_img new_ui" categories="non-categorized" pid="1001" aria-labelledby="label_100">
+                  <div data-wrapper-react="true" class="form-product-item-detail new_ui">
+                    <div class="p_col">
+                      <div class="p_checkbox">
+                        <input type="checkbox" class="form-checkbox  form-product-input" id="input_100_1001" name="q100_myProducts[][id]" value="1001" />
+                        <div class="checked">
+                        </div>
+                        <div class="select_border">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p_image">
+                      <div role="img" aria-label="Cream Cheese" class="image_area form-product-image-with-options" style="background-image:url(&quot;https://www.jotform.com/uploads/kgbraden/form_files/cream-cheese-spread-new.png&quot;)">
+                        <div class="image_zoom">
+                        </div>
+                      </div>
+                    </div>
+                    <div for="input_100_1001" class="form-product-container">
+                      <span data-wrapper-react="true">
+                        <div class="title_description">
+                          <span class="form-product-name" id="product-name-input_100_1001">
+                            Cream Cheese
+                          </span>
+                          <span class="form-product-description" id="product-name-description-input_100_1001">
+                            California Heath Code prohibits us from selling schmears with our bagels, but we can add a tub of Sonoma County&#x27;s Clover cream cheese spread in with your order
+                          </span>
+                        </div>
+                        <span class="form-product-details">
+                          <b>
+                            <span data-wrapper-react="true">
+                              $
+                              <span id="input_100_1001_price">
+                                3.00
+                              </span>
+                            </span>
+                          </b>
+                        </span>
+                      </span>
+                      <span class="form-sub-label-container" style="vertical-align:top">
+                        <label class="form-sub-label" for="input_100_quantity_1001_0" style="min-height:13px" aria-hidden="false"> Quantity </label>
+                        <span class="select_cont">
+                          <select class="form-dropdown" name="q100_myProducts[special_1001][item_0]" id="input_100_quantity_1001_0">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                          </select>
+                        </span>
+                      </span>
+                      <br/>
+                      <span class="form-special-subtotal">
+                        <span class="form-item-subtotal">
+                          Item subtotal:
+                        </span>
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="input_100_1001_item_subtotal">
+                            0.00
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </span>
+                <div class="p_item_separator ">
+                </div>
+                <span class="form-product-item  on_col1 show_image show_desc show_option show_subtotal full_img new_ui" categories="non-categorized" pid="1008" aria-labelledby="label_100">
+                  <div data-wrapper-react="true" class="form-product-item-detail new_ui">
+                    <div class="p_col">
+                      <div class="p_checkbox">
+                        <input type="checkbox" class="form-checkbox  form-product-input" id="input_100_1008" name="q100_myProducts[][id]" value="1008" />
+                        <div class="checked">
+                        </div>
+                        <div class="select_border">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p_image">
+                      <div role="img" aria-label="RandomBake" class="image_area form-product-image-with-options" style="background-image:url(&quot;https://www.jotform.com/uploads/kgbraden/form_files/Plaited_Loaf.png&quot;)">
+                        <div class="image_zoom">
+                        </div>
+                      </div>
+                    </div>
+                    <div for="input_100_1008" class="form-product-container">
+                      <span data-wrapper-react="true">
+                        <div class="title_description">
+                          <span class="form-product-name" id="product-name-input_100_1008">
+                            RandomBake
+                          </span>
+                          <span class="form-product-description" id="product-name-description-input_100_1008">
+                            Plaited (or braided) with a four stranded “over-under-over” technique, to produce a beautiful (and delicious) loaf. Perfect with soup, sliced for small sandwiches or toast, or made into French toast. $5.00 for one 8&quot;x4&quot;, 7 oz. loaf.
+                          </span>
+                        </div>
+                        <span class="form-product-details">
+                          <b>
+                            <span data-wrapper-react="true">
+                              $
+                              <span id="input_100_1008_price">
+                                5.00
+                              </span>
+                            </span>
+                          </b>
+                        </span>
+                      </span>
+                      <span class="form-sub-label-container" style="vertical-align:top">
+                        <label class="form-sub-label" for="input_100_quantity_1008_0" style="min-height:13px" aria-hidden="false"> Quantity </label>
+                        <span class="select_cont">
+                          <select class="form-dropdown" name="q100_myProducts[special_1008][item_0]" id="input_100_quantity_1008_0">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                          </select>
+                        </span>
+                      </span>
+                      <br/>
+                      <span class="form-special-subtotal">
+                        <span class="form-item-subtotal">
+                          Item subtotal:
+                        </span>
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="input_100_1008_item_subtotal">
+                            0.00
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </span>
+                <div class="p_item_separator ">
+                </div>
+                <span class="form-product-item  on_col2 show_image show_desc show_option show_subtotal full_img new_ui" categories="non-categorized" pid="1006" aria-labelledby="label_100">
+                  <div data-wrapper-react="true" class="form-product-item-detail new_ui">
+                    <div class="p_col">
+                      <div class="p_checkbox">
+                        <input type="checkbox" class="form-checkbox  form-product-input" id="input_100_1006" name="q100_myProducts[][id]" value="1006" />
+                        <div class="checked">
+                        </div>
+                        <div class="select_border">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p_image">
+                      <div role="img" aria-label="Apple Butter" class="image_area form-product-image-with-options" style="background-image:url(&quot;https://www.jotform.com/uploads/kgbraden/form_files/apple.jpg&quot;)">
+                        <div class="image_zoom">
+                        </div>
+                      </div>
+                    </div>
+                    <div for="input_100_1006" class="form-product-container">
+                      <span data-wrapper-react="true">
+                        <div class="title_description">
+                          <span class="form-product-name" id="product-name-input_100_1006">
+                            Apple Butter
+                          </span>
+                          <span class="form-product-description" id="product-name-description-input_100_1006">
+                            Apple Butter! $5.00 per 8 fl. oz jar. Use on dinner rolls, corn bread, or also delicious on a bagel. Our Apple Butter goes particularly well with this week&#x27;s Random Bake!
+                          </span>
+                        </div>
+                        <span class="form-product-details">
+                          <b>
+                            <span data-wrapper-react="true">
+                              $
+                              <span id="input_100_1006_price">
+                                6.00
+                              </span>
+                            </span>
+                          </b>
+                        </span>
+                      </span>
+                      <span class="form-sub-label-container" style="vertical-align:top">
+                        <label class="form-sub-label" for="input_100_quantity_1006_0" style="min-height:13px" aria-hidden="false"> Quantity </label>
+                        <span class="select_cont">
+                          <select class="form-dropdown" name="q100_myProducts[special_1006][item_0]" id="input_100_quantity_1006_0">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                          </select>
+                        </span>
+                      </span>
+                      <br/>
+                      <span class="form-special-subtotal">
+                        <span class="form-item-subtotal">
+                          Item subtotal:
+                        </span>
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="input_100_1006_item_subtotal">
+                            0.00
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </span>
+                <div class="p_item_separator ">
+                </div>
+                <span class="form-product-item  on_col1 show_image show_desc show_option show_subtotal full_img new_ui" categories="non-categorized" pid="1016" aria-labelledby="label_100">
+                  <div data-wrapper-react="true" class="form-product-item-detail new_ui">
+                    <div class="p_col">
+                      <div class="p_checkbox">
+                        <input type="checkbox" class="form-checkbox  form-product-input" id="input_100_1016" name="q100_myProducts[][id]" value="1016" />
+                        <div class="checked">
+                        </div>
+                        <div class="select_border">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p_image">
+                      <div role="img" aria-label="Everything Mix" class="image_area form-product-image-with-options" style="background-image:url(&quot;https://www.jotform.com/uploads/kgbraden/form_files/Everything_Spice-transp).png&quot;)">
+                        <div class="image_zoom">
+                        </div>
+                      </div>
+                    </div>
+                    <div for="input_100_1016" class="form-product-container">
+                      <span data-wrapper-react="true">
+                        <div class="title_description">
+                          <span class="form-product-name" id="product-name-input_100_1016">
+                            Everything Mix
+                          </span>
+                          <span class="form-product-description" id="product-name-description-input_100_1016">
+                            One 3 oz. jar of our Everything Topping (bagel not included). A mix of poppy seeds, black &amp; white sesame seeds, dried onion, and smoked-dried garlic. Finished off with a hint of pretzel salt. We&#x27;re offering these every week now! $5.00 per jar.
+                          </span>
+                        </div>
+                        <span class="form-product-details">
+                          <b>
+                            <span data-wrapper-react="true">
+                              $
+                              <span id="input_100_1016_price">
+                                5.00
+                              </span>
+                            </span>
+                          </b>
+                        </span>
+                      </span>
+                      <span class="form-sub-label-container" style="vertical-align:top">
+                        <label class="form-sub-label" for="input_100_quantity_1016_0" style="min-height:13px" aria-hidden="false"> Quantity </label>
+                        <span class="select_cont">
+                          <select class="form-dropdown" name="q100_myProducts[special_1016][item_0]" id="input_100_quantity_1016_0">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                          </select>
+                        </span>
+                      </span>
+                      <br/>
+                      <span class="form-special-subtotal">
+                        <span class="form-item-subtotal">
+                          Item subtotal:
+                        </span>
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="input_100_1016_item_subtotal">
+                            0.00
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </span>
+                <div class="p_item_separator ">
+                </div>
+                <span class="form-product-item  on_col2 show_image show_desc show_option show_subtotal full_img new_ui" categories="non-categorized" pid="1007" aria-labelledby="label_100">
+                  <div data-wrapper-react="true" class="form-product-item-detail new_ui">
+                    <div class="p_col">
+                      <div class="p_checkbox">
+                        <input type="checkbox" class="form-checkbox  form-product-input" id="input_100_1007" name="q100_myProducts[][id]" value="1007" />
+                        <div class="checked">
+                        </div>
+                        <div class="select_border">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p_image">
+                      <div role="img" aria-label="Dog Treats" class="image_area form-product-image-with-options" style="background-image:url(&quot;https://www.jotform.com/uploads/kgbraden/form_files/dog_treats.png&quot;)">
+                        <div class="image_zoom">
+                        </div>
+                      </div>
+                    </div>
+                    <div for="input_100_1007" class="form-product-container">
+                      <span data-wrapper-react="true">
+                        <div class="title_description">
+                          <span class="form-product-name" id="product-name-input_100_1007">
+                            Dog Treats
+                          </span>
+                          <span class="form-product-description" id="product-name-description-input_100_1007">
+                            Pumpkin &amp; Peanut Butter dog treats! $5.00 per 6oz bags. Limited ingredients, perfect for the pickiest pooch! We&#x27;re offering these every week now!
+                          </span>
+                        </div>
+                        <span class="form-product-details">
+                          <b>
+                            <span data-wrapper-react="true">
+                              $
+                              <span id="input_100_1007_price">
+                                5.00
+                              </span>
+                            </span>
+                          </b>
+                        </span>
+                      </span>
+                      <span class="form-sub-label-container" style="vertical-align:top">
+                        <label class="form-sub-label" for="input_100_quantity_1007_0" style="min-height:13px" aria-hidden="false"> Quantity </label>
+                        <span class="select_cont">
+                          <select class="form-dropdown" name="q100_myProducts[special_1007][item_0]" id="input_100_quantity_1007_0">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                          </select>
+                        </span>
+                      </span>
+                      <br/>
+                      <span class="form-special-subtotal">
+                        <span class="form-item-subtotal">
+                          Item subtotal:
+                        </span>
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="input_100_1007_item_subtotal">
+                            0.00
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </span>
+                <div class="payment_footer new_ui show_coupon">
+                  <div id="coupon-container" style="border:1px solid lightgray;padding:5px;border-radius:6px;width:200px;margin-top:8px">
+                    <table id="coupon-table">
+                      <tr>
+                        <th colSpan="2" style="text-align:left">
+                          <label id="coupon-header" for="coupon-input"> Enter coupon </label>
+                        </th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="text" name="coupon-input" id="coupon-input" data-stripe="false" size="15" placeholder="Enter Coupon Code" autoComplete="off" aria-labelledby="coupon-header coupon-message" />
+                        </td>
+                        <td width="40%" style="text-align:center">
+                          <img src="https://cdn.jotfor.ms//images/ajax-loader.gif" alt="coupon loading" id="coupon-loader" style="display:none;vertical-align:top" />
+                          <button type="button" id="coupon-button" data-qid="input_100" value="">
+                            Apply
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colSpan="2" style="text-align:left">
+                          <span id="coupon-message" role="alert">
+                          </span>
+                        </th>
+                      </tr>
+                    </table>
+                  </div>
+                  <input type="hidden" id="input_100_coupon" name="coupon" />
+                  <div class="total_area">
+                    <span class="form-payment-divider">
+                    </span>
+                    <div class="form-payment-subtotal form-payment-label">
+                      <div id="subtotal-text">
+                        Subtotal
+                      </div>
+                      <div class="form-payment-price">
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="payment_subtotal">
+                            0.00
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-payment-shipping form-payment-label">
+                      <div id="shipping-text">
+                        Shipping
+                      </div>
+                      <div class="form-payment-price">
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="payment_shipping">
+                            0.00
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="form-payment-divider" style="margin:8px 0">
+                    </span>
+                    <div class="form-payment-total">
+                      <div id="total-text">
+                        Total
+                      </div>
+                      <div class="form-payment-price">
+                        <span data-wrapper-react="true">
+                          $
+                          <span id="payment_total">
+                            0.00
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <input type="hidden" name="minTotalOrderAmount" data-min-amount="12.00" value="12.00" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <input type="text" name="cc_paypalSPB_orderID" id="cc_paypalSPB_orderID" class="form-textbox" readonly="" tabindex="-1" style="opacity:0;z-index:-1;pointer-events:none;position:absolute;width:0;height:0;left:-400px;top:-400px;padding:0;border:none;margin:0" />
+            <input type="text" name="cc_paypalSPB_payerID" id="cc_paypalSPB_payerID" class="form-textbox" readonly="" tabindex="-1" style="opacity:0;z-index:-1;pointer-events:none;position:absolute;width:0;height:0;left:-400px;top:-400px;padding:0;border:none;margin:0" />
+            <hr/>
+            <div class="paypal-smart-payment-buttons-wrapper" data-merchantid="JRDCSH4JMRB5J" data-paypal-button="Yes" data-paypal-button-qid="70" data-clientid="" data-environment="production" data-currency="USD" data-style-color="gold" data-style-shape="rect" data-style-size="medium" data-style-label="checkout" data-style-layout="vertical" data-funding-credit="disabled" data-funding-card="default" data-funding-elv="default">
+              loading smart payment buttons...
+            </div>
+            <div class="complete-payment-prompt" style="display:none">
+              The payment is ready! It will be completed once you submit the form.
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_button" id="id_70">
+        <div id="cid_70" class="form-input-wide">
+          <div style="text-align:center" data-align="center" class="form-buttons-wrapper form-buttons-center paypal-submit-container  jsTest-button-wrapperField">
+            <div class="paypal-submit-button-wrapper">
+            </div>
+            <div class="paypal-paylater-messages" style="order:2;width:100%;display:block">
+              <div class="message-area">
+              </div>
+            </div>
+            <button id="input_70" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
+              Submit
+            </button>
+          </div>
+        </div>
+      </li>
+      <li style="display:none">
+        Should be Empty:
+        <input type="text" name="website" value="" />
+      </li>
+    </ul>
+  </div>
+  <script>
+  JotForm.showJotFormPowered = "0";
+  </script>
+  <script>
+  JotForm.poweredByText = "Powered by Jotform";
+  </script>
+  <input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="210316249239150" />
+  <script type="text/javascript">
+  var all_spc = document.querySelectorAll("form[id='210316249239150'] .si" + "mple" + "_spc");
+for (var i = 0; i < all_spc.length; i++)
+{
+  all_spc[i].value = "210316249239150-210316249239150";
+}
+  </script>
+  <input type="hidden" id="input_75" name="q75_invoiceId" class="form-textbox form-hidden" data-defaultvalue="# INV-WGL5BR" value="# INV-WGL5BR" data-component="autoincrement" />
+</form>
+{% endblock %}
