@@ -670,7 +670,7 @@ def TYnew(request):
     def parseOrder(orders):
         products = {'Plain':0, 'Sesame':0, 'Salt':0, 'Poppy':0, 'Garlic':0,
                     'Onion':0, 'Everything':0, 'Cream':0, 'RandomBake':0, 'DogTreats': 0, 'EvMix':0,'AButter':0 }
-        #print(orders)
+        #print("HEY: %s" %orders)
         for order in range(0, len(orders)):
             # if "Additional Bagels" in orders[order]:
             #     quant = int(re.findall('Quantity: .+?,',orders[order])[0].replace(",", "").replace("Quantity: ", ""))
@@ -678,15 +678,17 @@ def TYnew(request):
             #     for product in products:
             #         if (product !='Cream') & (product !='RandomBake') & (product in orders[order]):
             #             products[product] += quant
-            #print(order)
+            
             ord = orders[order]
-            #print(ord)
-            if ("Pack" in ord):
+            print(ord)
+            if ("Bagel" in ord):
                 bTYPE = ord[(ord.find("Bagels: ")):(ord.find(", Q"))].replace("Bagels: ", "")
                 bTYPE = bTYPE.replace(" seed", "")
-                products[bTYPE] += int(ord[(ord.find("Quantity: ")):-1].replace("Quantity: ", ""))
+                quant = int(ord[ord.find("y:")+3:-1])
+                print(quant)
+                #products[bTYPE] += int(ord[(ord.find("Quantity: ")):-1].replace("Quantity: ", ""))
+                products[bTYPE] += quant
                 
-                #print(bTYPE,products)
             elif (orders[order].count("Cream")!=0):
                 products["Cream"] += int(orders[order][-2])
             elif (orders[order].count("RandomBake")!=0):
@@ -758,6 +760,7 @@ def TYnew(request):
                              deliveryaddress[2],deliveryaddress[3],
                              deliveryaddress[4], phone)
         ticket = ast.literal_eval(PayPalData[0])
+        #print(PayPalData[0])
         cart= parseOrder(ast.literal_eval(PayPalData[0]))
         #print(cart)
         products = parseOrder(ticket)
