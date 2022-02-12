@@ -422,6 +422,9 @@ def BatchInfo():
         if acv_sales.Everything_sold>0: batch += '<li>%s Everything Bagels</li>' %(acv_sales.Everything_sold)
         if acv_sales.RandomBake_sold>0: batch += '<li>%s RandomBakes</li>' %(acv_sales.RandomBake_sold)
         if acv_sales.CreamCheese_sold>0: batch += '<li>%s Tubs of Cream Cheese</li>' %(acv_sales.CreamCheese_sold)
+        if acv_sales.Dog_sold>0: batch += '<li>%s Dog Treats</li>' %(acv_sales.Dog_sold)
+        if acv_sales.EvMix_sold>0: batch += '<li>%s Everything mix</li>' %(acv_sales.EvMix_sold)
+        if acv_sales.AButter_sold>0: batch += '<li>%s Apple Butter</li>' %(acv_sales.AButter_sold)
         batch += '</ul>'
         
         DeliveryInfo += ' For this batch we are scheduled to produce:' + batch
