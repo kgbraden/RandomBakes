@@ -66,13 +66,13 @@
         </div>
       {%endif%}
       {% elif "Sales Not Open Yet" in CoverButton%}
-     <h4>Bagel Sales open Monday Morning!</h4>
+     <h4>Bagel Sales open Monday!</h4>
      <h1 class="cover-heading ">{{ CoverButton }}</h1>
       <img src=  "{{CoverPhoto}}"  class = "img-fluid" alt="{{ CoverAltText }}">
       <h4>An order button will appear</h4>
       <h2>HERE</h2> 
-      <h4>Starting Monday Morning!</h4>
-      <p class="lead  text-justify">{{ CoverText|safe|linebreaks }}</p>
+      <h4>Starting Monday!</h4>
+      <p class="lead  text-justify">{{CoverText|safe|linebreaks }}</p>
       
       {%if RB%} 
       
