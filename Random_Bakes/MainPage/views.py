@@ -712,7 +712,10 @@ def TYnew(request):
         FormCustomer = request.POST.getlist('name[]')  #0-firstname  | 1-lastname
         FormEmail = request.POST.get('email')
         phone = request.POST.getlist('phonenumber[]')  #0-area code | 1-phone number
-        phone = "%s %s" %(phone[0], phone[1])
+        try:
+          phone = "%s %s" %(phone[0], phone[1])
+        except:
+          phone = "999 999-9999"
         deliveryaddress = request.POST.getlist('deliveryaddress[]')  #0-address line 1
                                                                          #1-address line 2
                                                                          #2-city
