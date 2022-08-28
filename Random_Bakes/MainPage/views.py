@@ -655,12 +655,7 @@ def thankyou(request):
     else:
         BATCH_ID = "Didn't"
         Cust = ['work',""]
-    try:
-        subj = "%s Order placed!" %NewOrder.batch
-        msg = "HUZZAH! %s %s has ordered %s" % {DjangoCustomer.Fname, DjangoCustomer.Lname, NewOrder.cart}
-        send_mail('Order Placed', 'body of the message', 'info@RandomBakes.com', [config.KB, config.TT])
-    except:
-        print("Email Didn't work")
+    
     return render(request, 'MainPage/thankyou.html',
                  {'BATCH_ID':NewOrder.batch,
                   'fName': DjangoCustomer.Fname,
@@ -717,6 +712,7 @@ def TYnew(request):
         cit = request.POST.getlist('deliveryaddress[city]')[0]
         state = request.POST.getlist('deliveryaddress[state]')[0]
         zip = request.POST.getlist('deliveryaddress[postal]')[0]
+
         try:
             DjangoCustomer = Customer.objects.get(email=FormEmail)
         except:
@@ -830,6 +826,7 @@ def ACsuccess(request):
 
 def shopping(request):
     return render(request,'MainPage/shopping.html')
+"""
 def enterbatch(request):
     formfilled = False
 
@@ -845,7 +842,7 @@ def enterbatch(request):
     return render(request, 'MainPage/enter_batch.html',
                   {'batch_form': batch_form,
                   'formfilled': formfilled})
-
+"""
 @login_required
 def user_logout(request):
     logout(request)
