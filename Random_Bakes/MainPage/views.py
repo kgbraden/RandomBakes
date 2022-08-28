@@ -709,32 +709,31 @@ def TYnew(request):
     if request.method=='POST':
         BATCH_ID = request.POST.get('batchid76')
         Batch_Info = ActiveSales.objects.get(batch=BATCH_ID)
-        FormCustomer = request.POST.getlist('name[]')  #0-firstname  | 1-lastname
         FormEmail = request.POST.get('email')
-        phone = request.POST.getlist('phonenumber[]')  #0-area code | 1-phone number
-        phone = "%s %s" %(phone[0], phone[1])
-        deliveryaddress = request.POST.getlist('deliveryaddress[]')  #0-address line 1
-                                                                         #1-address line 2
-                                                                         #2-city
-                                                                         #3-State
-                                                                         #4-Zip
+        print(request.POST.getlist('name[first]')[0])
+        phone = f"{request.POST.getlist('phonenumber[area]')[0]} {request.POST.getlist('phonenumber[phone]')[0]} "  #0-area code | 1-phone number
+        St1 =request.POST.getlist('deliveryaddress[addr_line1]')[0]
+        St2 = request.POST.getlist('deliveryaddress[addr_line2]')[0]
+        cit = request.POST.getlist('deliveryaddress[city]')[0]
+        state = request.POST.getlist('deliveryaddress[state]')[0]
+        zip = request.POST.getlist('deliveryaddress[postal]')[0]
         try:
             DjangoCustomer = Customer.objects.get(email=FormEmail)
         except:
-            DjangoCustomer = Customer(Fname =  FormCustomer[0],
-                                      Lname =  FormCustomer[1],
+            DjangoCustomer = Customer(Fname =  request.POST.getlist('name[first]')[0] ,
+                                      Lname =  request.POST.getlist('name[last]')[0] ,
                                       email =  FormEmail,
-                                      dStreet1 = deliveryaddress[0],
-                                      dStreet2 = deliveryaddress[1],
-                                      dCity =  deliveryaddress[2],
-                                      dState =  deliveryaddress[3],
-                                      dZip =  deliveryaddress[4],
+                                      dStreet1 = St1,
+                                      dStreet2 = St2,
+                                      dCity =  cit,
+                                      dState =  state,
+                                      dZip =  zip,
                                       Phone = phone)
             try:
                 DjangoCustomer.save()
             except:
                 DjangoCustomer = Customer.objects.get(email="info@RandomBakes.com")
-        PayPalData = request.POST.getlist('myproducts[]') #0-products ordered
+        PayPalData = request.POST.getlist('myproducts[product]') #0-products ordered
                                                        #1-Currency type
                                                        #2-Delivery
                                                        #3-total
@@ -747,26 +746,19 @@ def TYnew(request):
                                                        #13-billing City
                                                        #14-billing State
                                                        #15-billing Zip
-        if type(PayPalData[4]) == float:
-            fees = PayPalData[4]
-        elif type(PayPalData[5]) == float:
-            fees = PayPalData[5]
-        else:
-            fees = 0
+        fees = request.POST.getlist('myproducts[transactionFee]')
+        
         try:
-            deliverynotes = '%s\n%s\n%s, %s %s\n%s\nDelivery Notes: %s' %(deliveryaddress[0], deliveryaddress[1],
-                             deliveryaddress[2],deliveryaddress[3],
-                             deliveryaddress[4], phone,
-                             request.POST.get('deliverynotes'))
+            deliverynotes = f'{St1}\n{St2}\n{cit}, {state} {zip}\n{phone}\nDelivery Notes: {request.POST.get("deliverynotes")}'
         except:
-            deliverynotes = '%s\n%s\n%s, %s %s\n%s' %(deliveryaddress[0], deliveryaddress[1],
-                             deliveryaddress[2],deliveryaddress[3],
-                             deliveryaddress[4], phone)
-        ticket = ast.literal_eval(PayPalData[0])
+            deliverynotes = f'{St1}\n{St2}\n{cit}, {state} {zip}\n{phone}\nDelivery Notes: None'
+        print(PayPalData[0])
+        #ticket = ast.literal_eval(PayPalData)
+        
         #print(PayPalData[0])
-        cart= parseOrder(ast.literal_eval(PayPalData[0]))
+        #cart= parseOrder(ast.literal_eval(PayPalData[0]))
         #print(cart)
-        products = parseOrder(ticket)
+        products = parseOrder(ast.literal_eval(PayPalData[0]))
         invoice = request.POST.get('invoiceid')
         delivered = Batch_Info.bakingdate
         cart = ""
@@ -797,10 +789,12 @@ def TYnew(request):
                             AButter_sold = products['AButter'],
                             deliveryinfo = deliverynotes,
                             cart = cart,
-                            total = PayPalData[4],
-                            fees = fees
+                            total = float(request.POST.getlist('myproducts[total]')[0]),
+                            fees = float(fees[0])
                         )
         #print("0: %s, 1: %s, 2: %s, 3: %s, 4: %s" %(PayPalData[0], PayPalData[1], PayPalData[2], PayPalData[3], PayPalData[4]))
+        #print(float(request.POST.getlist('myproducts[total]')[0]))
+        #NewOrder.save()
         try:
             NewOrder.save()
         except:
@@ -809,12 +803,6 @@ def TYnew(request):
     else:
         BATCH_ID = "Didn't"
         Cust = ['work',""]
-    try:
-        subj = "%s Order placed!" %NewOrder.batch
-        msg = "HUZZAH! %s %s has ordered %s" % {DjangoCustomer.Fname, DjangoCustomer.Lname, NewOrder.cart}
-        send_mail('Order Placed', 'body of the message', 'info@RandomBakes.com', [config.KB, config.TT])
-    except:
-        print("Email Didn't work")
     
     return render(request, 'MainPage/thankyou.html',
                  {'BATCH_ID':NewOrder.batch,
